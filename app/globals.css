@@ -4,30 +4,122 @@
 
 @layer base {
   :root {
-    --background: 200 20% 98%;
-    --btn-background: 200 10% 91%;
-    --btn-background-hover: 200 10% 89%;
-    --foreground: 200 50% 3%;
+    --background: #18181b;
+    --background-window: #fafafa;
+    --btn-background-red: #dc2626;
+    --btn-background-red-hover: #f87171;
+    --btn-background-sky: #0369a1;
+    --btn-background-sky-hover: #0ea5e9;
+    --btn-background-purple: #7e22ce;
+    --btn-background-purple-hover: #a855f7;
+    --btn-background-zinc: #71717a;
+    --btn-background-zinc-hover: #a1a1aa;
+    --label-emerald: #059669;
+    --foreground-ligth-zinc: #fafafa;
+    --foreground-dark-zinc: #18181b;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --background: 200 50% 3%;
-      --btn-background: 200 10% 9%;
-      --btn-background-hover: 200 10% 12%;
-      --foreground: 200 20% 96%;
+      --background: #c0c0b9;
+      --background-window: #09090b;
+      --btn-background-red: #23d9d9;
+      --btn-background-red-hover: #07e8e8;
+      --btn-background-sky: #fd9660;
+      --btn-background-sky-hover: #f15a16;
+      --btn-background-purple: #81dd31;
+      --btn-background-purple-hover: #57a808;
+      --btn-background-zinc: #8e8e85;
+      --btn-background-zinc-hover: #2b2b27;
+      --label-emerald-opposite: #fa6996;
+      --foreground-light-zinc: #050505;
+      --foreground-dark-zinc: #e7e7e4;
     }
   }
 }
 
-@layer base {
-  * {
-    @apply border-foreground/20;
-  }
+.background {
+  background: var(--background);
+  color: var(--foreground-light-zinc);
+}
+
+.background-window {
+  background: var(--background-window);
+  color: var(--foreground-dark-zinc);
+}
+
+.button-red {
+  background-color: var(--btn-background-red);
+  color: var(--foreground-light-zinc);
+}
+
+.button-red:hover {
+  background-color: var(--btn-background-red-hover);
+}
+
+.button-sky {
+  background-color: var(--btn-background-sky);
+  color: var(--foreground-light-zinc);
+}
+
+.button-sky:hover {
+  background-color: var(--btn-background-sky-hover);
+}
+
+.button-purple {
+  background-color: var(--btn-background-purple);
+  color: var(--foreground-light-zinc);
+}
+
+.button-purple:hover {
+  background-color: var(--btn-background-purple-hover);
+}
+
+.button-zinc {
+  background-color: var(--btn-background-zinc);
+  color: var(--foreground-light-zinc);
+}
+
+.button-zinc:hover {
+  background-color: var(--btn-background-zinc-hover);
+}
+
+.label-emerald {
+  color: var(--label-emerald);
+}
+
+.foreground-ligth {
+  color: var(--foreground-ligth-zinc);
+}
+
+.foreground-dark {
+  color: var(--foreground-dark-zinc);
 }
 
 .animate-in {
   animation: animateIn 0.3s ease 0.15s both;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1010;
 }
 
 @keyframes animateIn {
@@ -35,6 +127,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
