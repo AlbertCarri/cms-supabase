@@ -1,6 +1,5 @@
 'use server'
-//import { redirect } from "next/dist/server/api-utils/index.js";
-//import AuthButton from "../components/AuthButton.jsx";
+
 import { createClient } from "../utils/supabase/server";
 import { ClientButton } from "../components/ClientButton";
 import { redirect } from "next/navigation";

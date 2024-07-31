@@ -85,7 +85,8 @@
 }
 
 .label-emerald {
-  color: var(--label-emerald);
+  background-color: var(--label-emerald);
+  color: var(--foreground-ligth-zinc);
 }
 
 .foreground-ligth {
