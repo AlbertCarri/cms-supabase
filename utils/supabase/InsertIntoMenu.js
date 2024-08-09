@@ -2,10 +2,10 @@
 
 import { createClient } from "./server"
 
-export const InsertIntoMenu = async ({fileURL, formDataObject, categoryId}) => {
+export const InsertIntoMenu = async ({ fileURL, formDataObject, categoryId, menu }) => {
     const supabase = createClient()
-
-    console.log('Menu Insert:', categoryId)
+    const menues = menu
+    console.log('Menu Insert:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::', menu)
 
     const alergens = new Array()
     if (formDataObject.gluten === 'on') alergens.push('gluten')
@@ -17,11 +17,18 @@ export const InsertIntoMenu = async ({fileURL, formDataObject, categoryId}) => {
     if (formDataObject.mani === 'on') alergens.push('mani')
     if (formDataObject.frutossecos === 'on') alergens.push('frutossecos')
 
-    const { data: menu, error } = await supabase
-        .from('menu')
-        .insert([{ category_id: categoryId, name: formDataObject.name, description: formDataObject.description, image: fileURL.publicUrl, price: formDataObject.price, alergens: alergens }])
+    if (menu.length > 0) {
+        const { data: menu, error } = await supabase
+            .from('menu')
+            .update([{ category_id: categoryId, name: formDataObject.name, description: formDataObject.description, image: fileURL.publicUrl, price: formDataObject.price, alergens: alergens }])
+            .eq('id', menues[0].id)
+        if (error) console.error('Error de Consulta:', error)
+    } else {
+        const { data: menu, error } = await supabase
+            .from('menu')
+            .insert([{ category_id: categoryId, name: formDataObject.name, description: formDataObject.description, image: fileURL.publicUrl, price: formDataObject.price, alergens: alergens }])
+        if (error) console.error('Error de Consulta:', error)
+    }
 
-    console.log('Insert_Menu:', formDataObject)
-    if (error) console.error('Error de Consulta:', error)
 
 }

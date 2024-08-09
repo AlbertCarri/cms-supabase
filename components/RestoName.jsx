@@ -22,7 +22,7 @@ export const RestoName = async ({ userId }) => {
     console.log('RestoName :', users)
     return (
         <>
-            <h2 className="background-window w-56 p-2 mr-10 rounded-lg">{resto}</h2>
+            <h2 className="background-window w-48 sm:w-56 p-2 mr-10 rounded-lg">{resto}</h2>
         </>
     )
 }

@@ -1,8 +1,8 @@
 import AuthButton from "../../../components/AuthButton";
 import { createClient } from "../../../utils/supabase/server";
 import { redirect } from "next/navigation"
-import { ShowMenu } from "../../../components/ShowMenu";
 import { NewMenu } from "../../../components/NewMenu";
+import { GoBack } from "../../../components/GoBack";
 
 export default async function Menu({ params }) {
 
@@ -23,7 +23,8 @@ export default async function Menu({ params }) {
         <div className="flex-1 w-9/12 flex flex-col gap-10 items-center">
 
             <div className="w-full">
-                <nav className="w-full flex justify-end h-16 p-4">
+                <nav className="w-full flex justify-between h-16 p-4">
+                    <GoBack />
                     <AuthButton />
                 </nav>
                 <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div> {/* línea separadora*/}
@@ -32,9 +33,7 @@ export default async function Menu({ params }) {
             <div className="w-full text-center">
                 <p className="foreground-light text-4xl mb-10">{name}</p>
                 <NewMenu categoryId={categoryId} />
-                {/*<div className="flex flex-row mt-10">
-                    <ShowMenu categoryId={categoryId} />
-                </div>*/}
+                
             </div>
             <footer className="w-full border-t border-zinc-500 p-8 flex justify-center text-center text-xs">
                 <p>

@@ -2,15 +2,16 @@
 
 import { createClient } from "./server"
 
-export const SelectMenuesRow = async ({ categoryId }) => {
+export const SelectEditMenu = async ({ menuId }) => {
     const supabase = createClient()
 
     const { data: menu, error } = await supabase
         .from('menu')
         .select('id,name,image,description,price,alergens,checked')
-        .eq('category_id', categoryId)
-        .order('id', { ascending: true })
-    console.log('SelectMenuesRow:', menu)
+        .eq('id', menuId)
+
+    console.log('SelectEditMenu:::::', menu)
+
     if (error) console.error('Error de Consulta:', error)
     return menu
 }
