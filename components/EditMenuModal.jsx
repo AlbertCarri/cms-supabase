@@ -17,8 +17,6 @@ export const EditMenuModal = ({ closeEditModal, menuId }) => {
         const loadingMenu = async () => {
             const menuses = await SelectEditMenu({ menuId })
             setMenus(menuses)
-            console.log('menus:::::::::::::::', menuses)
-
             setIsLoading(false)
         }
         loadingMenu()

@@ -10,8 +10,6 @@ export const SelectEditMenu = async ({ menuId }) => {
         .select('id,name,image,description,price,alergens,checked')
         .eq('id', menuId)
 
-    console.log('SelectEditMenu:::::', menu)
-
     if (error) console.error('Error de Consulta:', error)
     return menu
 }

@@ -16,7 +16,6 @@ export const ShowCategory = ({ userId }) => {
     }
 
     const editMenu = (id, categoryname) => {
-        console.log('Show--------------Category:', id, categoryname)
         router.push(`/main/${id}/${categoryname}`)
     }
 
@@ -25,7 +24,6 @@ export const ShowCategory = ({ userId }) => {
             const categor = await SelectCategoryTable({ userId })
             setCategories(categor)
             setLoading(false)
-            console.log('FetchCategory', categor)
         }
         fetchCategories();
     }, [loading])

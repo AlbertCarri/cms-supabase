@@ -4,17 +4,19 @@ import { redirect } from "next/navigation"
 import { RestoName } from "../../components/RestoName";
 import { ChangeRestoName } from "../../components/ChangeRestoName";
 import { NewCategory } from "../../components/NewCategory";
-import { ShowCategory } from "../../components/ShowCategory";
+import { ShowCategory } from "../../components/ShowCategory"
+import { ShowQr } from "../../components/ShowQr";
 
 export default async function ProtectedPage() {
     const supabase = createClient();
 
     const { data: { user }, } = await supabase.auth.getUser();
-    console.log('Main Page:', user.id)
-
     if (!user) {
         return redirect("/login");
     }
+    const { data: urlQr, error } = await supabase.from('users').select('qr_url').eq('user_uid', user.id)
+    if (error) console.error('Error de Consulta:', error)
+
 
     return (
         <div className="flex-1 w-9/12 flex flex-col gap-10 items-center">
@@ -39,13 +41,12 @@ export default async function ProtectedPage() {
                     <div>
                         <ShowCategory userId={user.id} />
                     </div>
-
+                    <div className="basis-1/2 block lg:hidden p-8">
+                        <ShowQr urlQr={urlQr[0].qr_url} fileName={'codigoQR'}/>
+                    </div>
                 </div>
-                <div className="basis-1/2 hidden lg:block">
-
-                    <a className="button-sky" href='https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Codigo_QR.svg/500px-Codigo_QR.svg.png' download="qr.jpg">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Codigo_QR.svg/500px-Codigo_QR.svg.png" width={400} height={400}/>
-                    </a>
+                <div className="basis-1/2 hidden lg:block p-8">
+                    <ShowQr urlQr={urlQr[0].qr_url} />
                 </div>
             </div>
             <footer className="w-full border-t border-zinc-500 p-8 flex justify-center text-center text-xs">

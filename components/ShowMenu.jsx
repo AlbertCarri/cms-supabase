@@ -16,13 +16,11 @@ export const ShowMenu = ({ openEditModal, categoryId }) => {
 
     const editMenu = (MenuId) => {
         openEditModal(MenuId)
-        //setLoading(true)
     }
 
     const OnView = (e) => {
         let key = e.target.name
         let checked = (e.target.checked)
-        console.log(key, checked)
         ActiveMenu({ key, checked })
         setLoading(true)
     }
@@ -33,7 +31,6 @@ export const ShowMenu = ({ openEditModal, categoryId }) => {
             const menues = await SelectMenuesRow({ categoryId })
             setMenu(menues)
             setLoading(false)
-            console.log('FetchMenu', menues, 'CategoryId', categoryId)
         }
         fetchMenu();
     }, [loading])

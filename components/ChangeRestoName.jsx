@@ -8,7 +8,6 @@ export const ChangeRestoName = ({ userId }) => {
     const [inputValue, setInputValue] = useState('')
 
     const openModal = () => {
-        console.log('Opening Modal');
         setIsModalOpen(true);
     };
 

@@ -5,7 +5,6 @@ import { createClient } from "./server"
 export const InsertIntoMenu = async ({ fileURL, formDataObject, categoryId, menu }) => {
     const supabase = createClient()
     const menues = menu
-    console.log('Menu Insert:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::', menu)
 
     const alergens = new Array()
     if (formDataObject.gluten === 'on') alergens.push('gluten')

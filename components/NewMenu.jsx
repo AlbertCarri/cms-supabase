@@ -1,6 +1,6 @@
 'use client';
 
-import React, { use, useState } from 'react';
+import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js'
 import { ShowMenu } from './ShowMenu';
 import { NewMenuModal } from './NewMenuModal';
@@ -11,7 +11,6 @@ const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL,
 export const NewMenu = ({ categoryId }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [ShowMe, setShowMe] = useState(true)
-    const [editModalOpen, setEditModalOpen] = useState(false)
     const [menuId, setMenuId] = useState(0)
 
     const openModal = () => {
