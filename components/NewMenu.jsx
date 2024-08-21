@@ -30,7 +30,7 @@ export const NewMenu = ({ categoryId }) => {
 
     return (
         <div>
-            <button className="button-sky px-32 rounded-lg p-4" onClick={openModal}>
+            <button className="button-sky px-12 w- h-14 rounded-lg p-4" onClick={openModal}>
                 Agregar Menú
             </button>
             {isModalOpen && <NewMenuModal closeModal={closeModal} menuId={menuId} categoryId={categoryId} />}

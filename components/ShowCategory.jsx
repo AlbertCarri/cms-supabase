@@ -29,14 +29,14 @@ export const ShowCategory = ({ userId }) => {
     }, [loading])
 
     if (loading) {
-        return <p>Loading......</p>;
+        return <p>Loading............</p>;
     }
 
     return (
         <div className='flex flex-col'>
             {categories.map((category) => (
                 <div className='flex flex-row mt-10'>
-                    <button className='button-purple rounded-lg w-48 sm:w-96 p-4'
+                    <button className='button-purple rounded-lg w-48 h-14 sm:w-96 p-4'
                         onClick={() => editMenu(category.id, category.name)}>
                         {category.name}
                     </button>

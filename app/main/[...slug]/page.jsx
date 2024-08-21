@@ -20,7 +20,7 @@ export default async function Menu({ params }) {
 
     return (
 
-        <div className="flex-1 w-9/12 flex flex-col gap-10 items-center">
+        <div className="flex-1 w-11/12 flex flex-col gap-10 items-center">
 
             <div className="w-full">
                 <nav className="w-full flex justify-between h-16 p-4">

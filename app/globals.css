@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand/static/Quicksand-Regular.ttf') format('truetype'),
+    url('/fonts/Quicksand/static/Quicksand-Bold.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Merienda';
+  src: url('/fonts/Merienda-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Quicksand';
+}
+
 @layer base {
   :root {
     --background: #18181b;
@@ -11,7 +30,7 @@
     --btn-background-sky: #0369a1;
     --btn-background-sky-hover: #0ea5e9;
     --btn-background-purple: #7e22ce;
-    --btn-background-purple-hover: #a855f7;
+    --btn-background-purple-hover: #68319b;
     --btn-background-zinc: #71717a;
     --btn-background-zinc-hover: #a1a1aa;
     --label-emerald: #059669;
@@ -51,37 +70,53 @@
 .button-red {
   background-color: var(--btn-background-red);
   color: var(--foreground-light-zinc);
+  box-shadow: inset 0px 0px 1px 1px rgb(48, 1, 1);
+  transition: 150ms;
 }
 
 .button-red:hover {
   background-color: var(--btn-background-red-hover);
+  box-shadow: inset 0px 0px 2px 3px rgb(48, 1, 1);
+  font-size: 15px;
 }
 
 .button-sky {
   background-color: var(--btn-background-sky);
   color: var(--foreground-light-zinc);
+  box-shadow: inset 0px 0px 1px 1px rgb(0, 0, 0);
+  transition: 150ms;
 }
 
 .button-sky:hover {
   background-color: var(--btn-background-sky-hover);
+  box-shadow: inset 0px 0px 2px 3px rgb(0, 0, 0);
+  font-size: 15px;
 }
 
 .button-purple {
   background-color: var(--btn-background-purple);
   color: var(--foreground-light-zinc);
+  box-shadow: inset 0px 0px 1px 1px rgb(94, 3, 146);
+  transition: 150ms;
 }
 
 .button-purple:hover {
   background-color: var(--btn-background-purple-hover);
+  box-shadow: inset 0px 0px 2px 3px rgb(34, 2, 53);
+  font-size: 15px;
 }
 
 .button-zinc {
   background-color: var(--btn-background-zinc);
   color: var(--foreground-light-zinc);
+  box-shadow: inset 0px 0px 1px 1px rgb(0, 0, 0);
+  transition: 150ms;
 }
 
 .button-zinc:hover {
   background-color: var(--btn-background-zinc-hover);
+  box-shadow: inset 0px 0px 2px 3px rgb(0, 0, 0);
+  font-size: 15px;
 }
 
 .label-emerald {
@@ -121,6 +156,12 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1010;
+}
+
+.menu {
+  font-family: 'Merienda';
+  background: #f1f1f1;
+  color: #09090b;
 }
 
 @keyframes animateIn {

@@ -4,24 +4,9 @@ export const GoBack = () => {
     return (
         <Link
             href="/main"
-            className="py-2 px-4 rounded-md no-underline foreground-light button-zinc flex items-center group"
-        >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
-            >
-                <polyline points="15 18 9 12 15 6" />
-            </svg>{" "}
-            Back
+            className="flex -m-1 justify-center no-underline py-2 px-4 h-10 w-24 rounded-md button-zinc"
+        ><p>Back</p> 
         </Link>
     )
-} 
+}
 //absolute left-8 top-8 py-2 px-4 rounded-md no-underline foreground-light button-zinc hover:button-background-zinc-hover flex items-center group text-sm

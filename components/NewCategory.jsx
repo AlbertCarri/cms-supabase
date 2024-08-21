@@ -21,7 +21,7 @@ export const NewCategory = ({ userId }) => {
 
     return (
         <div>
-            <button className="button-purple px-8 sm:px-32  rounded-lg p-4" onClick={openModal}>
+            <button className="button-purple rounded-lg w-48 h-14 sm:w-96 p-4" onClick={openModal}>
                 Agregar Categoria
             </button>
             {isModalOpen && (
@@ -40,7 +40,7 @@ export const NewCategory = ({ userId }) => {
                                 />
                             </div>
                             <div className='flex flex-row justify-center'>
-                                <button type="submit" className='button-sky px-4 rounded-lg mx-2 p-2' onClick={() => InsertIntoCategory({userId, inputValue})}>Aceptar</button>
+                                <button type="submit" className='button-sky px-4 rounded-lg mx-2 p-2' onClick={() => InsertIntoCategory({ userId, inputValue })}>Aceptar</button>
                                 <button type="button" className='button-zinc px-4 rounded-lg mx-2 p-2' onClick={closeModal}>Cancelar</button>
                             </div>
                         </form>

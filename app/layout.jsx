@@ -1,4 +1,4 @@
-import { GeistSans } from "geist/font/sans";
+//import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
 // Metadatos para SEO de la pagina ya deployada
@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={GeistSans}>
+    <html lang="en">
       <body className="background foreground-ligth">
         <main className="min-h-screen flex flex-col items-center">
           {children}
