@@ -2,7 +2,7 @@ import { CompleteMenu } from "../../../utils/supabase/CompleteMenu"
 
 export default async function MenuC({ params }) {
 
-    const user_uid = params.slug[0]
+    const resto_name = params.slug[0]
     const MenuList = await CompleteMenu({ resto_name })
     const category = MenuList.category
 
