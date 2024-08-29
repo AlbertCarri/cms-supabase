@@ -2,21 +2,21 @@
 
 import { createClient } from "./server"
 
-export const CompleteMenu = async ({ user_uid }) => {
-    const supabase = createClient()
+export const CompleteMenu = async ({ resto_name }) => {
+  const supabase = createClient()
 
-    const { data: menu, error } = await supabase
-        .from('users')
-        .select(`
+  const { data: menu, error } = await supabase
+    .from('users')
+    .select(`
       *,
       category (
         *,
         menu (*)
       )
     `)
-        .eq('user_uid', user_uid);
+    .eq('resto_name', resto_name);
 
 
-    if (error) console.error('Error de Consulta:', error)
-    return menu[0]
+  if (error) console.error('Error de Consulta:', error)
+  return menu[0]
 }

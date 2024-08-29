@@ -14,7 +14,12 @@ export default async function ProtectedPage() {
     if (!user) {
         return redirect("/login");
     }
-    const { data: urlQr, error } = await supabase.from('users').select('qr_url').eq('user_uid', user.id)
+    /*const { data: urlQr, error } = await supabase.from('users').select('qr_url').eq('user_uid', user.id)
+    if (error) console.error('Error de Consulta:', error)*/
+
+    const { data: resto_name, error } = await supabase.from('users').select('resto_name').eq('user_uid', user.id)
+    const urlQr = 'https://cms-resto.vercel.app/menu/' + resto_name[0].resto_name
+    console.log('urlQR::::::::::', urlQr)
     if (error) console.error('Error de Consulta:', error)
 
 
@@ -42,11 +47,14 @@ export default async function ProtectedPage() {
                         <ShowCategory userId={user.id} />
                     </div>
                     <div className="basis-1/2 block lg:hidden p-8">
-                        <ShowQr urlQr={urlQr[0].qr_url} fileName={'codigoQR'}/>
+                        {/*<ShowQr urlQr={urlQr[0].qr_url} fileName={'codigoQR'} />*/}
+                        <ShowQr urlQr={urlQr} fileName={'codigoQR'} />
                     </div>
                 </div>
                 <div className="basis-1/2 hidden lg:block p-8">
-                    <ShowQr urlQr={urlQr[0].qr_url} />
+                    {/*<ShowQr urlQr={urlQr[0].qr_url} />*/}
+                    <ShowQr urlQr={urlQr} />
+
                 </div>
             </div>
             <footer className="w-full border-t border-zinc-500 p-8 flex justify-center text-center text-xs">

@@ -93,6 +93,15 @@ body {
   font-size: 15px;
 }
 
+.btn-sky {
+  background-color: var(--btn-background-sky);
+  color: var(--foreground-light-zinc);
+}
+
+.btn-sky:hover {
+  background-color: var(--btn-background-sky-hover);
+}
+
 .button-purple {
   background-color: var(--btn-background-purple);
   color: var(--foreground-light-zinc);
@@ -117,6 +126,15 @@ body {
   background-color: var(--btn-background-zinc-hover);
   box-shadow: inset 0px 0px 2px 3px rgb(0, 0, 0);
   font-size: 15px;
+}
+
+.btn-zinc {
+  background-color: var(--btn-background-zinc);
+  color: var(--foreground-light-zinc);
+}
+
+.btn-zinc:hover {
+  background-color: var(--btn-background-zinc-hover);
 }
 
 .label-emerald {

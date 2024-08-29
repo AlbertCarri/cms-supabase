@@ -8,11 +8,20 @@ import { useRouter } from "next/navigation";
 export const ShowCategory = ({ userId }) => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [modal, setModal] = useState(false)
+    const [categoryDelete, setCategoryDelete] = useState([])
     const router = useRouter();
 
-    const deleteCategory = (categoryId) => {
-        DeleteCategoryTable(categoryId)
+    const deleteCategory = () => {
+        DeleteCategoryTable(categoryDelete[0])
+        setModal(false)
         setLoading(true)
+        setCategoryDelete([])
+    }
+
+    const deleteConfirm = (categoryId, categoryName) => {
+        setCategoryDelete([categoryId, categoryName])
+        setModal(true)
     }
 
     const editMenu = (id, categoryname) => {
@@ -34,6 +43,19 @@ export const ShowCategory = ({ userId }) => {
 
     return (
         <div className='flex flex-col'>
+            {modal && (
+                <div className="modal-overlay" onClick={() => setModal(false)}>
+                    <div className='modal flex flex-col'>
+                        <div className='foreground-dark text-center mb-4'>
+                            <p> Deseas eliminar {categoryDelete[1]}?</p>
+                        </div>
+                        <div>
+                            <button type="submit" className='btn-sky px-4 rounded-lg mx-2 p-2' onClick={deleteCategory}>Aceptar</button>
+                            <button type="button" className='btn-zinc px-4 rounded-lg mx-2 p-2' onClick={() => setModal(false)}>Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            )}
             {categories.map((category) => (
                 <div className='flex flex-row mt-10'>
                     <button className='button-purple rounded-lg w-48 h-14 sm:w-96 p-4'
@@ -42,7 +64,7 @@ export const ShowCategory = ({ userId }) => {
                     </button>
                     <button key={category.id}
                         className='button-red rounded-lg ml-10 w-32 sm:w-40'
-                        onClick={() => deleteCategory(category.id)}>
+                        onClick={() => deleteConfirm(category.id, category.name)}>
                         Eliminar
                     </button>
                 </div>
