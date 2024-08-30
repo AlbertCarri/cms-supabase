@@ -178,8 +178,10 @@ body {
 
 .menu {
   font-family: 'Merienda';
-  background: #9e7979;
   background-image:url(/public/FondoMenu.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   color: #09090b;
 }
 
