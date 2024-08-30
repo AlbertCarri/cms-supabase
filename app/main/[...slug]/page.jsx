@@ -47,8 +47,8 @@ export default async function Menu({ params }) {
             <b>React Framework:</b>
             <p>Hecho con NEXT.js</p>
             </div>
-            <div className="basis-1/3 flex flex-row relative">
-              <img src="/linkedin.png" alt="logo" width={24} height={24} className="absolute align-middle left-0 object-scale-down"/>
+            <div className="basis-1/3 flex flex-row relative justify-center">
+              <img src="/linkedin.png" alt="logo" width={24} height={24} className="absolute mr-20 object-scale-down"/>
               <a
               href="https://www.linkedin.com/in/alberto-edelmiro-carrizo-7639a186/"
               target="_blank"

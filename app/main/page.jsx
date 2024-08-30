@@ -18,7 +18,7 @@ export default async function ProtectedPage() {
     if (error) console.error('Error de Consulta:', error)*/
 
     const { data: resto_name, error } = await supabase.from('users').select('resto_name').eq('user_uid', user.id)
-    const urlQr = 'https://cms-resto.vercel.app/menu/' + resto_name[0].resto_name
+    const urlQr = 'https://cms-resto.vercel.app/menu/' + (resto_name[0].resto_name).replaceAll(' ', '_')
     console.log('urlQR::::::::::', urlQr)
     if (error) console.error('Error de Consulta:', error)
 
@@ -47,54 +47,52 @@ export default async function ProtectedPage() {
                         <ShowCategory userId={user.id} />
                     </div>
                     <div className="basis-1/2 block lg:hidden p-8">
-                        {/*<ShowQr urlQr={urlQr[0].qr_url} fileName={'codigoQR'} />*/}
                         <ShowQr urlQr={urlQr} fileName={'codigoQR'} />
                     </div>
                 </div>
                 <div className="basis-1/2 hidden lg:block p-8">
-                    {/*<ShowQr urlQr={urlQr[0].qr_url} />*/}
                     <ShowQr urlQr={urlQr} />
 
                 </div>
             </div>
             <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div> {/* línea separadora*/}
             <footer className="w-full m-0 p-0">
-        <div>
-          <div className="flex flex-row text-center">
-            <div className="basis-1/3">
-            <b>Desarrollador:</b>
-            <p>Alberto Carrizo</p>
-            </div>
-            <div className="basis-1/3">
-            <b>React Framework:</b>
-            <p>Hecho con NEXT.js</p>
-            </div>
-            <div className="basis-1/3 flex flex-row relative">
-              <img src="/linkedin.png" alt="logo" width={24} height={24} className="absolute align-middle left-0 object-scale-down"/>
-              <a
-              href="https://www.linkedin.com/in/alberto-edelmiro-carrizo-7639a186/"
-              target="_blank"
-              className=" ml-8 font-bold hover:underline"
-              rel="noreferrer"
-              >Mi Linkedin</a>
-            </div>
+                <div>
+                    <div className="flex flex-row text-center">
+                        <div className="basis-1/3">
+                            <b>Desarrollador:</b>
+                            <p>Alberto Carrizo</p>
+                        </div>
+                        <div className="basis-1/3">
+                            <b>React Framework:</b>
+                            <p>Hecho con NEXT.js</p>
+                        </div>
+                        <div className="basis-1/3 flex flex-row relative justify-center">
+                            <img src="/linkedin.png" alt="logo" width={24} height={24} className="absolute mr-20 object-scale-down" />
+                            <a
+                                href="https://www.linkedin.com/in/alberto-edelmiro-carrizo-7639a186/"
+                                target="_blank"
+                                className=" ml-8 font-bold hover:underline"
+                                rel="noreferrer"
+                            >Mi Linkedin</a>
+                        </div>
 
-          </div>
-          <div className="mt-8 text-center">
-            <p>
-              Powered by{" "}
-              <a
-                href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-                target="_blank"
-                className="font-bold hover:underline"
-                rel="noreferrer"
-              >
-                Supabase
-              </a>
-            </p>
-          </div>
-        </div>
-      </footer>
+                    </div>
+                    <div className="mt-8 text-center">
+                        <p>
+                            Powered by{" "}
+                            <a
+                                href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
+                                target="_blank"
+                                className="font-bold hover:underline"
+                                rel="noreferrer"
+                            >
+                                Supabase
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </footer>
         </div>
     );
 }

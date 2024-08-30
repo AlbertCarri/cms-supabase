@@ -16,6 +16,7 @@ export const ChangeRestoName = ({ userId }) => {
     };
 
     const UpdateRestoName = () => {
+        setIsModalOpen(false);
         RestoNameChange({ userId, inputValue })
     }
 
@@ -39,7 +40,7 @@ export const ChangeRestoName = ({ userId }) => {
                                     className='mb-8 p-2 bg-gray-300 rounded-lg'
                                 />
                             </div>
-                            <button type="submit" className='btn-sky px-4 rounded-lg mx-2 p-2' onClick={UpdateRestoName}>Aceptar</button>
+                            <button type="button" className='btn-sky px-4 rounded-lg mx-2 p-2' onClick={UpdateRestoName}>Aceptar</button>
                             <button type="button" className='btn-zinc px-4 rounded-lg mx-2 p-2' onClick={closeModal}>Cancelar</button>
                         </form>
                     </div>

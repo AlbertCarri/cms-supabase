@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from "./server"
+import { redirect } from "next/navigation"
 
 export const RestoNameChange = async ({ userId, inputValue }) => {
     const supabase = createClient()
@@ -10,5 +11,5 @@ export const RestoNameChange = async ({ userId, inputValue }) => {
 
     if (error) console.error('Error de Consulta:', error)
 
-    return
+    return redirect('/main')
 }
