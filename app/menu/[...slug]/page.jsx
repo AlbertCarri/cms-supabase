@@ -9,7 +9,7 @@ export default async function MenuC({ params }) {
     return (
         <div className="menu w-full">
             <div className="menu w-11/12 mx-auto">
-                <h2 className="text-2xl mb-8 text-center">{MenuList.resto_name}</h2>
+                <h2 className="text-2xl my-8 text-center">{MenuList.resto_name}</h2>
                 {category.map((categ) => (
                     <div className='flex flex-col py-4 px-4 rounded-md border border-black mb-4'>
                         <p className='text-2xl mb-10 text-center'>{categ.name}</p>

@@ -40,8 +40,8 @@ export const NewCategory = ({ userId }) => {
                                 />
                             </div>
                             <div className='flex flex-row justify-center'>
-                                <button type="submit" className='button-sky px-4 rounded-lg mx-2 p-2' onClick={() => InsertIntoCategory({ userId, inputValue })}>Aceptar</button>
-                                <button type="button" className='button-zinc px-4 rounded-lg mx-2 p-2' onClick={closeModal}>Cancelar</button>
+                                <button type="submit" className='btn-sky px-4 rounded-lg mx-2 p-2' onClick={() => InsertIntoCategory({ userId, inputValue })}>Aceptar</button>
+                                <button type="button" className='btn-zinc px-4 rounded-lg mx-2 p-2' onClick={closeModal}>Cancelar</button>
                             </div>
                         </form>
                     </div>

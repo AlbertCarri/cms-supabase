@@ -201,8 +201,8 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
                         </div>
                     </div>
                     <div className='flex flex-row justify-between'>
-                        <button type="submit" className='button-sky px-6 rounded-lg mx-2 p-2' >Aceptar</button>
-                        <button type="button" className='button-zinc px-6 rounded-lg mx-2 p-2' onClick={CloseModal}>Cancelar</button>
+                        <button type="submit" className='btn-sky px-6 rounded-lg mx-2 p-2' >Aceptar</button>
+                        <button type="button" className='btn-zinc px-6 rounded-lg mx-2 p-2' onClick={CloseModal}>Cancelar</button>
                     </div>
                 </form>
             </div>

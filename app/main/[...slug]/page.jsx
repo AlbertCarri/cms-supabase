@@ -35,19 +35,44 @@ export default async function Menu({ params }) {
                 <NewMenu categoryId={categoryId} />
                 
             </div>
-            <footer className="w-full border-t border-zinc-500 p-8 flex justify-center text-center text-xs">
-                <p>
-                    Powered by{" "}
-                    <a
-                        href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-                        target="_blank"
-                        className="font-bold hover:underline"
-                        rel="noreferrer"
-                    >
-                        Supabase
-                    </a>
-                </p>
-            </footer>
+            <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div> {/* línea separadora*/}
+            <footer className="w-full m-0 p-0">
+        <div>
+          <div className="flex flex-row text-center">
+            <div className="basis-1/3">
+            <b>Desarrollador:</b>
+            <p>Alberto Carrizo</p>
+            </div>
+            <div className="basis-1/3">
+            <b>React Framework:</b>
+            <p>Hecho con NEXT.js</p>
+            </div>
+            <div className="basis-1/3 flex flex-row relative">
+              <img src="/linkedin.png" alt="logo" width={24} height={24} className="absolute align-middle left-0 object-scale-down"/>
+              <a
+              href="https://www.linkedin.com/in/alberto-edelmiro-carrizo-7639a186/"
+              target="_blank"
+              className=" ml-8 font-bold hover:underline"
+              rel="noreferrer"
+              >Mi Linkedin</a>
+            </div>
+
+          </div>
+          <div className="mt-8 text-center">
+            <p>
+              Powered by{" "}
+              <a
+                href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
+                target="_blank"
+                className="font-bold hover:underline"
+                rel="noreferrer"
+              >
+                Supabase
+              </a>
+            </p>
+          </div>
+        </div>
+      </footer>
         </div>
     )
 }
