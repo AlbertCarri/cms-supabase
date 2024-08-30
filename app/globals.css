@@ -178,7 +178,7 @@ body {
 
 .menu {
   font-family: 'Merienda';
-  background-image:url(/public/FondoMenu.png);
+  background-image:url('/public/FondoMenu.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
