@@ -25,7 +25,7 @@ export const ShowCategory = ({ userId }) => {
     }
 
     const editMenu = (id, categoryname) => {
-        router.push(`/main/${id}/${categoryname}`)
+        router.push(`/main/${id}/${categoryname.replaceAll(' ','_')}`)
     }
 
     useEffect(() => {

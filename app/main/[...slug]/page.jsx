@@ -6,7 +6,7 @@ import { GoBack } from "../../../components/GoBack";
 
 export default async function Menu({ params }) {
 
-    const name = params.slug[1]
+    const name = (params.slug[1]).replaceAll('_',' ')
     const categoryId = params.slug[0]
 
     const supabase = createClient();
