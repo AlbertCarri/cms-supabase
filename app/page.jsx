@@ -28,7 +28,7 @@ export default async function Index() {
         Bienvenido a SuResto:
       </p>
       <p className="text-xl">
-        Transforma tu restaurante o tienda de comidas con un menú dinámico y digital.
+        Moderniza tu restaurante o tienda de comidas con un menú dinámico y digital mientras ahorras en impresiones de menús.
       </p>
       <p className="text-sm">
         Optimiza la experiencia de tus clientes con nuestro software,

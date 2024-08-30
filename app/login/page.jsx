@@ -111,6 +111,9 @@ export default function Login({searchParams}) {
             {searchParams.message}
           </p>
         )}
+        <h3 className="mt-8">Puedes crear una cuenta nueva y verificarla via email o utilizar una de prueba ya creada.</h3>
+        <b>Email: wottan@live.com.ar</b>
+        <b>Password: Vercel2024</b>
       </form>
     </div>
   );
