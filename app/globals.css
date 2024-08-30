@@ -185,6 +185,13 @@ body {
   color: #09090b;
 }
 
+.menu-card{
+  background: rgb(247, 247, 247);
+  border-color: #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.5);
+}
+
 @keyframes animateIn {
   from {
     opacity: 0;
