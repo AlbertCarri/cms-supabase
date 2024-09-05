@@ -58,7 +58,7 @@ export default async function ProtectedPage() {
             <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div> {/* línea separadora*/}
             <footer className="w-full m-0 p-0">
                 <div>
-                    <div className="flex flex-row text-center">
+                    <div className="flex flex-row text-center md:text-xl text-sm">
                         <div className="basis-1/3">
                             <b>Desarrollador:</b>
                             <p>Alberto Carrizo</p>
@@ -67,12 +67,12 @@ export default async function ProtectedPage() {
                             <b>React Framework:</b>
                             <p>Hecho con NEXT.js</p>
                         </div>
-                        <div className="basis-1/3 flex flex-row relative justify-center">
-                            <img src="/linkedin.png" alt="logo" width={24} height={24} className="absolute mr-20 object-scale-down" />
+                        <div className="basis-1/3 flex flex-col md:justify-around">
+                            <img src="/linkedin.png" alt="logo" width={24} height={24} className="mx-auto object-scale-down" />
                             <a
                                 href="https://www.linkedin.com/in/alberto-edelmiro-carrizo-7639a186/"
                                 target="_blank"
-                                className=" ml-8 font-bold hover:underline"
+                                className="font-bold hover:underline"
                                 rel="noreferrer"
                             >Mi Linkedin</a>
                         </div>

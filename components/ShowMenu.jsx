@@ -71,27 +71,30 @@ export const ShowMenu = ({ openEditModal, categoryId }) => {
             {menu.map((menus) => (
                 <div className='flex flex-col bg-stone-800 py-4 px-4 rounded-xl mb-4 shadow-2xl'>
                     <div className='flex flex-row'>
-                        <div className='w-44 h-44 overflow-hidden mr-4'>
+                        <div className='md:w-44 w-32 md:h-44 h-32 overflow-hidden mr-4'>
                             <img className='rounded-lg w-full h-full object-cover' src={menus.image} />
                         </div>
                         <div className='flex-1 flex-col text-start'>
-                            <p className='text-2xl mb-1'>{menus.name}</p>
+                            <p className='md:text-2xl text-xl mb-1 '>{menus.name}</p>
                             <p className='text-xs mb-1 h-12'>{menus.description}</p>
-                            <p className='text-2xl mb-1'>Precio ${menus.price}</p>
-                            <p className='text-2xs mb-1'>Alergenos:</p>
-                            <div className='flex flex-row'>
-                                {menus.alergens.map((alerg) =>
-                                    <p className='label-emerald text-xs line-clamp-1 md:line-clamp-none rounded-sm px-1 mr-2 mb-2'>{alerg}</p>
-                                )}
-                            </div>
                         </div>
+                    </div>
+                    <div className='text-start mt-4'>
+                        <p className='md:text-2xl text-xl mb-1'>Precio ${menus.price}</p>
+                        <p className='text-2xs mb-1'>Alergenos:</p>
+                        <div className='flex flex-row'>
+                            {menus.alergens.map((alerg) =>
+                                <p className='label-emerald text-xs line-clamp-1 md:line-clamp-none rounded-sm px-1 mr-2 mb-2'>{alerg}</p>
+                            )}
+                        </div>
+
                     </div>
 
                     <div className='flex mx-auto mt-4'>
-                        <button key={menus.id} className='button-red rounded-lg ml-10 w-24 h-10 mr-4' onClick={() => deleteConfirm(menus.id, menus.name)}>Eliminar</button>
-                        <button key={menus.id + 'edit'} className='button-sky rounded-lg ml-2 w-24 h-10 mr-4' onClick={() => editMenu(menus.id)}>Editar</button>
+                        <button key={menus.id} className='button-red rounded-lg ml-10 w-24 h-10 mr-2' onClick={() => deleteConfirm(menus.id, menus.name)}>Eliminar</button>
+                        <button key={menus.id + 'edit'} className='button-sky rounded-lg ml-2 w-24 h-10 mr-2' onClick={() => editMenu(menus.id)}>Editar</button>
                         <input name={menus.id} type="checkbox" checked={menus.checked} onChange={(e) => OnView(e)} />
-                        <p className='ml-2'>Visible</p>
+                        <p className='ml-2 mt-2'>Visible</p>
                     </div>
                 </div>
             ))}

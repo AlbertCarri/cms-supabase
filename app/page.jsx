@@ -38,7 +38,7 @@ export default async function Index() {
         </div>
       </div>
       <div className="mx-4">
-        
+
         <p className="text-4xl">
           Creá tu carta QR
         </p>
@@ -47,19 +47,19 @@ export default async function Index() {
           Moderniza tu restaurante o tienda de comidas con un menú dinámico y digital mientras ahorras en impresiones de menús.
         </b>
         <ul role="list" class="marker:text-sky-400 list-disc pl-5 space-y md:text-xl text-md">
-        <li>Optimiza la experiencia de tus clientes.</li>
-          <li>Con SuResto podras crear un menú accesible desde cualquier dispositivo móvil con lector de códigos QR.</li> 
+          <li>Optimiza la experiencia de tus clientes.</li>
+          <li>Con SuResto podras crear un menú accesible desde cualquier dispositivo móvil con lector de códigos QR.</li>
           <li>Con esta herramienta,
-          podrás personalizar tu menú con el nombre de tu restaurante y organizarlo por categorías como pizzas,
-          sándwiches, entre otros. Dentro de cada categoría, podrás añadir los platos correspondientes con su descripción, precio, foto y alergenos.
+            podrás personalizar tu menú con el nombre de tu restaurante y organizarlo por categorías como pizzas,
+            sándwiches, entre otros. Dentro de cada categoría, podrás añadir los platos correspondientes con su descripción, precio, foto y alergenos.
           </li>
 
           <li>Una vez configurado, el sistema generará un código QR único que podrás descargar
-          e imprimir en el soporte de tu elección para ponerlo a disposición de tus clientes.
+            e imprimir en el soporte de tu elección para ponerlo a disposición de tus clientes.
           </li>
           <li>Al escanearlo, tus clientes accederán al menú completo y actualizado en su dispositivo móvil.
-          Además, si alguno de tus menús no está disponible temporalmente, podrás ocultarlo fácilmente desde la aplicación.
-        </li>
+            Además, si alguno de tus menús no está disponible temporalmente, podrás ocultarlo fácilmente desde la aplicación.
+          </li>
         </ul>
         <br />
         <p className="md:text-xl text-md text-center">
@@ -85,12 +85,12 @@ export default async function Index() {
               <b>React Framework:</b>
               <p>Hecho con NEXT.js</p>
             </div>
-            <div className="basis-1/3 flex flex-row relative justify-center">
-              <img src="/linkedin.png" alt="logo" width={24} height={24} className="absolute mr-20 object-scale-down" />
+            <div className="basis-1/3 flex flex-col md:justify-around">
+              <img src="/linkedin.png" alt="logo" width={24} height={24} className="mx-auto object-scale-down" />
               <a
                 href="https://www.linkedin.com/in/alberto-edelmiro-carrizo-7639a186/"
                 target="_blank"
-                className=" ml-8 font-bold hover:underline"
+                className="font-bold hover:underline"
                 rel="noreferrer"
               >Mi Linkedin</a>
             </div>
