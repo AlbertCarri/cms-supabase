@@ -179,17 +179,41 @@ body {
 .menu {
   font-family: 'Merienda';
   background-image: url('../public/FondoMenu.png');
-  background-size:contain;
+  background-size: contain;
   background-repeat: repeat;
-  background-position:0%;
+  background-position: 0%;
   color: #09090b;
 }
 
-.menu-card{
+.menu-card {
   background: rgb(247, 247, 247);
   border-color: #e0e0e0;
   border-radius: 12px;
   box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fondo {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.mobil{
+  filter: drop-shadow(10px 10px 10px rgba(112, 105, 155, 0.5));
+ 
+}
+
+.backMobil {
+  filter: blur(0px);
+  background: linear-gradient(-45deg, #10033d, #303e6d, #091427, #20193d);
+	background-size: 400% 400%;
+	animation: fondo 5s ease infinite;
 }
 
 @keyframes animateIn {

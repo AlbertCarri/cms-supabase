@@ -22,19 +22,19 @@ export default async function Index() {
   const isSupabaseConnected = canInitSupabaseClient();
 
   return (
-    <div className="w-full flex flex-col gap-10 items-start">
-      <div className="w-full flex flex-col md:flex-row bg-zinc-700">
-        <div className=" text-center my-auto mx-12 p-8">
-          <b className="md:text-6xl text-4xl">
-            Bienvenidos a:
+    <div className="w-3/4 flex flex-col gap-10 items-start">
+      <div className="w-full flex flex-col md:flex-row backMobil z-0">
+        <div className="basis-1/3 text-center my-auto mx-12 p-8 z-10">
+          <b className="md:text-5xl text-4xl inline-flex">
+            BIENVENIDOS A:
           </b>
           <br />
           <b className="md:text-8xl text-6xl text-center my-auto">
-            SuResto:
+            SuResto
           </b>
         </div>
-        <div className="flex justify-center w-full">
-          <img src="/FondoIntro.png" className="md:w-3/4 w-72 p-4" alt="imgenPresentacion" />
+        <div className="basis-2/3 flex justify-center w-full">
+          <img src="/FondoIntro.png" className="md:w-3/4 w-72 p-4 mobil" alt="imgenPresentacion" />
         </div>
       </div>
       <div className="mx-4">
@@ -46,6 +46,8 @@ export default async function Index() {
         <b className="md:text-xl text-md">
           Moderniza tu restaurante o tienda de comidas con un menú dinámico y digital mientras ahorras en impresiones de menús.
         </b>
+        <br/>
+        <br/>
         <ul role="list" class="marker:text-sky-400 list-disc pl-5 space-y md:text-xl text-md">
           <li>Optimiza la experiencia de tus clientes.</li>
           <li>Con SuResto podras crear un menú accesible desde cualquier dispositivo móvil con lector de códigos QR.</li>
