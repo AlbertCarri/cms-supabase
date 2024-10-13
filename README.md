@@ -4,12 +4,12 @@
 ### Que hace esta aplicación web?
 
 Es un sistema de gestión de contenidos (CMS) intuitiva y fácil de usar. Esta app-web permite a los dueños de restaurantes o locales de comida crear un menú digital y generar un código QR. 
-Una carta de solo lectura, ya que no es interactiva para el cliente, en lugar de la famosa carta de papel. 
+Una carta de solo lectura(no es interactiva) en lugar de la famosa cartilla de papel. 
 Esto les permite ahorrar papel, tiempo y darle un toque moderno al negocio. Ya que el cliente solo debe escanear el código QR con el smartphone para poder 
 visualizar la carta de menú. Es compatible con todos los dispositivos capaces de mostrar una página web, ya que el código QR solo tiene un link a dicha página.
 
 
-#### Características Principales:  
+### Características Principales:  
 
 * Optimiza la experiencia de tus clientes.
 * Con SuResto podras crear un menú accesible desde cualquier dispositivo móvil con lector de códigos QR.
