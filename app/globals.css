@@ -68,6 +68,7 @@ body {
 }
 
 .button-red {
+  background: linear-gradient(to bottom, var(--btn-background-red), #5c1006);
   background-color: var(--btn-background-red);
   color: var(--foreground-light-zinc);
   box-shadow: inset 0px 0px 1px 1px rgb(48, 1, 1);
@@ -81,15 +82,15 @@ body {
 }
 
 .button-sky {
-  background-color: var(--btn-background-sky);
+  background: linear-gradient(to bottom, var(--btn-background-sky), #08032c);
   color: var(--foreground-light-zinc);
-  box-shadow: inset 0px 0px 1px 1px rgb(0, 0, 0);
+  box-shadow: inset 0px 0px 2px 1px rgb(0, 0, 0);
   transition: 150ms;
 }
 
 .button-sky:hover {
   background-color: var(--btn-background-sky-hover);
-  box-shadow: inset 0px 0px 2px 3px rgb(0, 0, 0);
+  box-shadow: inset 0px 0px 4px 2px rgb(0, 0, 0);
   font-size: 15px;
 }
 
@@ -103,9 +104,9 @@ body {
 }
 
 .button-purple {
-  background-color: var(--btn-background-purple);
+  background: linear-gradient(to bottom, var(--btn-background-purple), #430450);
   color: var(--foreground-light-zinc);
-  box-shadow: inset 0px 0px 1px 1px rgb(94, 3, 146);
+  box-shadow: inset 0px 0px 4px 2px rgb(94, 3, 146);
   transition: 150ms;
 }
 
@@ -116,7 +117,7 @@ body {
 }
 
 .button-zinc {
-  background-color: var(--btn-background-zinc);
+  background: linear-gradient(to bottom, var(--btn-background-zinc), #1b1b1b);
   color: var(--foreground-light-zinc);
   box-shadow: inset 0px 0px 1px 1px rgb(0, 0, 0);
   transition: 150ms;
@@ -193,27 +194,29 @@ body {
 }
 
 @keyframes fondo {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-.mobil{
+.mobil {
   filter: drop-shadow(10px 10px 10px rgba(112, 105, 155, 0.5));
- 
+
 }
 
 .backMobil {
   filter: blur(0px);
   background: linear-gradient(-45deg, #10033d, #303e6d, #091427, #20193d);
-	background-size: 400% 400%;
-	animation: fondo 5s ease infinite;
+  background-size: 400% 400%;
+  animation: fondo 5s ease infinite;
 }
 
 @keyframes animateIn {

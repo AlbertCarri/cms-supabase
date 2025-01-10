@@ -21,7 +21,7 @@ export const NewCategory = ({ userId }) => {
 
     return (
         <div>
-            <button className="button-purple rounded-lg w-48 h-14 sm:w-96 p-4" onClick={openModal}>
+            <button className="button-purple rounded-2xl w-48 h-14 sm:w-96 p-4" onClick={openModal}>
                 Agregar Categoria
             </button>
             {isModalOpen && (

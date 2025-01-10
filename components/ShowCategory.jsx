@@ -58,12 +58,12 @@ export const ShowCategory = ({ userId }) => {
             )}
             {categories.map((category) => (
                 <div className='flex flex-row mt-10'>
-                    <button className='button-purple rounded-lg w-48 h-14 sm:w-96 p-4'
+                    <button className='button-purple rounded-2xl w-48 h-14 sm:w-96 p-4'
                         onClick={() => editMenu(category.id, category.name)}>
                         {category.name}
                     </button>
                     <button key={category.id}
-                        className='button-red rounded-lg ml-10 w-32 sm:w-40'
+                        className='button-red rounded-2xl ml-10 w-32 sm:w-40'
                         onClick={() => deleteConfirm(category.id, category.name)}>
                         Eliminar
                     </button>
