@@ -37,24 +37,6 @@ body {
     --foreground-ligth-zinc: #fafafa;
     --foreground-dark-zinc: #18181b;
   }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: #c0c0b9;
-      --background-window: #09090b;
-      --btn-background-red: #23d9d9;
-      --btn-background-red-hover: #07e8e8;
-      --btn-background-sky: #fd9660;
-      --btn-background-sky-hover: #f15a16;
-      --btn-background-purple: #81dd31;
-      --btn-background-purple-hover: #57a808;
-      --btn-background-zinc: #8e8e85;
-      --btn-background-zinc-hover: #2b2b27;
-      --label-emerald-opposite: #fa6996;
-      --foreground-light-zinc: #050505;
-      --foreground-dark-zinc: #e7e7e4;
-    }
-  }
 }
 
 .background {
