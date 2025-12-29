@@ -10,6 +10,10 @@ export default function Login({ searchParams }) {
     loginAction,
     "Ingrese sus datos"
   );
+  const [stateUp, signUp, isPendingUp] = useActionState(
+    signupAction,
+    "Ingrese sus datos"
+  );
   const router = useRouter();
 
   return (
@@ -63,13 +67,14 @@ export default function Login({ searchParams }) {
           Sign In
         </button>
         {isPending ? "Signing..." : state.error}
-        <SubmitButton
-          formAction={signupAction}
+        <button
+          formAction={signUp}
           className="button-purple rounded-md px-4 py-2 foreground-ligth mb-2"
-          pendingText="Signing Up..."
+          disabled={isPendingUp}
         >
           Sign Up
-        </SubmitButton>
+        </button>
+        {isPendingUp ? "SignUp..." : stateUp.error}
         {searchParams?.message && (
           <p className="mt-4 p-4 foregroound-ligth text-center">
             {searchParams.message}
