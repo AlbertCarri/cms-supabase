@@ -1,7 +1,6 @@
 import AuthButton from "../../components/AuthButton";
 import { createClient } from "../lib/supabase/server";
 import { redirect } from "next/navigation";
-import { RestoName } from "../../components/RestoName";
 import { ChangeRestoName } from "../../components/ChangeRestoName";
 import { NewCategory } from "../../components/NewCategory";
 import { ShowCategory } from "../../components/ShowCategory";
@@ -18,15 +17,28 @@ export default async function ProtectedPage() {
     return redirect("/login");
   }
 
-  const { data: resto_name, error } = await supabase
+  const { data: users, error } = await supabase
     .from("users")
     .select("resto_name")
     .eq("user_uid", user.id);
-  const urlQr =
-    "https://cms-resto.vercel.app/menu/" +
-    resto_name[0].resto_name.replaceAll(" ", "_");
-  console.log("urlQR::::::::::", urlQr);
+
+  let resto;
+
   if (error) console.error("Error de Consulta:", error);
+
+  if (users.length <= 0) {
+    const { data: users, error } = await supabase
+      .from("users")
+      .insert([{ resto_name: "Nombre del negocio", user_uid: user.id }]);
+    resto = "Nombre del negocio";
+    if (error) {
+      console.error("Error de Consulta:", error);
+      return;
+    }
+  } else {
+    resto = users[0].resto_name;
+  }
+  const urlQr = "https://cms-resto.vercel.app/menu/" + resto;
 
   return (
     <div className="flex-1 w-9/12 flex flex-col gap-10 items-center">
@@ -41,7 +53,9 @@ export default async function ProtectedPage() {
         <div className="basis-full">
           <h2 className="foreground-light mb-4">Nombre del Restó :</h2>
           <div className="flex flex-row">
-            <RestoName userId={user.id} />
+            <h2 className="background-window w-48 sm:w-56 p-2 mr-10 rounded-lg">
+              {resto}
+            </h2>
             <ChangeRestoName userId={user.id} />
           </div>
           <div className="mt-16">

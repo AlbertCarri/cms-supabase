@@ -75,11 +75,11 @@ export default function Login({ searchParams }) {
           Sign Up
         </button>
         {isPendingUp ? "SignUp..." : stateUp.error}
-        {searchParams?.message && (
+        {/*{searchParams?.message && (
           <p className="mt-4 p-4 foregroound-ligth text-center">
             {searchParams.message}
           </p>
-        )}
+        )}*/}
         <h3 className="mt-8">
           Puedes crear una cuenta nueva y verificarla via email o utilizar una
           de prueba ya creada.

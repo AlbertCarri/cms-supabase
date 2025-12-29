@@ -13,7 +13,7 @@ export const RestoName = async ({ userId }) => {
   if (users.length <= 0) {
     const { data: users, error } = await supabase
       .from("users")
-      .insert([{ resto_name: "Nada Cargado", user_uid: userId }]);
+      .insert([{ resto_name: "Nombre del negocio", user_uid: userId }]);
     if (error) {
       console.error("Error de Consulta:", error);
       return;
