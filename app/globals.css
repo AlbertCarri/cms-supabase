@@ -3,22 +3,22 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Quicksand';
-  src: url('/fonts/Quicksand/static/Quicksand-Regular.ttf') format('truetype'),
-    url('/fonts/Quicksand/static/Quicksand-Bold.ttf') format('truetype');
+  font-family: "Quicksand";
+  src: url("/fonts/Quicksand/static/Quicksand-Regular.ttf") format("truetype"),
+    url("/fonts/Quicksand/static/Quicksand-Bold.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Merienda';
-  src: url('/fonts/Merienda-VariableFont_wght.ttf') format('truetype');
+  font-family: "Merienda";
+  src: url("/fonts/Merienda-VariableFont_wght.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 body {
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
 }
 
 @layer base {
@@ -118,6 +118,7 @@ body {
 
 .btn-zinc:hover {
   background-color: var(--btn-background-zinc-hover);
+  cursor: pointer;
 }
 
 .label-emerald {
@@ -160,8 +161,8 @@ body {
 }
 
 .menu {
-  font-family: 'Merienda';
-  background-image: url('../public/FondoMenu.png');
+  font-family: "Merienda";
+  background-image: url("../public/FondoMenu.png");
   background-size: contain;
   background-repeat: repeat;
   background-position: 0%;
@@ -191,14 +192,29 @@ body {
 
 .mobil {
   filter: drop-shadow(10px 10px 10px rgba(112, 105, 155, 0.5));
-
 }
 
 .backMobil {
-  filter: blur(0px);
-  background: linear-gradient(-45deg, #10033d, #303e6d, #091427, #20193d);
-  background-size: 400% 400%;
-  animation: fondo 5s ease infinite;
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(
+    45deg,
+    #ccc 0%,
+    #fff 20%,
+    #999 40%,
+    #fff 60%,
+    #ccc 80%,
+    #999 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fondo 3s linear infinite;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 @keyframes animateIn {

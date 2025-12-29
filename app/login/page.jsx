@@ -1,53 +1,16 @@
+"use client";
+
 import Link from "next/link";
-import { headers } from "next/headers";
-import { createClient } from "../../utils/supabase/server";
-import { redirect } from "next/navigation";
-import { SubmitButton } from "./submit-button";
+import { useRouter } from "next/navigation";
+import { useActionState } from "react";
+import { signupAction, loginAction } from "../actions/auth";
 
-export default function Login({searchParams}) {
-  
-  const signIn = async (formData) => {
-    "use server";
-
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const supabase = createClient();
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      return redirect("/login?message=Could not authenticate user");
-    }
-
-    return redirect("/main");
-  };
-
-  const signUp = async (formData) => {
-    "use server";
-
-    const origin = headers().get("origin");
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const supabase = createClient();
-    console.log('Origin:::::',origin)
-
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${origin}/auth/callback`,
-      },
-    });
-
-    if (error) {
-      return redirect("/login?message=Could not authenticate user");
-    }
-
-    return redirect("/login?message=Check email to continue sign in process");
-  };
+export default function Login({ searchParams }) {
+  const [state, signIn, isPending] = useActionState(
+    loginAction,
+    "Ingrese sus datos"
+  );
+  const router = useRouter();
 
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
@@ -92,15 +55,16 @@ export default function Login({searchParams}) {
           placeholder="••••••••"
           required
         />
-        <SubmitButton
+        <button
           formAction={signIn}
           className="button-sky rounded-md px-4 py-2 foreground-ligth mb-2"
-          pendingText="Signing In..."
+          disabled={isPending}
         >
           Sign In
-        </SubmitButton>
+        </button>
+        {isPending ? "Signing..." : state.error}
         <SubmitButton
-          formAction={signUp}
+          formAction={signupAction}
           className="button-purple rounded-md px-4 py-2 foreground-ligth mb-2"
           pendingText="Signing Up..."
         >
@@ -111,7 +75,10 @@ export default function Login({searchParams}) {
             {searchParams.message}
           </p>
         )}
-        <h3 className="mt-8">Puedes crear una cuenta nueva y verificarla via email o utilizar una de prueba ya creada.</h3>
+        <h3 className="mt-8">
+          Puedes crear una cuenta nueva y verificarla via email o utilizar una
+          de prueba ya creada.
+        </h3>
         <b>Email: wottan@live.com.ar</b>
         <b>Password: Vercel2024</b>
       </form>

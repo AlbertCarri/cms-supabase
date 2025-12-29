@@ -6,7 +6,7 @@ export const ClientButton = ({children}) => {
 
 
 return (
-    <button className="button-sky p-4 rounded-lg"
+    <button className="btn-zinc py-1 px-4 rounded-lg "
         onClick={() => router.push('/login')}>
         {children}
     </button>

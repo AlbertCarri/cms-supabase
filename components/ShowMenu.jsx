@@ -69,7 +69,7 @@ export const ShowMenu = ({ openEditModal, categoryId }) => {
                 </div>
             )}
             {menu.map((menus) => (
-                <div className='flex flex-col bg-stone-800 py-4 px-4 rounded-xl mb-4 shadow-2xl'>
+                <div key={menus.id} className='flex flex-col bg-stone-800 py-4 px-4 rounded-xl mb-4 shadow-2xl'>
                     <div className='flex flex-row'>
                         <div className='md:w-44 w-32 md:h-44 h-32 overflow-hidden mr-4'>
                             <img className='rounded-lg w-full h-full object-cover' src={menus.image} />
@@ -84,7 +84,7 @@ export const ShowMenu = ({ openEditModal, categoryId }) => {
                         <p className='text-2xs mb-1'>Alergenos:</p>
                         <div className='flex flex-row'>
                             {menus.alergens.map((alerg) =>
-                                <p className='label-emerald text-xs line-clamp-1 md:line-clamp-none rounded-sm px-1 mr-2 mb-2'>{alerg}</p>
+                                <p key={alerg} className='label-emerald text-xs line-clamp-1 md:line-clamp-none rounded-sm px-1 mr-2 mb-2'>{alerg}</p>
                             )}
                         </div>
 
