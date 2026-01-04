@@ -25,7 +25,7 @@ export default async function Index() {
       <MainIntro />
       {isSupabaseConnected && (
         <>
-          <ClientButton>Comenzar</ClientButton>
+          <ClientButton>Comencemos</ClientButton>
         </>
       )}
       <FooterMain />

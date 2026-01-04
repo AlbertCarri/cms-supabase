@@ -45,7 +45,7 @@ export async function middleware(request) {
 
   // Sin usuario intentando acceder a ruta protegida → /login
   if (!user && isProtectedRoute) {
-    return NextResponse.redirect(new URL('/login', request.url))
+    return NextResponse.redirect(new URL('/auth/login', request.url))
   }
 
   // Con usuario en /login → /main (ya está logueado)

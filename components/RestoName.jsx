@@ -14,12 +14,14 @@ export const RestoName = async ({ userId }) => {
     const { data: users, error } = await supabase
       .from("users")
       .insert([{ resto_name: "Nombre del negocio", user_uid: userId }]);
+    const resto = "Nombre del negocio";
     if (error) {
       console.error("Error de Consulta:", error);
       return;
     }
+  } else {
+    const resto = users[0].resto_name;
   }
-  const resto = users[0].resto_name;
   return (
     <>
       <h2 className="background-window w-48 sm:w-56 p-2 mr-10 rounded-lg">

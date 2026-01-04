@@ -18,7 +18,7 @@ export default async function Menu({ params }) {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return redirect("/login");
+    return redirect("/auth/login");
   }
 
   return (

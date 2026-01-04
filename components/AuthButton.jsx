@@ -29,7 +29,7 @@ export default function AuthButton() {
     </div>
   ) : (
     <Link
-      href="/login"
+      href="/auth/login"
       className="py-2 px-3 h-10 flex rounded-md button-sky button-sky-hover"
     >
       Login

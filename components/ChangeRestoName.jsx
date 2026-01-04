@@ -31,7 +31,7 @@ export const ChangeRestoName = ({ userId }) => {
                     <div className="modal" onClick={(e) => e.stopPropagation()}>
                         <form>
                             <div className='flex flex-col foreground-dark'>
-                                <label for="changeName" className='mb-2'>Cambiar Nombre</label>
+                                <label htmlFor="changeName" className='mb-2'>Cambiar Nombre</label>
                                 <input
                                     type='text'
                                     id="changeName"

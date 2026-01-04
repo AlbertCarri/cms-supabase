@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { ClientButton } from "./ClientButton";
 import Link from "next/link";
 
 export default function NavMenu() {
@@ -20,7 +19,7 @@ export default function NavMenu() {
           <Link href="/about">Acerca</Link>
         </li>
         <li className="btn-zinc rounded-lg py-1 px-4">
-          <Link href="/login">Comenzar</Link>
+          <Link href="/auth/login">Comenzar</Link>
         </li>
       </ul>
       <button
@@ -44,7 +43,7 @@ export default function NavMenu() {
               <Link href="/about">Acerca</Link>
             </li>
             <li className="btn-zinc rounded-lg py-1 px-4">
-              <Link href="/login">Comenzar</Link>
+              <Link href="/auth/login">Comenzar</Link>
             </li>
           </ul>
         </div>

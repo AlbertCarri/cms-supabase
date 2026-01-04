@@ -70,7 +70,7 @@ body {
   transition: 150ms;
 }
 
-.button-sky:hover {
+.button-sky:active {
   background-color: var(--btn-background-sky-hover);
   box-shadow: inset 0px 0px 4px 2px rgb(0, 0, 0);
   font-size: 15px;
