@@ -40,7 +40,7 @@ export async function middleware(request) {
   const isProtectedRoute = protectedRoutes.some(route => path.startsWith(route))
 
   // ✅ Rutas públicas (NO requieren autenticación)
-  const publicRoutes = ['/login', '/menu']
+  const publicRoutes = ['/auth', '/menu']
   const isPublicRoute = publicRoutes.some(route => path.startsWith(route))
 
   // Sin usuario intentando acceder a ruta protegida → /login
