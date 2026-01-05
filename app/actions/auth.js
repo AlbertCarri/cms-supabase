@@ -107,5 +107,5 @@ export async function updatePasswordAction(prevState, formData) {
     return { error: true, message: error.message };
   }
 
-  redirect("/auth/login?message=Contraseña actualizada exitosamente");
+  redirect("/auth/login");
 }
