@@ -1,7 +1,7 @@
 import { createClient } from "../../app/lib/supabase/server";
 
 export const CompleteMenu = async ({ resto_name }) => {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { data: menu, error } = await supabase
     .from("users")

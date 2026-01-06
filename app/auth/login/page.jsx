@@ -72,7 +72,7 @@ export default function Login({ searchParams }) {
         <p className="text-center text-sm mt-4">
           <Link
             href="/auth/reset-password"
-            className="text-purple-600 hover:underline"
+            className="text-pink-400 hover:underline"
           >
             ¿Olvidaste tu contraseña?
           </Link>

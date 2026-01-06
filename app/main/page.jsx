@@ -38,7 +38,7 @@ export default async function ProtectedPage() {
   } else {
     resto = users[0].resto_name;
   }
-  const urlQr = "https://cms-resto.vercel.app/menu/" + resto;
+  const urlQr = "https://cms-resto.vercel.app/menu/" + resto.replaceAll(" ","_");
 
   return (
     <div className="flex-1 w-9/12 flex flex-col gap-10 items-center">

@@ -11,11 +11,11 @@ export default async function MenuC({ params }) {
             <div className="w-11/12 mx-auto">
                 <h2 className="text-4xl my-8 text-center">{MenuList.resto_name}</h2>
                 {category.map((categ) => (
-                    <div className='menu-card flex flex-col py-4 px-4 rounded-md border border-black mb-4'>
+                    <div key={categ.id} className='menu-card flex flex-col py-4 px-4 rounded-md border border-black mb-4'>
                         <p className='text-2xl mb-4 text-left'>{categ.name}:</p>
 
                         {categ.menu.map((category_menu) => (
-                            <div>
+                            <div key={category_menu.id}>
                                 {category_menu.checked && (
                                     <div>
                                         <div className="flex flex-row justify-center">
