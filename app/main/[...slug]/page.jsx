@@ -22,8 +22,8 @@ export default async function Menu({ params }) {
   }
 
   return (
-    <div className="flex-1 w-11/12 flex flex-col gap-10 items-center">
-      <div className="w-full">
+    <div className="w-full flex flex-col gap-10 items-center">
+      <div className="w-11/12">
         <nav className="w-full flex justify-between h-16 p-4">
           <GoBack />
           <AuthButton />
@@ -31,7 +31,7 @@ export default async function Menu({ params }) {
         <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>{" "}
         {/* línea separadora*/}
       </div>
-      <div className="w-full text-center">
+      <div className="w-11/12 text-center">
         <ChangeCategoryName name={name} categoryId={categoryId} />
         <NewMenu categoryId={categoryId} />
       </div>

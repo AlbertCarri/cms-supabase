@@ -57,10 +57,14 @@ body {
   transition: 150ms;
 }
 
-.button-red:hover {
+.button-red:active {
   background-color: var(--btn-background-red-hover);
   box-shadow: inset 0px 0px 2px 3px rgb(48, 1, 1);
   font-size: 15px;
+}
+
+.button-red:hover {
+  background: linear-gradient(to bottom, var(--btn-background-red), #ad1d0a);
 }
 
 .button-sky {
@@ -92,10 +96,14 @@ body {
   transition: 150ms;
 }
 
-.button-purple:hover {
+.button-purple:active {
   background-color: var(--btn-background-purple-hover);
   box-shadow: inset 0px 0px 2px 3px rgb(34, 2, 53);
   font-size: 15px;
+}
+
+.button-purple:hover {
+  background: linear-gradient(to bottom, var(--btn-background-purple), #87129e);
 }
 
 .button-zinc {
@@ -105,10 +113,14 @@ body {
   transition: 150ms;
 }
 
-.button-zinc:hover {
+.button-zinc:active {
   background-color: var(--btn-background-zinc-hover);
   box-shadow: inset 0px 0px 2px 3px rgb(0, 0, 0);
   font-size: 15px;
+}
+
+.button-zinc:hover {
+  background: linear-gradient(to bottom, var(--btn-background-zinc), #070707);
 }
 
 .btn-zinc {

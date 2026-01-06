@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { updateCategoryName } from "../utils/supabase/updateCategoryName";
+import { Pencil } from "lucide-react";
 
 export const ChangeCategoryName = ({ categoryId, name }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,10 +26,10 @@ export const ChangeCategoryName = ({ categoryId, name }) => {
       <div className="flex flex-row mb-4 justify-center items-center">
         <p className="foreground-light text-4xl">{inputValue}</p>
         <button
-          className="button-sky px-4 py-2 ml-4 rounded-lg"
+          className="px-4 py-2 ml-2 rounded-lg cursor-pointer"
           onClick={openModal}
         >
-          ✍
+          <Pencil/>
         </button>
       </div>
       {isModalOpen && (
