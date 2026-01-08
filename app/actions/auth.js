@@ -38,14 +38,13 @@ export async function loginAction(prevData, formData) {
   const email = formData.get("email");
   const password = formData.get("password");
 
-    const restoName = await signInUser(email, password);
-    console.log("auth login:", restoName);
-    if (restoName) {
-      redirect("/main");
-    } else {
-      redirect("/onboarding/step-1");
-    }
- 
+  const restoName = await signInUser(email, password);
+  console.log("auth login:", restoName);
+  if (restoName) {
+    redirect("/main");
+  } else {
+    redirect("/onboarding/step-1");
+  }
 }
 
 export async function signOut() {

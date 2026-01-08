@@ -44,7 +44,11 @@ export async function signInUser(email, password) {
   if (userError) {
     throw new Error(userError.message);
   }
-  return userData[0].resto_name;
+  if (!userData || userData.length === 0) {
+    return null;
+  } else {
+    return userData[0].resto_name;
+  }
 }
 
 export async function signUpUser(email, password) {
