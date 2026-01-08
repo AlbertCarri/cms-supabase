@@ -22,11 +22,15 @@ export default async function ProtectedPage() {
     .select("resto_name")
     .eq("user_uid", user.id);
 
-  let resto;
+  // let resto;
 
   if (error) console.error("Error de Consulta:", error);
 
-  if (users.length <= 0) {
+  const resto = users[0].resto_name;
+
+  if (!resto) redirect("onboarding/step1");
+  {
+    /* if (users.length <= 0) {
     const { data: users, error } = await supabase
       .from("users")
       .insert([{ resto_name: "Nombre del negocio", user_uid: user.id }]);
@@ -37,6 +41,7 @@ export default async function ProtectedPage() {
     }
   } else {
     resto = users[0].resto_name;
+  }*/
   }
   const urlQr =
     "https://cms-resto.vercel.app/menu/" + resto.replaceAll(" ", "_");
