@@ -37,7 +37,7 @@ export async function signupAction(prevData, formData) {
 export async function loginAction(prevData, formData) {
   const email = formData.get("email");
   const password = formData.get("password");
-  try {
+
     const restoName = await signInUser(email, password);
     console.log("auth login:", restoName);
     if (restoName) {
@@ -45,9 +45,7 @@ export async function loginAction(prevData, formData) {
     } else {
       redirect("/onboarding/step-1");
     }
-  } catch (error) {
-    return { success: false, error: error.message };
-  }
+ 
 }
 
 export async function signOut() {
