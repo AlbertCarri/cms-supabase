@@ -41,7 +41,6 @@ export async function signInUser(email, password) {
     .from("users")
     .select("resto_name")
     .eq("user_uid", data.user.id)
-    .single();
 
   if (userError) {
     throw new Error(userError.message);
