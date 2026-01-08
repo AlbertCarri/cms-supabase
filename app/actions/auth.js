@@ -39,12 +39,11 @@ export async function loginAction(prevData, formData) {
   const password = formData.get("password");
   try {
     const user = await signInUser(email, password);
-    console.log("action login", user);
-    if (!user) redirect("/onboarding/step1");
+    if (user) redirect("/main");
   } catch (error) {
     return { success: false, error: error.message };
   }
-  redirect("/main");
+  redirect("/onboarding/step1");
 }
 
 export async function signOut() {

@@ -33,7 +33,6 @@ export async function signInUser(email, password) {
     email,
     password,
   });
-  console.log("USER:", data.user.id);
   if (error) {
     throw new Error(error.message);
   }
@@ -45,7 +44,6 @@ export async function signInUser(email, password) {
   if (userError) {
     throw new Error(userError.message);
   }
-  console.log("RESTO NAME", userData[0].resto_name);
   return userData[0].resto_name;
 }
 
