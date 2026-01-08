@@ -33,20 +33,20 @@ export async function signInUser(email, password) {
     email,
     password,
   });
-
+  console.log("USER:", data.user.id);
   if (error) {
     throw new Error(error.message);
   }
   const { data: userData, error: userError } = await supabase
     .from("users")
     .select("resto_name")
-    .eq("user_uid", data.user.id)
+    .eq("user_uid", data.user.id);
 
   if (userError) {
     throw new Error(userError.message);
   }
-  console.log("RESTO NAME", userData.resto_name);
-  return userData.resto_name;
+  console.log("RESTO NAME", userData[0].resto_name);
+  return userData[0].resto_name;
 }
 
 export async function signUpUser(email, password) {
