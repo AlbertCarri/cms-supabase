@@ -38,7 +38,8 @@ export async function loginAction(prevData, formData) {
   const email = formData.get("email");
   const password = formData.get("password");
   try {
-    await signInUser(email, password);
+    const user = await signInUser(email, password);
+    if (!user) redirect("/onboarding/step1");
   } catch (error) {
     return { success: false, error: error.message };
   }

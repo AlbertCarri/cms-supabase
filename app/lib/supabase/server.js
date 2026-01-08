@@ -37,8 +37,16 @@ export async function signInUser(email, password) {
   if (error) {
     throw new Error(error.message);
   }
+  const { data: userData, error: userError } = await supabase
+    .from("users")
+    .select("resto_name")
+    .eq("user_uid", data.user.id)
+    .single();
 
-  return data;
+  if (userError) {
+    throw new Error(userError.message);
+  }
+  return userData.resto_name;
 }
 
 export async function signUpUser(email, password) {
@@ -65,3 +73,4 @@ export async function logOut() {
     throw new Error(error.message);
   }
 }
+
