@@ -38,12 +38,12 @@ export async function loginAction(prevData, formData) {
   const email = formData.get("email");
   const password = formData.get("password");
   try {
-    const user = await signInUser(email, password);
-    if (user.length > 0) redirect("/main");
+    const restoName = await signInUser(email, password);
+    if (restoName) redirect("/main");
+    else redirect("/onboarding/step-1");
   } catch (error) {
     return { success: false, error: error.message };
   }
-  redirect("/onboarding/step-1");
 }
 
 export async function signOut() {
