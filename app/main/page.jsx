@@ -29,6 +29,7 @@ export default async function ProtectedPage() {
   const resto = users[0].resto_name;
 
   if (!resto) redirect("onboarding/step1");
+  console.log("RESTO EN MAIN:", resto);
   {
     /* if (users.length <= 0) {
     const { data: users, error } = await supabase
