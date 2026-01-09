@@ -1,8 +1,9 @@
 "use server";
 
-import { signInUser, logOut, getRestoName } from "../lib/supabase/server";
+import { signInUser, signUpUser, logOut } from "../lib/supabase/server";
 import { redirect } from "next/navigation";
 import { createClient } from "../lib/supabase/server";
+import { error } from "console";
 
 // Acción para registrar un usuario
 export async function signupAction(prevData, formData) {
@@ -37,18 +38,16 @@ export async function signupAction(prevData, formData) {
 export async function loginAction(prevData, formData) {
   const email = formData.get("email");
   const password = formData.get("password");
-  let user_uid;
-
   try {
-    user_uid = await signInUser(email, password);
+    const restoName = await signInUser(email, password);
+    console.log("auth login:", restoName);
+    if (restoName) {
+      redirect("/main");
+    } else {
+      redirect("/onboarding/step-1");
+    }
   } catch (error) {
     return { success: false, error: error.message };
-  }
-  const restoName = await getRestoName(user_uid.user.id);
-  if (restoName) {
-    redirect("/main");
-  } else {
-    redirect("/onboarding");
   }
 }
 

@@ -36,7 +36,19 @@ export async function signInUser(email, password) {
   if (error) {
     throw new Error(error.message);
   }
-  return data;
+  const { data: userData, error: userError } = await supabase
+    .from("users")
+    .select("resto_name")
+    .eq("user_uid", data.user.id);
+
+  if (userError) {
+    throw new Error(userError.message);
+  }
+  if (!userData || userData.length === 0) {
+    return null;
+  } else {
+    return userData[0].resto_name;
+  }
 }
 
 export async function signUpUser(email, password) {
@@ -61,22 +73,5 @@ export async function logOut() {
 
   if (error) {
     throw new Error(error.message);
-  }
-}
-
-export async function getRestoName(user_uid) {
-  const supabase = await createClient();
-  const { data: userData, error: userError } = await supabase
-    .from("users")
-    .select("resto_name")
-    .eq("user_uid", user_uid);
-
-  if (userError) {
-    throw new Error(userError.message);
-  }
-  if (!userData || userData.length === 0) {
-    return null;
-  } else {
-    return userData[0].resto_name;
   }
 }

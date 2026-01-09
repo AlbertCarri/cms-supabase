@@ -1,16 +1,10 @@
 import "../globals.css";
+import { motion } from "motion/react";
 
 export default function OnboardingLayout({ children }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </head>
-      <body className="min-h-screen background foreground-ligth">
-        <main className="w-full p-8">
-          {children}
-        </main>
-      </body>
-    </html>
+    <main className="w-full background foreground-ligth p-8">
+      {children}
+    </main>
   );
 }

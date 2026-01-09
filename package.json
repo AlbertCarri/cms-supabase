@@ -12,6 +12,7 @@
     "file-saver": "^2.0.5",
     "geist": "^1.2.1",
     "lucide-react": "^0.562.0",
+    "motion": "^12.24.12",
     "next": "^15.5.9",
     "postcss": "8.4.33",
     "react": "18.3.1",
