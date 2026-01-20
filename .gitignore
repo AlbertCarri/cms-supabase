@@ -20,6 +20,7 @@
 .DS_Store
 *.pem
 /BackUp-borrar
+/para-borrar
 
 # debug
 npm-debug.log*

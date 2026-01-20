@@ -36,3 +36,18 @@
   social0: 'rey_seitan',
   social1: 'www.umamiveg.com.ar'
 }
+
+
+perfil 
+[
+ 0: 
+ {
+Type: null
+adress: "null"
+qr_url: "https://cvmxwupvgvezczpatmzg.supabase.co/storage/v1/object/public/cms-Main/public/Commons_QR_code.png"
+resto_name: "Rey Seitan"
+schedule: null
+socialmedia: []
+user_uid: "5688ee28-92d2-4b75-8021-c0f303f672bd"
+  }
+]

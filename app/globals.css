@@ -126,6 +126,8 @@ body {
 .btn-zinc {
   background-color: var(--btn-background-zinc);
   color: var(--foreground-light-zinc);
+  padding: 8px 16px;
+  border-radius: 8px;
 }
 
 .btn-zinc:hover {

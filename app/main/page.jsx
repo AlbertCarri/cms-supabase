@@ -30,20 +30,7 @@ export default async function ProtectedPage() {
 
   if (!resto) redirect("onboarding/step-1");
   console.log("RESTO EN MAIN:", resto);
-  {
-    /* if (users.length <= 0) {
-    const { data: users, error } = await supabase
-      .from("users")
-      .insert([{ resto_name: "Nombre del negocio", user_uid: user.id }]);
-    resto = "Nombre del negocio";
-    if (error) {
-      console.error("Error de Consulta:", error);
-      return;
-    }
-  } else {
-    resto = users[0].resto_name;
-  }*/
-  }
+  
   const urlQr =
     "https://cms-resto.vercel.app/menu/" + resto.replaceAll(" ", "_");
 

@@ -65,6 +65,36 @@ export async function logOut() {
 }
 
 export async function getRestoName(user_uid) {
+  const schedule = {
+    Domingo: {
+      activo: false,
+      turnos: [],
+    },
+    Lunes: {
+      activo: false,
+      turnos: [],
+    },
+    Martes: {
+      activo: false,
+      turnos: [],
+    },
+    Miércoles: {
+      activo: false,
+      turnos: [],
+    },
+    Jueves: {
+      activo: false,
+      turnos: [],
+    },
+    Viernes: {
+      activo: false,
+      turnos: [],
+    },
+    Sábado: {
+      activo: false,
+      turnos: [],
+    },
+  };
   const supabase = await createClient();
   const { data: userData, error: userError } = await supabase
     .from("users")
@@ -75,6 +105,22 @@ export async function getRestoName(user_uid) {
     throw new Error(userError.message);
   }
   if (!userData || userData.length === 0) {
+    const { data, error: insertError } = await supabase.from("users").insert([
+      {
+        resto_name: "Nada cargado",
+        user_uid: user_uid,
+        schedule: schedule,
+        type: "Cafetería",
+        adress: "Avenida Siempre Viva 1234",
+        socialmedia: [],
+        qr_url: "",
+      },
+    ]);
+    if (insertError) {
+      console.error("ERROR AL INSERTAR:", insertError);
+      throw new Error(insertError.message);
+    }
+    console.log("INSERTADO:", data);
     return null;
   } else {
     return userData[0].resto_name;
