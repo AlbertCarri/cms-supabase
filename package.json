@@ -9,6 +9,7 @@
     "@supabase/ssr": "0.7.0",
     "@supabase/supabase-js": "^2.86.0",
     "autoprefixer": "10.4.17",
+    "browser-image-compression": "^2.0.2",
     "file-saver": "^2.0.5",
     "geist": "^1.2.1",
     "lucide-react": "^0.562.0",

@@ -44,7 +44,7 @@ export default async function ProtectedPage() {
           <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>{" "}
           {/* línea separadora*/}
         </div>
-        <div className="flex flex-row">
+        <div className="flex flex-row w-full">
           <div className="basis-full">
             <h2 className="foreground-light mb-4">Nombre del Restó :</h2>
             <div className="flex flex-row">

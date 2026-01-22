@@ -109,8 +109,9 @@ body {
 .button-zinc {
   background: linear-gradient(to bottom, var(--btn-background-zinc), #1b1b1b);
   color: var(--foreground-light-zinc);
-  box-shadow: inset 0px 0px 1px 1px rgb(0, 0, 0);
+  box-shadow: inset 0px 0px 4px 2px rgb(39, 39, 39);
   transition: 150ms;
+  border-radius: 8px;
 }
 
 .button-zinc:active {
@@ -120,7 +121,7 @@ body {
 }
 
 .button-zinc:hover {
-  background: linear-gradient(to bottom, var(--btn-background-zinc), #070707);
+  background: linear-gradient(to bottom, var(--btn-background-zinc), #5a5a5a);
 }
 
 .btn-zinc {

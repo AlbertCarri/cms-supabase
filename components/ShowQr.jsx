@@ -12,8 +12,11 @@ export const ShowQr = ({ urlQr }) => {
   };
 
   return (
-    <div className="bg-slate-800">
-      <Link className="w-11/12 btn-zinc mx-auto mb-4 block" href={"/onboarding/step-1"}>
+    <>
+      <Link
+        className="button-zinc w-2/3 py-2 px-4 mx-auto mb-4 block text-center"
+        href={"/onboarding/step-1"}
+      >
         Modificar tu perfil
       </Link>
       <p className="text-xl text-center mb-4">Tu código QR:</p>
@@ -30,6 +33,6 @@ export const ShowQr = ({ urlQr }) => {
       <p className="text-sm mt-4 text-center">
         Click sobre la imagen para descargar:
       </p>
-    </div>
+    </>
   );
 };

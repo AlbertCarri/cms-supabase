@@ -1,5 +1,6 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { createClient } from "../lib/supabase/server";
 
 export async function onboardingStep1(prevData, formData) {
@@ -112,4 +113,5 @@ export async function onboardingStep1(prevData, formData) {
     })
     .eq("user_uid", formStep1.user_uid);
   if (error) console.error("Error al insertar en bd:", error);
+  redirect("/onboarding/step-2");
 }

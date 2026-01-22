@@ -5,10 +5,12 @@ import { useActionState, useState } from "react";
 import { onboardingStep1 } from "../app/actions/onboardingStep1";
 import { motion } from "motion/react";
 import { Trash2 } from "lucide-react";
+import Link from "next/link";
+import { scheduleBase } from "../app/lib/scheduleStarter";
 
 export default function OnboardingStep1({ datosIniciales }) {
   const profile = datosIniciales[0];
-  const schedule = profile.schedule;
+  const schedule = profile?.schedule || scheduleBase;
   const weekDays = [
     "Domingo",
     "Lunes",
@@ -20,13 +22,13 @@ export default function OnboardingStep1({ datosIniciales }) {
   ];
   const [variasRedes, setVariasRedes] = useState(profile?.socialmedia || []);
   const [emprendimiento, setEmprendimiento] = useState(
-    profile?.resto_name || "Ingrese el nombre del emprendimiento"
+    profile?.resto_name || "Ingrese el nombre del emprendimiento",
   );
   const [tipo, setTipo] = useState(
-    profile?.type || "Tipo de emprendimiendo. Ej: Cafetería"
+    profile?.type || "Tipo de emprendimiendo. Ej: Cafetería",
   );
   const [direccion, setDireccion] = useState(
-    profile?.adress || "Ingrese la dirección de su negocio"
+    profile?.adress || "Ingrese la dirección de su negocio",
   );
   const [state, sendingStep1, isPending] = useActionState(onboardingStep1, "");
 
@@ -186,8 +188,10 @@ export default function OnboardingStep1({ datosIniciales }) {
                     onChange={(e) => {
                       setVariasRedes((prev) =>
                         prev.map((item, index) =>
-                          i === index ? { ...item, name: e.target.value } : item
-                        )
+                          i === index
+                            ? { ...item, name: e.target.value }
+                            : item,
+                        ),
                       );
                     }}
                     value={item.name}
@@ -204,13 +208,18 @@ export default function OnboardingStep1({ datosIniciales }) {
                 </div>
               ))}
           </div>
-          <button
-            type="submit"
-            disabled={isPending}
-            className="button-purple w-48 mx-auto p-2 mt-14 rounded-md"
-          >
-            {isPending ? "Guardando...." : "Guardar y continuar"}
-          </button>
+          <div className="flex items-center justify-center mt-14 gap-4">
+            <button
+              type="submit"
+              disabled={isPending}
+              className="button-purple w-auto p-2 rounded-md"
+            >
+              {isPending ? "Guardando...." : "Guardar y continuar"}
+            </button>
+            <Link href={"/main"} className="button-zinc w-auto px-4 py-2">
+              Volver
+            </Link>
+          </div>
         </form>
       </div>
     </motion.div>
