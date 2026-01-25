@@ -1,12 +1,14 @@
 "use client";
 
-import { FileInput, Trash2, Pencil } from "lucide-react";
-import { useActionState, useState } from "react";
+import { FileInput, Pencil } from "lucide-react";
+import { useState } from "react";
 import { onboardingStep2 } from "../app/actions/onboardingStep2";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { palettes } from "../app/lib/palettes";
 import imageCompression from "browser-image-compression";
+import PaletteSelect from "./PaletteSelect";
+import PreviewMenu from "./PreviewMenu";
 
 export default function OnboardingStep2({ datosIniciales }) {
   const profile = datosIniciales[0];
@@ -84,7 +86,7 @@ export default function OnboardingStep2({ datosIniciales }) {
         ease: [0, 0.71, 0.2, 1.01],
       }}
     >
-      <div className="w-11/12 md:w-2/3 bg-slate-800 mx-auto p-8 rounded-lg">
+      <div className="relative w-11/12 md:w-2/3 bg-slate-800 mx-auto p-8 rounded-lg">
         <form action={handleSubmit} className="flex flex-col p-4">
           <input type="hidden" name="user_uid" value={profile?.user_uid} />
           <label htmlFor="logo" className="p-2">
@@ -150,45 +152,11 @@ export default function OnboardingStep2({ datosIniciales }) {
           <p className="mb-4 mt-8 text-lg font-bold">
             Elegí tu paleta de colores
           </p>
-          <div className="flex flex-row w-full gap-2 p-4 overflow-scroll snap-x">
-            {palettes.map((palette) => {
-              return (
-                <div
-                  key={palette.id}
-                  className={`p-1 rounded-md snap-start scroll-ml-44 active:scale-95 cursor-pointer duration-300
-                    ${palette.id === selectedPalette ? "bg-indigo-600 scale-110 shadow-xl" : "bg-gray-900 hover:scale-102 hover:shadow-lg}"}
-                    `}
-                  onClick={() => selectPalette(palette.id)}
-                >
-                  <div className="flex flex-col">
-                    <div
-                      style={{
-                        background: `${palette.background}`,
-                        color: `${palette.text}`,
-                      }}
-                      className="w-40 h-20 p-4 rounded-t-md flex items-center justify-center font-semibold text-sm"
-                    >
-                      {palette.name}
-                    </div>
-                    <div className="flex flex-row text-xs">
-                      <div
-                        style={{ background: `${palette.button1}` }}
-                        className="w-20 p-4 text-center rounded-bl-md"
-                      >
-                        Boton1
-                      </div>
-                      <div
-                        style={{ background: `${palette.button2}` }}
-                        className="w-20 p-4 text-center rounded-br-md"
-                      >
-                        Boton2
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <PaletteSelect
+            palettes={palettes}
+            selectedPalette={selectedPalette}
+            selectPalette={selectPalette}
+          />
           <div className="flex items-center justify-center mt-14 gap-4">
             <button
               type="submit"
@@ -202,6 +170,13 @@ export default function OnboardingStep2({ datosIniciales }) {
             </Link>
           </div>
         </form>
+        <PreviewMenu
+          palettes={palettes}
+          selectedPalette={selectedPalette}
+          bannerImage={bannerImage}
+          logoImage={logoImage}
+          restoName={profile.resto_name}
+        />
       </div>
     </motion.div>
   );

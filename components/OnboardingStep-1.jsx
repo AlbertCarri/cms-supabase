@@ -216,6 +216,12 @@ export default function OnboardingStep1({ datosIniciales }) {
             >
               {isPending ? "Guardando...." : "Guardar y continuar"}
             </button>
+            <Link
+              href={"/onboarding/step-2"}
+              className="button-zinc w-auto px-4 py-2"
+            >
+              Imágenes y colores
+            </Link>
             <Link href={"/main"} className="button-zinc w-auto px-4 py-2">
               Volver
             </Link>

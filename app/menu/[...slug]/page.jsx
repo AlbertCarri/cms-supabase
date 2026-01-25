@@ -1,18 +1,43 @@
 import { CompleteMenu } from "../../../utils/supabase/CompleteMenu";
+import { palettes } from "../../lib/palettes";
 
 export default async function MenuC({ params }) {
-  const resto_name = params.slug[0].replaceAll("_", " ");
+  const Params = await params;
+  const resto_name = Params.slug[0].replaceAll("_", " ");
   const MenuList = await CompleteMenu({ resto_name });
   const category = MenuList.category;
+  const palette = MenuList.palette-1;
+  console.log("datos del la base de datos:::", category);
 
   return (
-    <div className="menu w-full">
-      <div className="w-11/12 mx-auto">
-        <h2 className="text-4xl my-8 text-center">{MenuList.resto_name}</h2>
+    <div
+      className="menu w-full"
+      style={{
+        background: `${palettes[palette].background}`,
+        color: `${palettes[palette].text}`,
+      }}
+    >
+      <img
+        src={`${MenuList.banner}`}
+        alt="banner del resto"
+        className="w-full h-32 object-cover"
+      />
+      <img
+        src={`${MenuList.logo}`}
+        alt="logo del resto"
+        className="w-36 h-36 mx-auto -mt-20"
+      />
+      <h1 className="text-4xl text-center">{resto_name}</h1>
+      <div className="w-11/12 mx-auto mt-8">
         {category.map((categ) => (
           <div
             key={categ.id}
-            className="menu-card flex flex-col py-4 px-4 rounded-md border border-black mb-4"
+            style={{
+              
+              backgroundColor:`${palettes[palette].button1}4f`,
+              border: `1px solid ${palettes[palette].text}`,
+            }}
+            className="flex flex-col py-4 px-4 rounded-md mb-4"
           >
             <p className="text-2xl mb-4 text-left">{categ.name}:</p>
 
@@ -45,7 +70,8 @@ export default async function MenuC({ params }) {
                     <p className="text-xs mb-1">Alergenos:</p>
                     <div className="flex flex-row justify-center">
                       {category_menu.alergens.map((alerg) => (
-                        <p className="label-emerald text-xs line-clamp-1 md:line-clamp-none rounded-sm px-1 mr-2 mb-4">
+                        <p key={alerg}
+                         className="label-emerald text-xs line-clamp-1 md:line-clamp-none rounded-sm px-1 mr-2 mb-4">
                           {alerg}
                         </p>
                       ))}
