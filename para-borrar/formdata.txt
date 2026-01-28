@@ -51,3 +51,53 @@ socialmedia: []
 user_uid: "5688ee28-92d2-4b75-8021-c0f303f672bd"
   }
 ]
+
+
+schedule
+{
+    "Lunes": {
+        "activo": false,
+        "turnos": []
+    },
+    "Jueves": {
+        "activo": false,
+        "turnos": []
+    },
+    "Martes": {
+        "activo": false,
+        "turnos": []
+    },
+    "Domingo": {
+        "activo": true,
+        "turnos": [
+            {
+                "cierre": "14:00",
+                "apertura": "12:00"
+            },
+            {
+                "cierre": "23:00",
+                "apertura": "20:00"
+            }
+        ]
+    },
+    "Sábado": {
+        "activo": false,
+        "turnos": []
+    },
+    "Viernes": {
+        "activo": false,
+        "turnos": []
+    },
+    "Miércoles": {
+        "activo": false,
+        "turnos": []
+    }
+}
+
+socialmedia
+[
+    {
+        "name": "Umamiveg",
+        "social": "Instagram"
+    }
+]

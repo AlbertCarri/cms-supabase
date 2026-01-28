@@ -4,6 +4,7 @@ import { InsertIntoMenu } from "../utils/supabase/InsertIntoMenu";
 import { createClient } from "../app/lib/supabase/client";
 import { useState, useEffect } from "react";
 import { SelectEditMenu } from "../utils/supabase/EditMenu";
+import { Pencil } from "lucide-react";
 
 export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
   const [menu, setMenu] = useState([]);
@@ -93,7 +94,7 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={CloseModal}>
+    <div className="modal-overlay" >
       <div className="modal w-96" onClick={(e) => e.stopPropagation()}>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col foreground-dark text-start">
@@ -118,24 +119,32 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
               defaultValue={menu && menu.length > 0 ? menu[0].description : ""}
               className="mb-8 p-2 bg-gray-300 rounded-lg"
             />
-            <img
-              src={
-                menu && menu.length > 0 && imagePreview === "/LogoMenu.jpg"
-                  ? menu[0].image
-                  : imagePreview
-              }
-              width={100}
-              height={100}
-              alt="imagen"
-            />
-            <input
-              className="mb-8"
-              name="file"
-              type="file"
-              accept="jpg,png,bmp"
-              onChange={ImagePreview}
-            />
-            <label htmlFor="price" className="mb-2">
+            <label htmlFor="file" className="">
+              Imagen
+              <div className="relative w-24 mt-2 cursor-pointer">
+                <img
+                  src={
+                    menu && menu.length > 0 && imagePreview === "/LogoMenu.jpg"
+                      ? menu[0].image
+                      : imagePreview
+                  }
+                  width={100}
+                  height={100}
+                  alt="imagen"
+                  className="rounded-lg"
+                />
+                <Pencil color="white" className="absolute right-2 top-1" />
+              </div>
+              <input
+                className="hidden mb-8"
+                id="file"
+                name="file"
+                type="file"
+                accept="jpg,png,bmp"
+                onChange={ImagePreview}
+              />
+            </label>
+            <label htmlFor="price" className="mt-8 mb-2">
               Precio en $(pesos)
             </label>
             <input

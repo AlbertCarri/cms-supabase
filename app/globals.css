@@ -4,7 +4,8 @@
 
 @font-face {
   font-family: "Quicksand";
-  src: url("/fonts/Quicksand/static/Quicksand-Regular.ttf") format("truetype"),
+  src:
+    url("/fonts/Quicksand/static/Quicksand-Regular.ttf") format("truetype"),
     url("/fonts/Quicksand/static/Quicksand-Bold.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
@@ -243,3 +244,4 @@ html {
     transform: translateY(0);
   }
 }
+
