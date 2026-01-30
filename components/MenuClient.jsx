@@ -8,8 +8,12 @@ export default function MenuClient({ MenuList }) {
   const category = MenuList.category;
   const palette = palettes[MenuList.palette - 1];
   const resto_name = MenuList.resto_name;
+  const suitableOption = MenuList.category[0].menu[0]?.suitableOption || [
+    "Filtros",
+  ];
   const categoryRef = useRef({});
   const [masInfo, setMasInfo] = useState(false);
+  const [suitableFilter, setSuitableFilter] = useState("");
 
   const handleCategoryScroll = (catId) => {
     categoryRef.current[catId].scrollIntoView({
@@ -19,6 +23,11 @@ export default function MenuClient({ MenuList }) {
 
   const closeMasInfo = () => {
     setMasInfo(false);
+  };
+
+  const handleSuitableChange = (item) => {
+    if (suitableFilter === item) setSuitableFilter("");
+    else setSuitableFilter(item);
   };
 
   return (
@@ -46,27 +55,44 @@ export default function MenuClient({ MenuList }) {
           type="button"
           className="text-xs opacity-75 cursor-pointer"
           onClick={() => setMasInfo(true)}
-        >
+          >
           Más info...
         </button>
       </div>
       {masInfo && (
         <MasInfo
-          closeMasInfo={closeMasInfo}
-          adress={MenuList.adress}
-          schedule={MenuList.schedule}
-          socialmedia={MenuList.socialmedia}
+        closeMasInfo={closeMasInfo}
+        adress={MenuList.adress}
+        schedule={MenuList.schedule}
+        socialmedia={MenuList.socialmedia}
         />
       )}
-      <div className="flex w-11/12 mx-auto gap-2 mt-8 overflow-scroll">
+      <p className="ml-4 mt-8">Nuestro menú:</p>
+      <div className="flex w-11/12 mx-auto gap-2 overflow-scroll">
         {category.map((categ) => (
           <button
             key={categ.name}
             style={{ background: `${palette.button1}` }}
-            className="min-w-24 h-20 text-xs rounded-xl overflow-hidden"
+            className="min-w-24 h-16 text-xs rounded-xl overflow-hidden"
             onClick={() => handleCategoryScroll(categ.id)}
           >
             {categ.name}
+          </button>
+        ))}
+      </div>
+      <p className="ml-4 mt-8">Preferencia:</p>
+      <div className="flex w-11/12 mx-auto gap-2 overflow-scroll">
+        {suitableOption.map((item) => (
+          <button
+            type="button"
+            key={item}
+            style={{ background: `${palette.button2}` }}
+            className={`w-16 h-10 text-xs rounded-xl overflow-clip
+              ${item===suitableFilter? 'border-sky-700 border-4':''}
+              `}
+            onClick={() => handleSuitableChange(item)}
+          >
+            {item}
           </button>
         ))}
       </div>
@@ -85,45 +111,47 @@ export default function MenuClient({ MenuList }) {
 
             {categ.menu.map((category_menu) => (
               <div key={category_menu.id}>
-                {category_menu.checked && (
-                  <div>
-                    <div className="flex flex-row justify-center">
-                      <div className="basis-40">
-                        <div className="rounded-lg mr-4 items-center w-28 h-28 overflow-hidden">
-                          <img
-                            className="w-full h-full object-cover"
-                            src={category_menu.image}
-                            alt="Food"
-                          />
+                {category_menu.checked &&
+                  (category_menu.suitableFor.includes(suitableFilter) ||
+                    suitableFilter === "") && (
+                    <div>
+                      <div className="flex flex-row justify-center">
+                        <div className="basis-40">
+                          <div className="rounded-lg mr-4 items-center w-28 h-28 overflow-hidden">
+                            <img
+                              className="w-full h-full object-cover"
+                              src={category_menu.image}
+                              alt="Food"
+                            />
+                          </div>
+                        </div>
+                        <div className="basis-96">
+                          <p className="text-md mb-2 underline underline-offset-4">
+                            {category_menu.name}
+                          </p>
+                          <p className="text-xs mb-1 h-16">
+                            {category_menu.description}
+                          </p>
+                          <p className="text-md mb-1">
+                            Precio ${category_menu.price}
+                          </p>
                         </div>
                       </div>
-                      <div className="basis-96">
-                        <p className="text-md mb-2 underline underline-offset-4">
-                          {category_menu.name}
-                        </p>
-                        <p className="text-xs mb-1 h-16">
-                          {category_menu.description}
-                        </p>
-                        <p className="text-md mb-1">
-                          Precio ${category_menu.price}
-                        </p>
+                      <p className="text-xs mb-1">Alergenos:</p>
+                      <div className="flex flex-row justify-center">
+                        {category_menu.alergens.map((alerg) => (
+                          <p
+                            key={alerg}
+                            className="label-emerald text-xs line-clamp-1 md:line-clamp-none rounded-sm px-1 mr-2 mb-4"
+                          >
+                            {alerg}
+                          </p>
+                        ))}
                       </div>
+                      <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>{" "}
+                      {/* línea separadora*/}
                     </div>
-                    <p className="text-xs mb-1">Alergenos:</p>
-                    <div className="flex flex-row justify-center">
-                      {category_menu.alergens.map((alerg) => (
-                        <p
-                          key={alerg}
-                          className="label-emerald text-xs line-clamp-1 md:line-clamp-none rounded-sm px-1 mr-2 mb-4"
-                        >
-                          {alerg}
-                        </p>
-                      ))}
-                    </div>
-                    <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>{" "}
-                    {/* línea separadora*/}
-                  </div>
-                )}
+                  )}
               </div>
             ))}
           </div>

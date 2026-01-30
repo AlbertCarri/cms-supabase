@@ -19,6 +19,9 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
     mani: false,
     frutossecos: false,
   });
+  const [suitableForDb, setSuitableForDb] = useState([]);
+
+  const suitableFor = ["Celíacos", "Veganos", "Vegetarianos", "Diabéticos"];
 
   useEffect(() => {
     const ReadMenus = async () => {
@@ -35,6 +38,7 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
         mani: menus[0].alergens.includes("mani"),
         frutossecos: menus[0].alergens.includes("frutossecos"),
       });
+      setSuitableForDb(menus[0]?.suitableFor || []);
     };
     if (menuId !== 0) {
       ReadMenus({ menuId });
@@ -56,7 +60,13 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
       const dataObject = Object.fromEntries(datas.entries());
       const formDataObject = { ...dataObject };
       delete formDataObject.file;
-      InsertIntoMenu({ fileURL, formDataObject, categoryId, menu });
+      InsertIntoMenu({
+        fileURL,
+        formDataObject,
+        categoryId,
+        menu,
+        suitableFor,
+      });
       closeModal();
     } else {
       const imageFile = datas.get("file");
@@ -71,12 +81,17 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
       if (error) {
         console.error("Error al subir la IMAGEN", path);
       } else {
-        console.log("Imagen subida correctamente");
       }
       const dataObject = Object.fromEntries(datas.entries());
       const formDataObject = { ...dataObject };
       delete formDataObject.file;
-      InsertIntoMenu({ fileURL, formDataObject, categoryId, menu });
+      InsertIntoMenu({
+        fileURL,
+        formDataObject,
+        categoryId,
+        menu,
+        suitableFor,
+      });
       closeModal();
     }
   };
@@ -93,12 +108,20 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
     }
   };
 
+  const handleSuitableChange = (item) => {
+    setSuitableForDb((prev) =>
+      prev.includes(item)
+        ? prev.filter((check) => check !== item)
+        : [...prev, item],
+    );
+  };
+
   return (
-    <div className="modal-overlay" >
+    <div className="modal-overlay">
       <div className="modal w-96" onClick={(e) => e.stopPropagation()}>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col foreground-dark text-start">
-            <label htmlFor="name" className="mb-2">
+            <label htmlFor="name" className="mb-1 font-bold">
               Nuevo Menú
             </label>
             <input
@@ -106,10 +129,10 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
               id="name"
               name="name"
               defaultValue={menu && menu.length > 0 ? menu[0].name : ""}
-              className="mb-8 p-2 bg-gray-300 rounded-lg"
+              className="mb-4 p-2 bg-gray-300 rounded-lg"
             />
 
-            <label htmlFor="description" className="mb-2">
+            <label htmlFor="description" className="mb-1 font-bold">
               Descripción
             </label>
             <input
@@ -117,11 +140,27 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
               name="description"
               id="description"
               defaultValue={menu && menu.length > 0 ? menu[0].description : ""}
-              className="mb-8 p-2 bg-gray-300 rounded-lg"
+              className="mb-4 p-2 bg-gray-300 rounded-lg"
             />
-            <label htmlFor="file" className="">
-              Imagen
-              <div className="relative w-24 mt-2 cursor-pointer">
+            <p className="font-bold">Apto para:</p>
+            <div className="flex flex-wrap mb-4">
+              {suitableFor.map((item) => (
+                <label key={item} htmlFor={item} className="mr-4">
+                  {item}
+                  <input
+                    type="checkbox"
+                    id={item}
+                    name={item}
+                    checked={suitableForDb.includes(item)}
+                    onChange={() => handleSuitableChange(item)}
+                    className="ml-1 accent-purple-600 cursor-pointer"
+                  />
+                </label>
+              ))}
+            </div>
+            <p className="font-bold">Imagen</p>
+            <div className="relative w-24 h-24">
+              <label htmlFor="file" className="cursor-pointer">
                 <img
                   src={
                     menu && menu.length > 0 && imagePreview === "/LogoMenu.jpg"
@@ -134,17 +173,17 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
                   className="rounded-lg"
                 />
                 <Pencil color="white" className="absolute right-2 top-1" />
-              </div>
-              <input
-                className="hidden mb-8"
-                id="file"
-                name="file"
-                type="file"
-                accept="jpg,png,bmp"
-                onChange={ImagePreview}
-              />
-            </label>
-            <label htmlFor="price" className="mt-8 mb-2">
+              </label>
+            </div>
+            <input
+              className="hidden mb-8"
+              id="file"
+              name="file"
+              type="file"
+              accept="image/*"
+              onChange={ImagePreview}
+            />
+            <label htmlFor="price" className="mt-4 mb-1 font-bold">
               Precio en $(pesos)
             </label>
             <input
@@ -152,10 +191,10 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
               name="price"
               id="price"
               defaultValue={menu && menu.length > 0 ? menu[0].price : ""}
-              className="mb-8 p-2 bg-gray-300 rounded-lg"
+              className="mb-4 p-2 bg-gray-300 rounded-lg"
             />
 
-            <p className="mb-4">Alergenos:</p>
+            <p className="mb-1 font-bold">Alergenos:</p>
             <div className="flex flex-row text-md justify-between">
               <label>
                 <input
@@ -165,7 +204,7 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
                   onChange={() =>
                     setCheckedBox({ ...checkBox, gluten: !checkBox.gluten })
                   }
-                  className="mb-8 p-2 bg-gray-300 rounded-lg"
+                  className="mb-2 p-2 bg-gray-300 rounded-lg"
                 />
                 Gluten
               </label>
@@ -180,7 +219,7 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
                       crustaceos: !checkBox.crustaceos,
                     })
                   }
-                  className="mb-8 p-2 bg-gray-300 rounded-lg"
+                  className="mb-2 p-2 bg-gray-300 rounded-lg"
                 />
                 Crustáceos
               </label>
@@ -192,7 +231,7 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
                   onChange={() =>
                     setCheckedBox({ ...checkBox, huevo: !checkBox.huevo })
                   }
-                  className="mb-8 p-2 bg-gray-300 rounded-lg"
+                  className="mb-2 p-2 bg-gray-300 rounded-lg"
                 />
                 Huevo
               </label>
@@ -204,7 +243,7 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
                   onChange={() =>
                     setCheckedBox({ ...checkBox, pescado: !checkBox.pescado })
                   }
-                  className="mb-8 p-2 bg-gray-300 rounded-lg"
+                  className="mb-2 p-2 bg-gray-300 rounded-lg"
                 />
                 Pescado
               </label>
@@ -218,7 +257,7 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
                   onChange={() =>
                     setCheckedBox({ ...checkBox, leche: !checkBox.leche })
                   }
-                  className="mb-8 p-2 bg-gray-300 rounded-lg"
+                  className="mb-2 p-2 bg-gray-300 rounded-lg"
                 />
                 Leche
               </label>
@@ -230,7 +269,7 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
                   onChange={() =>
                     setCheckedBox({ ...checkBox, soja: !checkBox.soja })
                   }
-                  className="mb-8 p-2 bg-gray-300 rounded-lg"
+                  className="mb-2 p-2 bg-gray-300 rounded-lg"
                 />
                 Soja
               </label>
@@ -242,7 +281,7 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
                   onChange={() =>
                     setCheckedBox({ ...checkBox, mani: !checkBox.mani })
                   }
-                  className="mb-8 p-2 bg-gray-300 rounded-lg"
+                  className="mb-2 p-2 bg-gray-300 rounded-lg"
                 />
                 Maní
               </label>
@@ -257,13 +296,13 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
                       frutossecos: !checkBox.frutossecos,
                     })
                   }
-                  className="mb-8 p-2 bg-gray-300 rounded-lg"
+                  className="mb-2 p-2 bg-gray-300 rounded-lg"
                 />
                 Frutos secos
               </label>
             </div>
           </div>
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-row justify-between mt-4">
             <button type="submit" className="btn-sky px-6 rounded-lg mx-2 p-2">
               Aceptar
             </button>

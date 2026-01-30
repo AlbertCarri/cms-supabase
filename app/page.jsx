@@ -10,7 +10,6 @@ export default async function Index() {
       createClient();
       return true;
     } catch (e) {
-      console.log('error de logeo:')
       return false;
     }
   };

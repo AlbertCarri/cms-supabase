@@ -5,7 +5,7 @@ export const SelectEditMenu = async ({ menuId }) => {
 
   const { data: menu, error } = await supabase
     .from("menu")
-    .select("id,name,image,description,price,alergens,checked")
+    .select("id,name,image,description,price,alergens,checked,suitableFor")
     .eq("id", menuId);
 
   if (error) console.error("Error de Consulta:", error);

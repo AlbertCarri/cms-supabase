@@ -10,10 +10,6 @@ export async function onboardingStep2(prevData, formData) {
   const banner = formData.get("banner");
   const palette = formData.get("palette");
 
-  console.log("LOGO:", logo);
-  console.log("BANNER:", banner);
-  console.log("User uid:", userUid);
-
   let logoUrl;
   let bannerUrl;
 

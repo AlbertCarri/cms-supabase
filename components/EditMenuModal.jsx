@@ -145,7 +145,6 @@ export const EditMenuModal = ({ closeEditModal, menuId }) => {
         console.error("Error actualizando menú:", updateError);
         alert("Error al actualizar el menú");
       } else {
-        console.log("Menú actualizado correctamente");
         closeEditModal(); // 👈 Cerrar modal después de éxito
       }
     } catch (error) {

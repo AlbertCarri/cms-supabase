@@ -92,7 +92,7 @@ export async function getRestoName(user_uid) {
       console.error("ERROR AL INSERTAR:", insertError);
       throw new Error(insertError.message);
     }
-    console.log("INSERTADO:", data);
+
     return null;
   } else {
     return userData[0].resto_name;

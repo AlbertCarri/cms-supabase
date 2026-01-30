@@ -29,7 +29,6 @@ export default async function ProtectedPage() {
   const resto = users[0].resto_name;
 
   if (!resto) redirect("onboarding/step-1");
-  console.log("RESTO EN MAIN:", resto);
   
   const urlQr =
     "https://cms-resto.vercel.app/menu/" + resto.replaceAll(" ", "_");

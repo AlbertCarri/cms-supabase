@@ -5,6 +5,7 @@ export const InsertIntoMenu = async ({
   formDataObject,
   categoryId,
   menu,
+  suitableFor,
 }) => {
   const supabase = createClient();
   const menues = menu;
@@ -19,6 +20,10 @@ export const InsertIntoMenu = async ({
   if (formDataObject.mani === "on") alergens.push("mani");
   if (formDataObject.frutossecos === "on") alergens.push("frutossecos");
 
+  const suitableForDataBase = suitableFor.filter(
+    (suitable) => formDataObject[suitable],
+  );
+
   if (menu.length > 0) {
     const { data: menu, error } = await supabase
       .from("menu")
@@ -30,23 +35,25 @@ export const InsertIntoMenu = async ({
           image: fileURL.publicUrl,
           price: formDataObject.price,
           alergens: alergens,
+          suitableFor: suitableForDataBase,
+          suitableOption: suitableFor,
         },
       ])
       .eq("id", menues[0].id);
     if (error) console.error("Error de Consulta:", error);
   } else {
-    const { data: menu, error } = await supabase
-      .from("menu")
-      .insert([
-        {
-          category_id: categoryId,
-          name: formDataObject.name,
-          description: formDataObject.description,
-          image: fileURL.publicUrl,
-          price: formDataObject.price,
-          alergens: alergens,
-        },
-      ]);
+    const { data: menu, error } = await supabase.from("menu").insert([
+      {
+        category_id: categoryId,
+        name: formDataObject.name,
+        description: formDataObject.description,
+        image: fileURL.publicUrl,
+        price: formDataObject.price,
+        alergens: alergens,
+        suitableFor: suitableForDataBase,
+        suitableOption: suitableFor,
+      },
+    ]);
     if (error) console.error("Error de Consulta:", error);
   }
 };
