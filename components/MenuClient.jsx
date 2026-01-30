@@ -8,9 +8,7 @@ export default function MenuClient({ MenuList }) {
   const category = MenuList.category;
   const palette = palettes[MenuList.palette - 1];
   const resto_name = MenuList.resto_name;
-  const suitableOption = MenuList.category[0].menu[0]?.suitableOption || [
-    "Filtros",
-  ];
+  const suitableOption = MenuList.category[0].menu[0]?.suitableOption || [""];
   const categoryRef = useRef({});
   const [masInfo, setMasInfo] = useState(false);
   const [suitableFilter, setSuitableFilter] = useState("");
@@ -55,16 +53,16 @@ export default function MenuClient({ MenuList }) {
           type="button"
           className="text-xs opacity-75 cursor-pointer"
           onClick={() => setMasInfo(true)}
-          >
+        >
           Más info...
         </button>
       </div>
       {masInfo && (
         <MasInfo
-        closeMasInfo={closeMasInfo}
-        adress={MenuList.adress}
-        schedule={MenuList.schedule}
-        socialmedia={MenuList.socialmedia}
+          closeMasInfo={closeMasInfo}
+          adress={MenuList.adress}
+          schedule={MenuList.schedule}
+          socialmedia={MenuList.socialmedia}
         />
       )}
       <p className="ml-4 mt-8">Nuestro menú:</p>
@@ -88,7 +86,7 @@ export default function MenuClient({ MenuList }) {
             key={item}
             style={{ background: `${palette.button2}` }}
             className={`w-16 h-10 text-xs rounded-xl overflow-clip
-              ${item===suitableFilter? 'border-sky-700 border-4':''}
+              ${item === suitableFilter ? "border-sky-700 border-4" : ""}
               `}
             onClick={() => handleSuitableChange(item)}
           >
@@ -126,11 +124,12 @@ export default function MenuClient({ MenuList }) {
                           </div>
                         </div>
                         <div className="basis-96">
-                          <p className="text-md mb-2 underline underline-offset-4">
+                          <p className="text-md mb-1 underline underline-offset-4">
                             {category_menu.name}
                           </p>
-                          <p className="text-xs mb-1 h-16">
-                            {category_menu.description}
+                          <p className="text-xs mb-4 h-16">
+                            {category_menu.description} Apto para:{" "}
+                            {category_menu.suitableFor.join()}
                           </p>
                           <p className="text-md mb-1">
                             Precio ${category_menu.price}
