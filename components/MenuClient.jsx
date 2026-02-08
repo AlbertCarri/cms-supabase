@@ -8,7 +8,12 @@ export default function MenuClient({ MenuList }) {
   const category = MenuList.category;
   const palette = palettes[MenuList.palette - 1];
   const resto_name = MenuList.resto_name;
-  const suitableOption = MenuList.category[0].menu[0]?.suitableOption || [""];
+  const suitableOption = MenuList.category[0].menu[0].suitableOption || [
+    "Celíacos",
+    "Veganos",
+    "Vegetarianos",
+    "Diabéticos",
+  ];
   const categoryRef = useRef({});
   const [masInfo, setMasInfo] = useState(false);
   const [suitableFilter, setSuitableFilter] = useState("");
@@ -110,7 +115,7 @@ export default function MenuClient({ MenuList }) {
             {categ.menu.map((category_menu) => (
               <div key={category_menu.id}>
                 {category_menu.checked &&
-                  (category_menu.suitableFor.includes(suitableFilter) ||
+                  (category_menu.suitableFor?.includes(suitableFilter) ||
                     suitableFilter === "") && (
                     <div>
                       <div className="flex flex-row justify-center">
@@ -129,7 +134,7 @@ export default function MenuClient({ MenuList }) {
                           </p>
                           <p className="text-xs mb-4 h-16">
                             {category_menu.description} Apto para:{" "}
-                            {category_menu.suitableFor.join()}
+                            {category_menu.suitableFor?.join()}
                           </p>
                           <p className="text-md mb-1">
                             Precio ${category_menu.price}

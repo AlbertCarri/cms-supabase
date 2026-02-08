@@ -6,6 +6,7 @@ import { NewCategory } from "../../components/NewCategory";
 import { ShowCategory } from "../../components/ShowCategory";
 import { ShowQr } from "../../components/ShowQr";
 import FooterMain from "../../components/FooterMain";
+import MonthSuscriptionButton from "../../components/MonthSuscription";
 
 export default async function ProtectedPage() {
   const supabase = await createClient();
@@ -22,14 +23,13 @@ export default async function ProtectedPage() {
     .select("resto_name")
     .eq("user_uid", user.id);
 
-  // let resto;
 
   if (error) console.error("Error de Consulta:", error);
 
   const resto = users[0].resto_name;
 
   if (!resto) redirect("onboarding/step-1");
-  
+
   const urlQr =
     "https://cms-resto.vercel.app/menu/" + resto.replaceAll(" ", "_");
 
@@ -63,6 +63,7 @@ export default async function ProtectedPage() {
             </div>
           </div>
           <div className="basis-1/2 hidden lg:block p-8">
+            <MonthSuscriptionButton email={user.email} userId={user.id} />
             <ShowQr urlQr={urlQr} />
           </div>
         </div>
