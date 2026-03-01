@@ -56,7 +56,7 @@ export default function OnboardingStep1({ datosIniciales }) {
     >
       <div className="w-11/12 md:w-2/3 bg-slate-800 mx-auto p-8 rounded-lg">
         <form action={sendingStep1} className="flex flex-col p-4">
-          <input type="hidden" name="user_uid" value={profile?.user_uid} />
+          <input type="hidden" name="user_id" value={profile?.user_id} />
           <input
             type="hidden"
             name="socialmedia"

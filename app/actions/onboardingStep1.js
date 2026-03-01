@@ -111,7 +111,7 @@ export async function onboardingStep1(prevData, formData) {
       socialmedia: socialMedia,
       schedule: schedule,
     })
-    .eq("user_uid", formStep1.user_uid);
+    .eq("user_id", formStep1.user_id);
   if (error) console.error("Error al insertar en bd:", error);
   redirect("/onboarding/step-2");
 }

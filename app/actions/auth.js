@@ -37,14 +37,14 @@ export async function signupAction(prevData, formData) {
 export async function loginAction(prevData, formData) {
   const email = formData.get("email");
   const password = formData.get("password");
-  let user_uid;
+  let user_id;
 
   try {
-    user_uid = await signInUser(email, password);
+    user_id = await signInUser(email, password);
   } catch (error) {
     return { success: false, error: error.message };
   }
-  const restoName = await getRestoName(user_uid.user.id);
+  const restoName = await getRestoName(user_id.user.id);
   if (restoName) {
     redirect("/main");
   } else {

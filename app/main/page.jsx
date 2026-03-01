@@ -17,12 +17,11 @@ export default async function ProtectedPage() {
   if (!user) {
     return redirect("/auth/login");
   }
-
+console.log('user:::', user, ' user.id:',user.id)
   const { data: users, error } = await supabase
     .from("users")
     .select("resto_name")
-    .eq("user_uid", user.id);
-
+    .eq("user_id", user.id);
 
   if (error) console.error("Error de Consulta:", error);
 

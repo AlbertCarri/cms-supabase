@@ -5,7 +5,7 @@ import { createClient } from "../lib/supabase/server";
 
 export async function onboardingStep2(prevData, formData) {
   const supabase = await createClient();
-  const userUid = formData.get("user_uid");
+  const userUid = formData.get("user_id");
   const logo = formData.get("logo");
   const banner = formData.get("banner");
   const palette = formData.get("palette");
@@ -62,7 +62,7 @@ export async function onboardingStep2(prevData, formData) {
     const { error: dbError } = await supabase
       .from("users")
       .update(updateData)
-      .eq("user_uid", userUid);
+      .eq("user_id", userUid);
 
     if (dbError) console.error("ERROR AL ENVIAR LAS IMAGENES:", dbError);
   }

@@ -7,7 +7,7 @@ export const RestoNameChange = async ({ userId, inputValue }) => {
   const { data: users, error } = await supabase
     .from("users")
     .update({ resto_name: inputValue })
-    .eq("user_uid", userId);
+    .eq("user_id", userId);
 
   if (error) console.error("Error de Consulta:", error);
 

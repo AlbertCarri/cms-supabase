@@ -65,13 +65,13 @@ export async function logOut() {
   }
 }
 
-export async function getRestoName(user_uid) {
+export async function getRestoName(user_id) {
   const schedule = scheduleBase;
   const supabase = await createClient();
   const { data: userData, error: userError } = await supabase
     .from("users")
     .select("resto_name")
-    .eq("user_uid", user_uid);
+    .eq("user_id", user_id);
 
   if (userError) {
     throw new Error(userError.message);
@@ -80,7 +80,7 @@ export async function getRestoName(user_uid) {
     const { data, error: insertError } = await supabase.from("users").insert([
       {
         resto_name: "Nada cargado",
-        user_uid: user_uid,
+        user_id: user_id,
         schedule: schedule,
         type: "Cafetería",
         adress: "Avenida Siempre Viva 1234",

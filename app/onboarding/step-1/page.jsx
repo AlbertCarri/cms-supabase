@@ -15,7 +15,7 @@ export default async function OnboardingPage() {
   const { data: perfil } = await supabase
     .from("users")
     .select("*")
-    .eq("user_uid", user.id)
+    .eq("user_id", user.id)
 
   return <OnboardingStep1 datosIniciales={perfil} />;
 }

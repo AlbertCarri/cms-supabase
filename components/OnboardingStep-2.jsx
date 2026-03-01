@@ -67,7 +67,7 @@ export default function OnboardingStep2({ datosIniciales }) {
   const handleSubmit = async (e) => {
     setIsPending(true);
     const formData = new FormData();
-    formData.append("user_uid", profile.user_uid);
+    formData.append("user_id", profile.user_id);
     formData.append("logo", logoFile);
     formData.append("banner", bannerFile);
     formData.append("palette", selectedPalette);
@@ -88,7 +88,7 @@ export default function OnboardingStep2({ datosIniciales }) {
     >
       <div className="relative w-11/12 md:w-2/3 bg-slate-800 mx-auto p-8 rounded-lg">
         <form action={handleSubmit} className="flex flex-col p-4">
-          <input type="hidden" name="user_uid" value={profile?.user_uid} />
+          <input type="hidden" name="user_id" value={profile?.user_id} />
           <label htmlFor="logo" className="p-2">
             <p className="mb-4 text-lg font-bold">Tu logo aqui</p>
             {logoImage ? (

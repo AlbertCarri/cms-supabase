@@ -6,14 +6,14 @@ export const RestoName = async ({ userId }) => {
   const { data: users, error } = await supabase
     .from("users")
     .select("resto_name")
-    .eq("user_uid", userId);
+    .eq("user_id", userId);
 
   if (error) console.error("Error de Consulta:", error);
 
   if (users.length <= 0) {
     const { data: users, error } = await supabase
       .from("users")
-      .insert([{ resto_name: "Nombre del negocio", user_uid: userId }]);
+      .insert([{ resto_name: "Nombre del negocio", user_id: userId }]);
     const resto = "Nombre del negocio";
     if (error) {
       console.error("Error de Consulta:", error);

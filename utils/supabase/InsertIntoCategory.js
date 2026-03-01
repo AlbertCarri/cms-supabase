@@ -5,6 +5,6 @@ export const InsertIntoCategory = async ({ userId, inputValue }) => {
 
   const { data: category, error } = await supabase
     .from("category")
-    .insert([{ name: inputValue, user_uid: userId }]);
+    .insert([{ name: inputValue, user_id: userId }]);
   if (error) console.error("Error de Consulta:", error);
 };
