@@ -6,17 +6,19 @@ import Link from "next/link";
 export default function NavMenu() {
   const [open, setOpen] = useState(false);
   return (
-    <nav className="flex bg-slate-800 items-center justify-between p-4">
-      <div className="text-xl font-bold">TuRestó</div>
+    <nav className="fixed left-0 top-0 flex w-full z-10 bg-slate-800/70 backdrop-blur-md items-center justify-between p-4">
+      <div className="text-xl font-bold">
+        <Link href="#home">TuRestó</Link>
+      </div>
       <ul className="hidden md:flex gap-6 items-center">
         <li>
           <Link href="#features">Características</Link>
         </li>
         <li>
-          <Link href="/pricing">Precios</Link>
+          <Link href="#pricing">Precios</Link>
         </li>
         <li>
-          <Link href="/about">Acerca</Link>
+          <Link href="#contact">Contacto</Link>
         </li>
         <li className="btn-zinc rounded-lg py-1 px-4">
           <Link href="/auth/login">Comenzar</Link>
@@ -37,10 +39,10 @@ export default function NavMenu() {
               <Link href="#features">Características</Link>
             </li>
             <li>
-              <Link href="/pricing">Precios</Link>
+              <Link href="#pricing">Precios</Link>
             </li>
             <li>
-              <Link href="/about">Acerca</Link>
+              <Link href="#contact">Contacto</Link>
             </li>
             <li className="btn-zinc rounded-lg py-1 px-4">
               <Link href="/auth/login">Comenzar</Link>
