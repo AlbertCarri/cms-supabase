@@ -43,41 +43,54 @@ export default function MainIntro() {
           role="list"
           className="marker:text-sky-400 list-disc pl-5 space-y md:text-xl text-md"
         >
-          <li>Optimiza la experiencia de tus clientes.</li>
           <li>
-            Con SuResto podras crear un menú accesible desde cualquier
-            dispositivo móvil con lector de códigos QR.
+            Digitalizá el menú de tu restaurante o emprendimiento gastronómico
+            de forma simple y profesional.
           </li>
           <li>
-            Con esta herramienta, podrás personalizar tu menú con el nombre de
-            tu restaurante y organizarlo por categorías como pizzas, sándwiches,
-            entre otros. Dentro de cada categoría, podrás añadir los platos
-            correspondientes con su descripción, precio, foto y alergenos.
+            TuResto es un sistema de menú digital pensado para un solo negocio,
+            totalmente personalizable con el nombre, logo y colores que
+            representen tu marca.
+          </li>
+          <li>
+            Desde el panel de administración podés crear y organizar tu menú en
+            categorías como pizzas, hamburguesas, bebidas o las que necesites.
+            Dentro de cada categoría podés agregar los platos con su foto,
+            descripción, precio y la información de alérgenos o preferencias
+            alimentarias más comunes, como opciones veganas, vegetarianas, sin
+            gluten o dietéticas.
           </li>
 
           <li>
-            Una vez configurado, el sistema generará un código QR único que
-            podrás descargar e imprimir en el soporte de tu elección para
-            ponerlo a disposición de tus clientes.
+            El sistema también permite filtrar el menú según estas preferencias,
+            facilitando que cada cliente encuentre rápidamente las opciones que
+            se adaptan a su alimentación.
           </li>
           <li>
-            Al escanearlo, tus clientes accederán al menú completo y actualizado
-            en su dispositivo móvil. Además, si alguno de tus menús no está
-            disponible temporalmente, podrás ocultarlo fácilmente desde la
+            Una vez configurado el menú, TuResto genera automáticamente un
+            código QR listo para descargar e imprimir. Al escanearlo, tus
+            clientes acceden al menú actualizado desde cualquier teléfono o
+            dispositivo con navegador, sin necesidad de instalar ninguna
             aplicación.
           </li>
         </ul>
+          <h2 className="text-xl mt-4">
+            Actualizá tu menú en segundos, sin volver a imprimir cartas. Si
+            algún plato no está disponible temporalmente, podés ocultarlo
+            fácilmente desde el panel de administración y el cambio se verá
+            reflejado al instante en el menú digital.
+          </h2>
       </section>
 
       <section id="pricing" className="w-3/4 h-svh scroll-mt-24">
         <h2 className="text-6xl font-bold text-center mb-8">Princing</h2>
         <div className="flex flex-col md:flex-row mb-4 justify-center items-center gap-8">
-          <div className="w-80 h-[500px] bg-slate-800/20 border-gray-300 border-2 rounded-xl">
+          <div className="w-80 h-[500px] bg-slate-800/20 border-gray-500 border rounded-xl">
             <div className="ml-8 mt-8">
               <h2 className="text-2xl font-bold">Plan Free</h2>
               <p>Hasta 20 productos</p>
               <p className="mt-8 text-4xl font-bold">0$</p>
-              <div className="w-64 mt-16 border-t-slate-300 border-t-2"></div>
+              <div className="w-64 mt-16 border-t-slate-500 border border-t-2"></div>
               <p className="mt-16">✅ 1 Emprendimiento</p>
               <p>✅ Logo de tu negocio</p>
               <p>✅ Una imágen representativa</p>
@@ -87,13 +100,13 @@ export default function MainIntro() {
               <p>✅ Cada menú con imagen</p>
             </div>
           </div>
-          <div className="w-80 h-[500px] bg-slate-800/20 border-gray-300 border-2 rounded-xl">
+          <div className="w-80 h-[500px] bg-slate-800/20 border-gray-500 border rounded-xl">
             <div className="ml-8 mt-8">
               <h2 className="text-2xl font-bold">Plan Pro</h2>
               <p>Sin límites</p>
               <p className="mt-8 text-4xl font-bold">5000$</p>
 
-              <div className="w-64 mt-16 border-t-slate-300 border-t-2"></div>
+              <div className="w-64 mt-16 border-t-slate-500 border border-t-2"></div>
               <p className="mt-16">✅ 1 Emprendimiento</p>
               <p>✅ Logo de tu negocio</p>
               <p>✅ Una imágen representativa</p>

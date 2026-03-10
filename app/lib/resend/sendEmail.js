@@ -10,7 +10,7 @@ export async function sendEmail({ from, to, subject, html }) {
       subject: subject,
       html: html,
     });
-    console.log("Mail enviado con éxito a:");
+    console.log("Mail enviado con éxito");
     return { success: true, id: response };
   } catch (error) {
     console.error("Envio de mail fallido, error:", error);
