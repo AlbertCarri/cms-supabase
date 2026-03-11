@@ -20,7 +20,7 @@ export async function getSuscriptionUrl({ userId, email }) {
       },
       reason: "Suscripcion a CMS usando NGROK",
       status: "pending",
-      back_url: "https://raina-unmoody-trula.ngrok-free.dev/suscriptions",
+      back_url: "https://turesto.edelbyte.com.ar/suscriptions",
     },
   });
   return newSubscriber.init_point;
