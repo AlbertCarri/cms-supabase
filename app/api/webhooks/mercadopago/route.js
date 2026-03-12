@@ -70,7 +70,7 @@ export async function POST(request) {
         );
         const subscriptionEnd = dateToSpanish(subscription.next_payment_date);
         await handleSubscriptionCancelled(userId);
-        notifySubscriptionCancelled({ userId, subscriptionEnd });
+        await notifySubscriptionCancelled({ userId, subscriptionEnd });
       }
 
       if (subscription.status === "authorized") {
@@ -87,7 +87,7 @@ export async function POST(request) {
           currentPeriodEnd,
         });
         const dateSpanish = dateToSpanish(currentPeriodEnd);
-        notifySubscriptionAuthorized({ userId, dateSpanish });
+        await notifySubscriptionAuthorized({ userId, dateSpanish });
         console.info(
           "La suscipcion del usuario:",
           userId,
@@ -141,7 +141,7 @@ export async function POST(request) {
           userId,
           subscriptionId,
         });
-        notifySubscriptionRejected({ userId, subscriptionStatus });
+        await notifySubscriptionRejected({ userId, subscriptionStatus });
       }
     }
 
