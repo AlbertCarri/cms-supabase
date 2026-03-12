@@ -1,15 +1,24 @@
 import { createClient } from "../supabase/service_role";
 
 export async function handleSubscriptionCancelled(userId) {
-  const supabase = createClient();
   try {
+    const supabase = createClient();
+
     const { error } = await supabase
       .from("users")
-      .update({ canceledAtPeriodEnd: true })
+      .update({ cancel_at_period_end: true })
       .eq("user_id", userId);
 
-    console.log("canceledAtPeriodEnd cambiada a TRUE");
+    if (error) {
+      console.error(
+        "Error al cambiar cancel_at_period_end to TRUE, error:",
+        error,
+      );
+      return;
+    }
+    console.log("cancel_at_period_end cambiada a TRUE");
+    return;
   } catch (error) {
-    console.log("Error al cambiar canceledAtPeriodEnd to TRUE, error:", error);
+    console.error("Error al cambiar cancel_at_period_end to TRUE, error:", error);
   }
 }

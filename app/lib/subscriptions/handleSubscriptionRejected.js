@@ -5,7 +5,7 @@ export async function handleSubscriptionRejected({ userId, subscriptionId }) {
 
   const { data: mpPeriod, error: badResponse } = await supabase
     .from("users")
-    .select("currentPeriodEnd, mpGracePeriodEnd")
+    .select("current_period_end, grace_period_end")
     .eq("user_id", userId);
 
   if (badResponse) {
@@ -13,34 +13,30 @@ export async function handleSubscriptionRejected({ userId, subscriptionId }) {
     return;
   }
 
-  if (mpPeriod.currentPeriodEnd === "2026-01-01") {
+  if (mpPeriod.current_period_end === null) {
     return "pending";
   }
 
-  if (mpPeriod.mpGracePeriodEnd === null) {
-    const periodEnd = mpPeriod.currentPeriodEnd;
-    const [year, month, day] = periodEnd.split("-").map(Number);
-    const time = new Date(year, month - 1, day);
-
-    const gracePeriod = new Date(time);
+  if (mpPeriod.grace_period_end === null) {
+    const gracePeriod = new Date(mpPeriod.current_period_end);
     gracePeriod.setDate(gracePeriod.getDate() + 5);
 
     const { error } = await supabase
       .from("users")
       .update({
-        subscription: "past_due",
-        mpGracePeriodEnd: gracePeriod.toLocaleDateString("sv"),
+        subscription_status: "past_due",
+        grace_period_end: gracePeriod,
       })
       .eq("user_id", userId);
 
     if (error)
-      console.log("Error al tratar de actualizar la base de datos: ", error);
+      console.error("Error al tratar de actualizar la base de datos: ", error);
 
     console.log("Base de datos actualizada con past_due");
     return "past_due";
   }
 
-  const expiration = Date.now() > new Date(mpPeriod.mpGracePeriodEnd);
+  const expiration = Date.now() > new Date(mpPeriod.grace_period_end);
 
   if (expiration) {
     const response = await fetch(

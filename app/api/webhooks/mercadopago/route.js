@@ -47,7 +47,7 @@ export async function POST(request) {
       return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
     }
 
-    console.log("Webhook válido:", body);
+    // Aquí procesamos el webhook según el tipo de evento
 
     if (body.type === "subscription_preapproval") {
       const response = await fetch(
@@ -63,7 +63,7 @@ export async function POST(request) {
       const userId = subscription.external_reference;
 
       if (subscription.status === "cancelled") {
-        console.log(
+        console.info(
           "El usuario con id: '",
           userId,
           "', ha cancelado su suscripción",
@@ -76,22 +76,21 @@ export async function POST(request) {
       }
 
       if (subscription.status === "authorized") {
-        const currentPeriodEnd = subscription.next_payment_date.substring(
-          0,
-          10,
-        );
-        const subscriptionStatus = "active";
+        const currentPeriodEnd = subscription.next_payment_date;
         const subscriptionId = subscription.subscription_id;
+        const dateCreated = subscription.date_created;
+        const id = body.id;
 
         await handleSubscriptionActive({
+          id,
           userId,
           subscriptionId,
-          subscriptionStatus,
+          dateCreated,
           currentPeriodEnd,
         });
         const dateSpanish = dateToSpanish(currentPeriodEnd);
         notifySubscriptionAuthorized({ userId, dateSpanish });
-        console.log(
+        console.info(
           "La suscipcion del usuario:",
           userId,
           ", ya está activa y vence el: ",
@@ -111,9 +110,10 @@ export async function POST(request) {
       );
       const payment = await payments.json();
       const paymentUserId = payment.external_reference;
-      console.log("Status en el payment:", payment.status);
+      console.info("Status en el payment:", payment.status);
+
       if (payment.status === "approved") {
-        console.log(
+        console.info(
           "Pago del cliente: '",
           paymentUserId,
           "', esta : ",
@@ -121,21 +121,20 @@ export async function POST(request) {
         );
 
         const userId = paymentUserId;
-        const mpTransactionData = payment.point_of_interaction.transaction_data;
-        const mpPaymentPayer = payment.payer;
-        const mpPaymentMethod = payment.payment_method;
+        const rawWebhook = body;
+        const id = body.id;
         await handleSubscriptionApproved({
+          id,
           userId,
-          mpTransactionData,
-          mpPaymentPayer,
-          mpPaymentMethod,
+          rawWebhook,
         });
       }
 
       if (payment.status === "rejected") {
+        const id=body.id;
         const userId = paymentUserId;
         const subscriptionId = body.data.id;
-        console.log(
+        console.info(
           "El pago del cliente:'",
           paymentUserId,
           "', ha sido rechazado",
