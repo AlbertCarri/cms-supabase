@@ -1,4 +1,3 @@
-import { sub } from "motion/react-client";
 import { createClient } from "../supabase/service_role";
 
 export async function handleSubscriptionActive({
@@ -27,10 +26,10 @@ export async function handleSubscriptionActive({
       .neq("webhook_id", id);
 
     if (error) {
-      console.error("Error al cargar activo en base de datos:", error);
+      console.error("Error al cargar 'activo' en base de datos:", error);
     }
     return;
   } catch (error) {
-    console.log("Error al cargar aprobado en base de datos:", error);
+    console.error("Error al cargar 'activo' en base de datos:", error);
   }
 }

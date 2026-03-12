@@ -68,9 +68,7 @@ export async function POST(request) {
           userId,
           "', ha cancelado su suscripción",
         );
-        const subscriptionEnd = dateToSpanish(
-          subscription.next_payment_date.substring(0, 10),
-        );
+        const subscriptionEnd = dateToSpanish(subscription.next_payment_date);
         await handleSubscriptionCancelled(userId);
         notifySubscriptionCancelled({ userId, subscriptionEnd });
       }
@@ -131,7 +129,7 @@ export async function POST(request) {
       }
 
       if (payment.status === "rejected") {
-        const id=body.id;
+        const id = body.id;
         const userId = paymentUserId;
         const subscriptionId = body.data.id;
         console.info(
