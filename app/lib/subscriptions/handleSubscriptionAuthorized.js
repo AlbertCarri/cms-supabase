@@ -23,7 +23,6 @@ export async function handleSubscriptionActive({
         grace_period_end: null,
       })
       .eq("user_id", userId)
-      .neq("webhook_id", id);
 
     if (error) {
       console.error("Error al cargar 'activo' en base de datos:", error);
