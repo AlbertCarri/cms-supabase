@@ -42,7 +42,7 @@ export async function POST(request) {
     }
 
     console.warn("Webhook válido:", body);
-    const received_at =
+    const created_at =
       body.date_created ?? body.date ?? new Date().toISOString();
 
     const { error: supabaseError } = await supabase
@@ -55,7 +55,7 @@ export async function POST(request) {
           action: body.action,
           raw_body: body,
           status: "pending",
-          received_at: received_at,
+          created_at: created_at,
           attempts: 0,
         },
         { onConflict: "mp_notification_id", ignoreDuplicates: true },
