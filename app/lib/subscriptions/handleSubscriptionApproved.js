@@ -11,8 +11,14 @@ export async function handleSubscriptionApproved({ id, userId, rawWebhook }) {
         raw_webhook: rawWebhook,
       })
       .eq("user_id", userId)
-      .neq("webhook_id", id);
+      .neq("webhook_id", id); // Solo actualiza si el webhook_id es diferente
+
+    if (error) {
+      console.error("Error al actualizar usuario en base de datos:", error);
+    } else {
+      console.log(`Usuario ${userId} actualizado con webhook_id ${id}`);
+    }
   } catch (error) {
-    console.log("Error al cargar aprobado en base de datos:", error);
+    console.error("Error al cargar aprobado en base de datos:", error);
   }
 }
