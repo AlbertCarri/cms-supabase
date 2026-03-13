@@ -33,3 +33,10 @@ export async function handleSubscriptionActive({
     console.error("Error al cargar 'activo' en base de datos:", error);
   }
 }
+
+// pseudo-ejemplo con supabase-js para manejar NULLs
+const { data, error } = await supabase
+  .from('users')
+  .update({ data_id, date, name })
+  .eq('user_id', user_id)
+  .or(`data_id.is.null,data_id.neq.${data_id}`) // no exacto; construir condiciones OR correctas
