@@ -36,7 +36,7 @@ export async function POST(request) {
     for (const job of data) {
       const { id, event_type, mp_event_id } = job;
 
-      // Aquí procesamos el evento según su tipo, similar a lo que hacemos en el webhook route
+      // Aquí procesamos el evento de la tabla webhook_jobs según el tipo de evento
       if (event_type === "subscription_preapproval") {
         const response = await fetch(
           `https://api.mercadopago.com/preapproval/${mp_event_id}`,
