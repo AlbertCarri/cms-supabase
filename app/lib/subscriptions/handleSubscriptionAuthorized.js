@@ -1,7 +1,6 @@
 import { createClient } from "../supabase/service_role";
 
 export async function handleSubscriptionActive({
-  id,
   userId,
   subscriptionId,
   dateCreated,
@@ -23,7 +22,6 @@ export async function handleSubscriptionActive({
         grace_period_end: null,
       })
       .eq("user_id", userId)
-      .neq("webhook_id", id); // Solo actualiza si el webhook_id es diferente
 
     if (error) {
       console.error("Error al cargar 'activo' en base de datos:", error);
