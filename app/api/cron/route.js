@@ -8,7 +8,6 @@ import { notifySubscriptionRejected } from "../../lib/subscriptions/notifySubscr
 import { handleSubscriptionCancelled } from "../../lib/subscriptions/handleSubscriptionCancelled";
 import { notifySubscriptionCancelled } from "../../lib/subscriptions/notifySubscriptionCancelled";
 import dateToSpanish from "../../../lib/dateToSpanish";
-import { i } from "motion/react-client";
 
 export async function POST(request) {
   try {
