@@ -9,10 +9,9 @@ import { handleSubscriptionCancelled } from "../../lib/subscriptions/handleSubsc
 import { notifySubscriptionCancelled } from "../../lib/subscriptions/notifySubscriptionCancelled";
 import dateToSpanish from "../../lib/dateToSpanish";
 
-export const dynamic = "force-dynamic";
-
 export async function POST(request) {
   try {
+    const supabase = createClient();
     if (
       request.headers.get("Authorization") !==
       `Bearer ${process.env.CRON_SECRET}`
@@ -20,7 +19,6 @@ export async function POST(request) {
       return NextResponse.json({ end: "Unauthorized" }, { status: 401 });
     }
 
-    const supabase = createClient();
     const { data, error } = await supabase
       .from("webhook_jobs")
       .select("*")
