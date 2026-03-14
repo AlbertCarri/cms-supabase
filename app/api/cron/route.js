@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import { createClient } from "../../../lib/supabase/service_role";
+import { createClient } from "../../lib/supabase/service_role";
 import { handleSubscriptionApproved } from "../../lib/subscriptions/handleSubscriptionApproved";
 import { notifySubscriptionAuthorized } from "../../lib/subscriptions/notifySubscriptionAuthorized";
 import { handleSubscriptionActive } from "../../lib/subscriptions/handleSubscriptionAuthorized";
@@ -7,7 +7,7 @@ import { handleSubscriptionRejected } from "../../lib/subscriptions/handleSubscr
 import { notifySubscriptionRejected } from "../../lib/subscriptions/notifySubscriptionRejected";
 import { handleSubscriptionCancelled } from "../../lib/subscriptions/handleSubscriptionCancelled";
 import { notifySubscriptionCancelled } from "../../lib/subscriptions/notifySubscriptionCancelled";
-import dateToSpanish from "../../../lib/dateToSpanish";
+import dateToSpanish from "../../lib/dateToSpanish";
 
 export async function POST(request) {
   try {
