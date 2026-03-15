@@ -16,7 +16,7 @@ export async function POST(request) {
       request.headers.get("Authorization") !==
       `Bearer ${process.env.CRON_SECRET}`
     ) {
-      console.warn("Unauthorized access attempt to cron route",process.env.CRON_SECRET);
+      console.warn("Unauthorized access attempt to cron route");
       return NextResponse.json({ end: "Unauthorized" }, { status: 401 });
     }
 
