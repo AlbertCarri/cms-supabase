@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { createClient } from "../../lib/supabase/service_role";
-/*import { handleSubscriptionApproved } from "../../lib/subscriptions/handleSubscriptionApproved";
-import { notifySubscriptionAuthorized } from "../../lib/subscriptions/notifySubscriptionAuthorized";*/
-import { handleSubscriptionActive } from "../../lib/subscriptions/handleSubscriptionAuthorized";
+import { handleSubscriptionApproved } from "../../lib/subscriptions/handleSubscriptionApproved";
+import { notifySubscriptionAuthorized } from "../../lib/subscriptions/notifySubscriptionAuthorized";
+/*import { handleSubscriptionActive } from "../../lib/subscriptions/handleSubscriptionAuthorized";*/
 import { handleSubscriptionRejected } from "../../lib/subscriptions/handleSubscriptionRejected";
 import { notifySubscriptionRejected } from "../../lib/subscriptions/notifySubscriptionRejected";
 import { handleSubscriptionCancelled } from "../../lib/subscriptions/handleSubscriptionCancelled";
