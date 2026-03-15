@@ -35,7 +35,7 @@ export async function POST(request) {
     }
 
     for (const job of data) {
-      const { id, event_type, mp_event_id } = job;
+      const { webhook_event_id, event_type, mp_event_id } = job;
 
       // Aquí procesamos el evento de la tabla webhook_jobs según el tipo de evento
       if (event_type === "subscription_preapproval") {
@@ -68,6 +68,7 @@ export async function POST(request) {
           const dateCreated = subscription.date_created;
 
           await handleSubscriptionActive({
+            webhook_event_id,
             userId,
             subscriptionId,
             dateCreated,
@@ -108,6 +109,7 @@ export async function POST(request) {
           const userId = paymentUserId;
           const rawWebhook = payment;
           await handleSubscriptionApproved({
+            webhook_event_id,
             userId,
             rawWebhook,
           });

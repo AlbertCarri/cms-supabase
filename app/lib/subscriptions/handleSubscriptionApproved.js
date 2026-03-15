@@ -1,6 +1,10 @@
 import { createClient } from "../supabase/service_role";
 
-export async function handleSubscriptionApproved({ userId, rawWebhook }) {
+export async function handleSubscriptionApproved({
+  webhook_event_id,
+  userId,
+  rawWebhook,
+}) {
   try {
     const supabase = createClient();
 
@@ -13,9 +17,11 @@ export async function handleSubscriptionApproved({ userId, rawWebhook }) {
 
     if (error) {
       console.error("Error al actualizar usuario en base de datos:", error);
-    } else {
-      console.log(`Usuario ${userId} actualizado con webhook_id ${id}`);
     }
+    console.log(
+      `Usuario ${userId} actualizado con webhook_id ${webhook_event_id}`,
+    );
+    return;
   } catch (error) {
     console.error("Error al cargar aprobado en base de datos:", error);
   }

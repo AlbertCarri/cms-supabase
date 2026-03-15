@@ -1,6 +1,7 @@
 import { createClient } from "../supabase/service_role";
 
 export async function handleSubscriptionActive({
+  webhook_event_id,
   userId,
   subscriptionId,
   dateCreated,
@@ -13,7 +14,7 @@ export async function handleSubscriptionActive({
       .from("users")
       .update({
         plan: "Pro",
-        webhook_id: id,
+        webhook_id: webhook_event_id,
         subscription_status: "active",
         mp_subscription_id: subscriptionId,
         current_period_end: currentPeriodEnd,
@@ -21,7 +22,7 @@ export async function handleSubscriptionActive({
         cancel_at_period_end: false,
         grace_period_end: null,
       })
-      .eq("user_id", userId)
+      .eq("user_id", userId);
 
     if (error) {
       console.error("Error al cargar 'activo' en base de datos:", error);
@@ -31,4 +32,3 @@ export async function handleSubscriptionActive({
     console.error("Error al cargar 'activo' en base de datos:", error);
   }
 }
-
