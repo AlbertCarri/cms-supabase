@@ -1,9 +1,10 @@
 import { getUserData } from "../supabase/getUserData";
 import { sendEmail } from "../resend/sendEmail";
 import { buildMailAuthorizedTemplate } from "./buildMailAuthorizedTemplate";
+import { createClient } from "../supabase/service_role";
 
 export async function notifySubscriptionAuthorized({ userId, dateSpanish }) {
-  console.log("notify : userId y dateSpanish", userId, dateSpanish);
+  const supabase = createClient();
   const to = await getUserData(userId);
   if (!to) return;
 
@@ -20,7 +21,7 @@ export async function notifySubscriptionAuthorized({ userId, dateSpanish }) {
     );
     return { success: false, error: "Email de activación ya enviado" };
   }
-  
+
   const { subject, html } = buildMailAuthorizedTemplate(dateSpanish);
 
   const response = await sendEmail({

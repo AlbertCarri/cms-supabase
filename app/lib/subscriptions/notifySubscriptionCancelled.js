@@ -1,8 +1,10 @@
 import { getUserData } from "../supabase/getUserData";
 import { sendEmail } from "../resend/sendEmail";
 import { buildMailCancelledTemplete } from "./buildMailCancelledTemplate";
+import { createClient } from "../supabase/service_role";
 
 export async function notifySubscriptionCancelled({ userId, subscriptionEnd }) {
+  const supabase = createClient();
   const to = await getUserData(userId);
   if (!to) return;
 
