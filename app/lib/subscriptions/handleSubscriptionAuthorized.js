@@ -22,7 +22,8 @@ export async function handleSubscriptionActive({
         cancel_at_period_end: false,
         grace_period_end: null,
       })
-      .eq("user_id", userId);
+      .eq("user_id", userId)
+      .neq("subscription_status", "active");
 
     if (error) {
       console.error("Error al cargar 'activo' en base de datos:", error);
