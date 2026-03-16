@@ -117,7 +117,7 @@ export async function POST(request) {
 
         if (payment.status === "rejected") {
           const userId = paymentUserId;
-          const subscriptionId = mp_event_id;
+          const subscriptionId = payment.transaction_data.subscription_id;
           console.info(
             "El pago del cliente:'",
             paymentUserId,
