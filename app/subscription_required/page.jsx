@@ -1,7 +1,7 @@
 import MonthSuscriptionButton from "../../components/MonthSuscription";
 import { createClient } from "../lib/supabase/server";
 
-export async function SubscriptionRequired() {
+export default async function SubscriptionRequired() {
   const supabase = await createClient();
   const {
     data: { user },
