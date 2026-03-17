@@ -1,7 +1,7 @@
 import { sendEmail } from "../resend/sendEmail";
 import { buildMailBlockedTemplate } from "./buildMailBlockedTemplate";
 
-export async function notifySubscriptionBlocked(email, resto) {
+export async function notifySubscriptionBlocked({email, resto}) {
   const to = email;
   const { subject, html } = buildMailBlockedTemplate(resto);
 
