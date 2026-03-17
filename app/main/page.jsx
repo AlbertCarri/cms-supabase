@@ -8,6 +8,7 @@ import { ShowQr } from "../../components/ShowQr";
 import FooterMain from "../../components/FooterMain";
 import MonthSuscriptionButton from "../../components/MonthSuscription";
 import getAccessLevel from "../lib/subscriptions/getAccessLevel";
+import { notifySubscriptionBlocked } from "../lib/notifications/notifySubscriptionBlocked";
 
 export default async function ProtectedPage() {
   const supabase = await createClient();
