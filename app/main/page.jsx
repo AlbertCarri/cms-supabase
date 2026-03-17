@@ -7,6 +7,7 @@ import { ShowCategory } from "../../components/ShowCategory";
 import { ShowQr } from "../../components/ShowQr";
 import FooterMain from "../../components/FooterMain";
 import MonthSuscriptionButton from "../../components/MonthSuscription";
+import getAccessLevel from "../lib/subscriptions/getAccessLevel";
 
 export default async function ProtectedPage() {
   const supabase = await createClient();
@@ -20,13 +21,32 @@ export default async function ProtectedPage() {
 
   const { data: users, error } = await supabase
     .from("users")
-    .select("resto_name")
-    .eq("user_id", user.id);
+    .select("*")
+    .eq("user_id", user.id)
+    .single();
 
   if (error) console.error("Error de Consulta:", error);
 
-  const resto = users[0].resto_name;
+  const resto = users.resto_name;
+  const email = user.email;
 
+  const accessLevel = await getAccessLevel(users);
+
+  if (accessLevel === "blocked") {
+    const { error: cancelError } = await supabase
+      .from("users")
+      .update({ subscription_status: "cancelled" })
+      .eq("user_id", user.id);
+    if (cancelError)
+      console.error(
+        "Error al actualizar el estado de suscripción a 'cancelled':",
+        cancelError,
+      );
+    await notifySubscriptionBlocked({ email, resto });
+    return redirect("/subscription_required");
+  }
+
+  // Si el restó no tiene nombre, redirige al onboarding
   if (!resto) redirect("onboarding/step-1");
 
   const urlQr =
