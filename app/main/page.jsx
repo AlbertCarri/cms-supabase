@@ -33,6 +33,7 @@ export default async function ProtectedPage() {
 
   const accessLevel = await getAccessLevel(users);
   console.log("Access level:", accessLevel);
+
   if (accessLevel === "blocked") {
     const { error: cancelError } = await supabase
       .from("users")
@@ -60,6 +61,16 @@ export default async function ProtectedPage() {
           <nav className="w-full flex justify-end h-16 p-4">
             <AuthButton />
           </nav>
+          {accessLevel === "grace" && (
+            <>
+              <h2 className="bg-amber-500 mx-auto text-xl p-2 rounded-lg">
+                Tu suscripción está vencida y tienes unos días de gracia
+              </h2>
+              <h3 className="bg-red-700 mx-auto text-lg p-2 rounded-lg">
+                Por favor renueva la suscripción antes de que se bloquee
+              </h3>
+            </>
+          )}
           <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>{" "}
           {/* línea separadora*/}
         </div>
