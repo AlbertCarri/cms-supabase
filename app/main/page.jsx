@@ -32,7 +32,7 @@ export default async function ProtectedPage() {
   const email = user.email;
 
   const accessLevel = await getAccessLevel(users);
-
+  console.log("Access level:", accessLevel);
   if (accessLevel === "blocked") {
     const { error: cancelError } = await supabase
       .from("users")

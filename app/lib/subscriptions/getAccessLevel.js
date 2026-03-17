@@ -9,8 +9,8 @@ export default async function getAccessLevel(users) {
 
   console.log("Subscription Status:", subscriptionStatus);
   console.log("Grace Period Expired:", graceExpired);
-  console.log("Subscription Expired:", subscriptionExpired);  
-  console.log("Lectura de la base de datos users:", users);
+  console.log("Subscription Expired:", subscriptionExpired);
+  console.log("Cancel at period end:", users.cancel_at_period_end);
 
   if (subscriptionStatus === "active") {
     return "full";
