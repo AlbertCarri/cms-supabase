@@ -1,6 +1,6 @@
 import { handleSubscriptionCancel } from "./handleSubscriptionCancel";
 
-export async function getAccessLevel(users) {
+export default async function getAccessLevel(users) {
   const subscriptionId = users.mp_subscription_id;
   const subscriptionStatus = users.subscription_status;
   const graceExpired = Date.now() > new Date(users.grace_period_end).getTime();
