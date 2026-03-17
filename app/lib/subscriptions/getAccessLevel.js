@@ -12,9 +12,6 @@ export default async function getAccessLevel(users) {
   console.log("Subscription Expired:", subscriptionExpired);
   console.log("Cancel at period end:", users.cancel_at_period_end);
 
-  if (subscriptionStatus === "active") {
-    return "full";
-  }
   if (subscriptionStatus === "past_due" && graceExpired) {
     await handleSubscriptionCancel({ subscriptionId });
     return "blocked";
@@ -23,6 +20,9 @@ export default async function getAccessLevel(users) {
     await handleSubscriptionCancel({ subscriptionId });
     return "blocked";
   }
-
+  
+  if (subscriptionStatus === "active") {
+    return "full";
+  }
   return "grace";
 }
