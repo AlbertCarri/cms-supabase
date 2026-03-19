@@ -10,6 +10,8 @@ import { notifySubscriptionCancelled } from "../../lib/subscriptions/notifySubsc
 import dateToSpanish from "../../lib/dateToSpanish";
 
 export async function POST(request) {
+  let cronProcessed = true;
+  let lastError = "";
   try {
     const supabase = createClient();
     if (
@@ -19,7 +21,6 @@ export async function POST(request) {
       console.warn("Unauthorized access attempt to cron route");
       return NextResponse.json({ end: "Unauthorized" }, { status: 401 });
     }
-
     const { data, error } = await supabase
       .from("webhook_jobs")
       .select("*")
@@ -35,7 +36,8 @@ export async function POST(request) {
     }
 
     for (const job of data) {
-      const { id, webhook_event_id, event_type, mp_event_id } = job;
+      const { id, webhook_event_id, event_type, mp_event_id, attempts } = job;
+      cronProcessed = true;
 
       // Aquí procesamos el evento de la tabla webhook_jobs según el tipo de evento
       if (event_type === "subscription_preapproval") {
@@ -58,8 +60,14 @@ export async function POST(request) {
             "', ha cancelado su suscripción",
           );
           const subscriptionEnd = dateToSpanish(subscription.next_payment_date);
-          await handleSubscriptionCancelled(userId);
-          await notifySubscriptionCancelled({ userId, subscriptionEnd });
+          const successUpdate = await handleSubscriptionCancelled(userId);
+          if (successUpdate.success) {
+            await notifySubscriptionCancelled({ userId, subscriptionEnd });
+            cronProcessed = true;
+          } else {
+            cronProcessed = false;
+            lastError = successUpdate.error;
+          }
         }
 
         if (subscription.status === "authorized") {
@@ -67,21 +75,21 @@ export async function POST(request) {
           const subscriptionId = subscription.subscription_id;
           const dateCreated = subscription.date_created;
 
-          await handleSubscriptionActive({
+          const subscriptionResponse = await handleSubscriptionActive({
             webhook_event_id,
             userId,
             subscriptionId,
             dateCreated,
             currentPeriodEnd,
           });
-          const dateSpanish = dateToSpanish(currentPeriodEnd);
-          await notifySubscriptionAuthorized({ userId, dateSpanish });
-          console.info(
-            "La suscipcion del usuario:",
-            userId,
-            ", ya está activa y vence el: ",
-            dateSpanish,
-          );
+          if (subscriptionResponse.success) {
+            const dateSpanish = dateToSpanish(currentPeriodEnd);
+            await notifySubscriptionAuthorized({ userId, dateSpanish });
+            cronProcessed = true;
+          } else {
+            cronProcessed = false;
+            lastError = subscriptionResponse.error;
+          }
         }
       }
 
@@ -96,7 +104,7 @@ export async function POST(request) {
         );
         const payment = await payments.json();
         const paymentUserId = payment.external_reference;
-        console.info("Status en el payment:", payment.status);
+        console.info("Status en el payment:", payment);
 
         if (payment.status === "approved") {
           console.info(
@@ -108,41 +116,71 @@ export async function POST(request) {
 
           const userId = paymentUserId;
           const rawWebhook = payment;
-          await handleSubscriptionApproved({
+          const successUpdate = await handleSubscriptionApproved({
             webhook_event_id,
             userId,
             rawWebhook,
           });
+          if (successUpdate.success) cronProcessed = true;
         }
 
         if (payment.status === "rejected") {
           const userId = paymentUserId;
-          const subscriptionId = payment.transaction_data.subscription_id;
           console.info(
             "El pago del cliente:'",
             paymentUserId,
             "', ha sido rechazado",
           );
-          const subscriptionStatus = await handleSubscriptionRejected({
+          const subscriptionResponse = await handleSubscriptionRejected({
             userId,
-            subscriptionId,
           });
-          await notifySubscriptionRejected({ userId, subscriptionStatus });
+          if (subscriptionResponse.success) {
+            const subscriptionStatus = subscriptionResponse.message;
+            await notifySubscriptionRejected({ userId, subscriptionStatus });
+            cronProcessed = true;
+          } else {
+            cronProcessed = false;
+            lastError = subscriptionResponse.error;
+          }
         }
       }
 
-      const { error: updateError } = await supabase
-        .from("webhook_jobs")
-        .update({ status: "processed" })
-        .eq("id", id);
-
-      if (updateError) {
-        console.error(`Error updating job ${id} status:`, updateError);
+      if (cronProcessed) {
+        const { error: updateError } = await supabase
+          .from("webhook_jobs")
+          .update({ status: "processed" })
+          .eq("id", id);
+        if (updateError) {
+          console.error(`Error updating job ${id} status:`, updateError);
+          return NextResponse.json(
+            { error: "Error al intentar actualizar status en webhook_jobs" },
+            { status: 500 },
+          );
+        }
+      } else {
+        const { error: updateError } = await supabase
+          .from("webhook_jobs")
+          .update({
+            status: "pending",
+            attempts: attempts + 1,
+            last_error: lastError,
+          })
+          .eq("id", id);
+        if (updateError) {
+          console.error(`Error updating job ${id} status:`, updateError);
+          return NextResponse.json(
+            { error: "Error al intentar actualizar status en webhook_jobs" },
+            { status: 500 },
+          );
+        }
       }
     }
     return NextResponse.json({ ok: true });
-  } catch (error) {
-    console.error("Unexpected error:", error);
+  } catch (err) {
+    console.error(
+      "Unexpected error, se interrumpió el proceso del cron por este error grave:",
+      err,
+    );
     return NextResponse.json({ error: "Unexpected error" }, { status: 500 });
   }
 }

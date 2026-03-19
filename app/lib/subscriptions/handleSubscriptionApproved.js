@@ -17,12 +17,14 @@ export async function handleSubscriptionApproved({
 
     if (error) {
       console.error("Error al actualizar usuario en base de datos:", error);
+      return { success: false, error: error.message };
     }
     console.log(
       `Usuario ${userId} actualizado con webhook_id ${webhook_event_id}`,
     );
-    return;
-  } catch (error) {
-    console.error("Error al cargar aprobado en base de datos:", error);
+    return { success: true };
+  } catch (err) {
+    console.error("Error al cargar aprobado en base de datos:", err);
+    throw err;
   }
 }

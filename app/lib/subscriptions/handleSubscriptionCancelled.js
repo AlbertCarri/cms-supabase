@@ -14,11 +14,13 @@ export async function handleSubscriptionCancelled(userId) {
         "Error al cambiar cancel_at_period_end to TRUE, error:",
         error,
       );
-      return;
+      return { success: false, error: error };
     }
-    console.log("cancel_at_period_end cambiada a TRUE");
-    return;
-  } catch (error) {
-    console.error("Error al cambiar cancel_at_period_end to TRUE, error:", error);
+
+    console.info("cancel_at_period_end cambiada a TRUE");
+    return { success: true };
+  } catch (err) {
+    console.error("Error al cambiar cancel_at_period_end to TRUE, error:", err);
+    throw err;
   }
 }

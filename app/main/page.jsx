@@ -63,10 +63,10 @@ export default async function ProtectedPage() {
           </nav>
           {accessLevel === "grace" && (
             <>
-              <h2 className="bg-amber-500 mx-auto text-xl p-2 rounded-lg">
+              <h2 className="bg-amber-500 mx-auto text-xl text-center p-2 rounded-lg">
                 Tu suscripción está vencida y tienes unos días de gracia
               </h2>
-              <h3 className="bg-red-700 mx-auto text-lg p-2 rounded-lg">
+              <h3 className="bg-red-700 mx-auto text-lg text-center p-2 rounded-lg">
                 Por favor renueva la suscripción antes de que se bloquee
               </h3>
             </>

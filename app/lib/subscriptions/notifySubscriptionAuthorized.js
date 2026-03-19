@@ -4,45 +4,55 @@ import { buildMailAuthorizedTemplate } from "./buildMailAuthorizedTemplate";
 import { createClient } from "../supabase/service_role";
 
 export async function notifySubscriptionAuthorized({ userId, dateSpanish }) {
-  const supabase = createClient();
-  const to = await getUserData(userId);
-  if (!to) return;
+  try {
+    const supabase = createClient();
+    const to = await getUserData(userId);
+    if (!to) return;
 
-  const { data: alreadySent } = await supabase
-    .from("email_logs")
-    .select("id")
-    .eq("user_id", userId)
-    .eq("email_type", "activation")
-    .maybeSingle();
+    const { data: alreadySent } = await supabase
+      .from("email_logs")
+      .select("id")
+      .eq("user_id", userId)
+      .eq("email_type", "activation")
+      .maybeSingle();
 
-  if (alreadySent) {
-    console.log(
-      `Email de activación ya enviado al usuario ${userId}, no se enviará nuevamente.`,
-    );
-    return { success: false, error: "Email de activación ya enviado" };
+    if (alreadySent) {
+      console.log(
+        `Email de activación ya enviado al usuario ${userId}, no se enviará nuevamente.`,
+      );
+      return { success: false, error: "Email de activación ya enviado" };
+    }
+
+    const { subject, html } = buildMailAuthorizedTemplate(dateSpanish);
+
+    const response = await sendEmail({
+      from: "TuResto <noreply@edelbyte.com.ar>",
+      to,
+      subject,
+      html,
+    });
+
+    if (!response.success) {
+      console.error(
+        "Error al enviar email de suscripción autorizada:",
+        response.error,
+      );
+      return { success: false, error: response.error };
+    }
+
+    const { error } = await supabase.from("email_logs").insert({
+      user_id: userId,
+      email_type: "activation",
+      sent_at: new Date(),
+    });
+    if (error) {
+      console.error("Error al insertar en emails_logs");
+      return { success: false, error: error };
+    }
+
+    return { success: true, id: response.id };
+  } catch (err) {
+    console.error("Error al intentar enviar Autorized. Detalle:", err);
+    return { success: false, error: err };
   }
-
-  const { subject, html } = buildMailAuthorizedTemplate(dateSpanish);
-
-  const response = await sendEmail({
-    from: "TuResto <noreply@edelbyte.com.ar>",
-    to,
-    subject,
-    html,
-  });
-
-  if (!response.success) {
-    console.error(
-      "Error al enviar email de suscripción autorizada:",
-      response.error,
-    );
-  }
-
-  const { error } = await supabase.from("email_logs").insert({
-    user_id: userId,
-    email_type: "activation",
-    sent_at: new Date(),
-  });
-
-  return response;
 }

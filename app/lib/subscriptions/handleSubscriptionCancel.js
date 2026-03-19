@@ -16,9 +16,12 @@ export async function handleSubscriptionCancel({ subscriptionId }) {
     if (!response.ok) {
       const error = await response.text();
       console.error(`Error cancelando suscripción MP: ${error}`);
+      return { success: false, error: error };
     }
-    return;
-  } catch (error) {
-    console.error(`Error cancelando suscripción MP: ${error}`);
+
+    return { success: true };
+  } catch (err) {
+    console.error(`Error cancelando suscripción MP: ${err}`);
+    throw err;
   }
 }

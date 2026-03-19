@@ -27,9 +27,11 @@ export async function handleSubscriptionActive({
 
     if (error) {
       console.error("Error al cargar 'activo' en base de datos:", error);
+      return { success: false, error: error };
     }
-    return;
-  } catch (error) {
-    console.error("Error al cargar 'activo' en base de datos:", error);
+    return { success: true };
+  } catch (err) {
+    console.error("Error al cargar 'activo' en base de datos:", err);
+    throw err;
   }
 }
