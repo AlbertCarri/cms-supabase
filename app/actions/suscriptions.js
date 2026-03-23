@@ -10,7 +10,6 @@ export async function getSuscriptionUrl({ userId, email }) {
   const preApproval = new PreApproval(mercadopago);
   const newSubscriber = await preApproval.create({
     body: {
-      payer_email: email,
       external_reference: userId,
       auto_recurring: {
         frequency: 1,
