@@ -32,7 +32,7 @@ export async function POST(request) {
 
     const manifiest = `id:${body.data.id};request-id:${requestId};ts:${ts};`;
 
-    const hash = createHmac("sha256", process.env.MP_SECRET_KEY_TEST)
+    const hash = createHmac("sha256", process.env.MP_SECRET_KEY)
       .update(manifiest)
       .digest("hex");
 

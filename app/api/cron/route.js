@@ -45,7 +45,7 @@ export async function POST(request) {
           `https://api.mercadopago.com/preapproval/${mp_event_id}`,
           {
             headers: {
-              Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN_TEST}`,
+              Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
             },
           },
         );
@@ -98,7 +98,7 @@ export async function POST(request) {
           `https://api.mercadopago.com/v1/payments/${mp_event_id}`,
           {
             headers: {
-              Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN_TEST}`,
+              Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
             },
           },
         );
