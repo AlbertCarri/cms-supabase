@@ -10,6 +10,19 @@ export async function getSuscriptionUrl({ userId, email }) {
   const preApproval = new PreApproval(mercadopago);
   const newSubscriber = await preApproval.create({
     body: {
+      preapproval_plan_id: process.env.MP_PLAN_ID,
+      external_reference: userId,
+      back_url: "https://turesto.edelbyte.com.ar/suscriptions",
+      status: "pending",
+    },
+  });
+  return newSubscriber.init_point;
+}
+
+/*
+const newSubscriber = await preApproval.create({
+    body: {
+      payer_email: email,
       external_reference: userId,
       auto_recurring: {
         frequency: 1,
@@ -22,5 +35,4 @@ export async function getSuscriptionUrl({ userId, email }) {
       back_url: "https://turesto.edelbyte.com.ar/suscriptions",
     },
   });
-  return newSubscriber.init_point;
-}
+  */
