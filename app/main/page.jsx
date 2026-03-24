@@ -9,6 +9,7 @@ import FooterMain from "../../components/FooterMain";
 import MonthSuscriptionButton from "../../components/MonthSuscription";
 import getAccessLevel from "../lib/subscriptions/getAccessLevel";
 import { notifySubscriptionBlocked } from "../lib/subscriptions/notifySubscriptionBlocked";
+import Link from "next/link";
 
 export default async function ProtectedPage() {
   const supabase = await createClient();
@@ -94,7 +95,14 @@ export default async function ProtectedPage() {
             </div>
           </div>
           <div className="basis-1/2 hidden lg:block p-8">
-            <MonthSuscriptionButton email={user.email} userId={user.id} />
+            <div className="flex w-full justify-center">
+              <Link
+                href={"/subscription_checkout"}
+                className="btn-sky w-2/3 mx-auto py-2 px-4 rounded-lg mb-4 text-center"
+              >
+                Suscribirme a Pro
+              </Link>
+            </div>
             <ShowQr urlQr={urlQr} />
           </div>
         </div>

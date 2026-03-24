@@ -36,7 +36,7 @@ export async function middleware(request) {
   const path = request.nextUrl.pathname;
 
   // 🔒 Rutas que REQUIEREN autenticación
-  const protectedRoutes = ["/main", "/onboarding", "/subscription_required"];
+  const protectedRoutes = ["/main", "/onboarding", "/subscription_required", "/subscription_checkout"];
   const isProtectedRoute = protectedRoutes.some((route) =>
     path.startsWith(route),
   );
