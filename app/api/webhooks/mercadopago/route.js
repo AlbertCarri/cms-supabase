@@ -37,7 +37,7 @@ export async function POST(request) {
       .digest("hex");
 
     if (hash !== xSignature) {
-      console.log("Error de hash :", hash, ", xSignature:", xSignature);
+      console.error("Error de hash :", hash, ", xSignature:", xSignature);
       return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
     }
 

@@ -6,10 +6,10 @@ import { NewCategory } from "../../components/NewCategory";
 import { ShowCategory } from "../../components/ShowCategory";
 import { ShowQr } from "../../components/ShowQr";
 import FooterMain from "../../components/FooterMain";
-import MonthSuscriptionButton from "../../components/MonthSuscription";
 import getAccessLevel from "../lib/subscriptions/getAccessLevel";
 import { notifySubscriptionBlocked } from "../lib/subscriptions/notifySubscriptionBlocked";
 import Link from "next/link";
+import countMenu from "../../utils/supabase/countMenu";
 
 export default async function ProtectedPage() {
   const supabase = await createClient();
@@ -33,7 +33,6 @@ export default async function ProtectedPage() {
   const email = user.email;
 
   const accessLevel = await getAccessLevel(users);
-  console.log("Access level:", accessLevel);
 
   if (accessLevel === "blocked") {
     const { error: cancelError } = await supabase
@@ -55,6 +54,8 @@ export default async function ProtectedPage() {
   const urlQr =
     "https://cms-resto.vercel.app/menu/" + resto.replaceAll(" ", "_");
 
+  const limitOfFree = await countMenu(users.id);
+
   return (
     <>
       <div className="flex-1 w-9/12 flex flex-col gap-10 items-center">
@@ -62,6 +63,11 @@ export default async function ProtectedPage() {
           <nav className="w-full flex justify-end h-16 p-4">
             <AuthButton />
           </nav>
+          {limitOfFree && accessLevel === "inactive" && (
+            <h2 className="bg-amber-500 mx-auto text-xl text-center p-2 rounded-lg">
+              Llegaste al límite del plan free, ya cargaste 20 <b>menús</b>
+            </h2>
+          )}
           {accessLevel === "grace" && (
             <>
               <h2 className="bg-amber-500 mx-auto text-xl text-center p-2 rounded-lg">

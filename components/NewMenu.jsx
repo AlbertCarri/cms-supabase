@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ShowMenu } from "./ShowMenu";
 import { NewMenuModal } from "./NewMenuModal";
 
-export const NewMenu = ({ categoryId }) => {
+export const NewMenu = ({ categoryId, hidden }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [ShowMe, setShowMe] = useState(true);
   const [menuId, setMenuId] = useState(0);
@@ -27,10 +27,11 @@ export const NewMenu = ({ categoryId }) => {
   return (
     <div>
       <button
+        disabled={hidden}
         className="button-sky px-12 w- h-14 rounded-lg p-4"
         onClick={openModal}
       >
-        Agregar Menú
+        {hidden ? "Alcanzaste el límite" : "Agregar Menú"}
       </button>
       {isModalOpen && (
         <NewMenuModal

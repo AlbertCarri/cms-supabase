@@ -7,10 +7,7 @@ export default async function getAccessLevel(users) {
   const subscriptionExpired =
     Date.now() > new Date(users.current_period_end).getTime();
 
-  console.log("Subscription Status:", subscriptionStatus);
-  console.log("Grace Period Expired:", graceExpired);
-  console.log("Subscription Expired:", subscriptionExpired);
-  console.log("Cancel at period end:", users.cancel_at_period_end);
+  if (subscriptionStatus === "inactive") return "inactive";
 
   if (
     (subscriptionStatus === "past_due" && graceExpired) ||
@@ -27,5 +24,6 @@ export default async function getAccessLevel(users) {
   if (subscriptionStatus === "active") {
     return "full";
   }
+
   return "grace";
 }
