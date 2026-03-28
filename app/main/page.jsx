@@ -58,22 +58,22 @@ export default async function ProtectedPage() {
 
   return (
     <>
-      <div className="flex-1 w-9/12 flex flex-col gap-10 items-center">
+      <div className="flex flex-col w-full lg:w-4/5 p-2 gap-2 items-center">
         <div className="w-full">
-          <nav className="w-full flex justify-end h-16 p-4">
+          <nav className="w-full h-16 p-2">
             <AuthButton />
           </nav>
           {limitOfFree && accessLevel === "inactive" && (
-            <h2 className="bg-amber-500 mx-auto text-xl text-center p-2 rounded-lg">
+            <h2 className="bg-amber-500 mx-auto text-md lg:text-xl text-center p-2 rounded-lg">
               Llegaste al límite del plan free, ya cargaste 20 <b>menús</b>
             </h2>
           )}
           {accessLevel === "grace" && (
             <>
-              <h2 className="bg-amber-500 mx-auto text-xl text-center p-2 rounded-lg">
+              <h2 className="bg-amber-500 mx-auto text-md lg:text-xl text-center p-2 rounded-lg">
                 Tu suscripción está vencida y tienes unos días de gracia
               </h2>
-              <h3 className="bg-red-700 mx-auto text-lg text-center p-2 rounded-lg">
+              <h3 className="bg-red-700 mx-auto text-md lg:text-lg text-center p-2 rounded-lg">
                 Por favor renueva la suscripción antes de que se bloquee
               </h3>
             </>
@@ -96,7 +96,13 @@ export default async function ProtectedPage() {
             <div>
               <ShowCategory userId={user.id} />
             </div>
-            <div className="basis-1/2 block lg:hidden p-8">
+            <div className="flex flex-col basis-1/2 lg:hidden p-8">
+              <Link
+                href={"/subscription_checkout"}
+                className="btn-sky w-2/3 mx-auto py-2 px-4 rounded-lg mb-4 text-center"
+              >
+                Suscribirme a Pro
+              </Link>
               <ShowQr urlQr={urlQr} fileName={"codigoQR"} />
             </div>
           </div>

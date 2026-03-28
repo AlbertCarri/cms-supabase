@@ -31,12 +31,25 @@ export async function middleware(request) {
 
   const {
     data: { user },
+    error,
   } = await supabase.auth.getUser();
+
+  if (error?.code === "refresh_token_not_found") {
+    const response = NextResponse.next({ request });
+    response.cookies.delete("sb-access-token");
+    response.cookies.delete("sb-refresh-token");
+    return response;
+  }
 
   const path = request.nextUrl.pathname;
 
   // 🔒 Rutas que REQUIEREN autenticación
-  const protectedRoutes = ["/main", "/onboarding", "/subscription_required", "/subscription_checkout"];
+  const protectedRoutes = [
+    "/main",
+    "/onboarding",
+    "/subscription_required",
+    "/subscription_checkout",
+  ];
   const isProtectedRoute = protectedRoutes.some((route) =>
     path.startsWith(route),
   );

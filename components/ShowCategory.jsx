@@ -69,15 +69,15 @@ export const ShowCategory = ({ userId }) => {
         </div>
       )}
       {categories.map((category) => (
-        <div key={category.id} className="flex flex-row mt-10">
+        <div key={category.id} className="flex flex-row  justify-between lg:justify-normal mt-4 lg:mt-10">
           <button
-            className="button-purple rounded-2xl w-48 h-14 sm:w-96 p-4"
+            className="button-purple rounded-2xl w-48 h-14 text-md lg:text-base sm:w-96 p-2 lg:p-4"
             onClick={() => editMenu(category.id, category.name)}
           >
             {category.name}
           </button>
           <button
-            className="button-red rounded-2xl ml-10 w-32 sm:w-40"
+            className="button-red rounded-2xl ml-10 w-24 sm:w-40"
             onClick={() => deleteConfirm(category.id, category.name)}
           >
             Eliminar
