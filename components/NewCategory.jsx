@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { InsertIntoCategory } from "../utils/supabase/InsertIntoCategory";
+import { createClient } from "../app/lib/supabase/client";
 
-export const NewCategory = ({ userId }) => {
+export const NewCategory = ({ userId, restoId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
@@ -15,8 +15,16 @@ export const NewCategory = ({ userId }) => {
     setIsModalOpen(false);
   };
 
-  const UpdateRestoName = () => {
-    RestoNameChange({ userId, inputValue });
+  const handleInsertCategory = async () => {
+    const supabase = createClient();
+
+    const { data } = await supabase.auth.getUser();
+
+    const { error } = await supabase
+      .from("category")
+      .insert([{ name: inputValue, user_id: data.user.id, resto_id: restoId }]);
+
+    if (error) console.error("ERROR:::", error);
   };
 
   return (
@@ -30,7 +38,7 @@ export const NewCategory = ({ userId }) => {
       {isModalOpen && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal w-96" onClick={(e) => e.stopPropagation()}>
-            <form>
+            <form onSubmit={handleInsertCategory}>
               <div className="flex flex-col foreground-dark">
                 <label htmlFor="changeName" className="mb-2">
                   Nueva Categoria
@@ -47,7 +55,6 @@ export const NewCategory = ({ userId }) => {
                 <button
                   type="submit"
                   className="btn-sky px-4 rounded-lg mx-2 p-2"
-                  onClick={() => InsertIntoCategory({ userId, inputValue })}
                 >
                   Aceptar
                 </button>

@@ -10,6 +10,7 @@ import getAccessLevel from "../lib/subscriptions/getAccessLevel";
 import { notifySubscriptionBlocked } from "../lib/subscriptions/notifySubscriptionBlocked";
 import Link from "next/link";
 import countMenu from "../../utils/supabase/countMenu";
+import { div } from "motion/react-client";
 
 export default async function ProtectedPage() {
   const supabase = await createClient();
@@ -30,6 +31,7 @@ export default async function ProtectedPage() {
   if (error) console.error("Error de Consulta:", error);
 
   const resto = users.resto_name;
+  const restoId = users.id;
   const email = user.email;
 
   const accessLevel = await getAccessLevel(users);
@@ -52,7 +54,7 @@ export default async function ProtectedPage() {
   if (!resto) redirect("onboarding/step-1");
 
   const urlQr =
-    "https://cms-resto.vercel.app/menu/" + resto.replaceAll(" ", "_");
+    "https://turesto.edelbyte.com.ar/menu/" + resto.replaceAll(" ", "_");
 
   const limitOfFree = await countMenu(users.id);
 
@@ -60,7 +62,23 @@ export default async function ProtectedPage() {
     <>
       <div className="flex flex-col w-full lg:w-4/5 p-2 gap-2 items-center">
         <div className="w-full">
-          <nav className="w-full h-16 p-2">
+          <nav className="flex flex-col md:flex-row w-full mb-10 md:mb-0 items-center justify-between h-16 p-2">
+            <div className="flex mb-2">
+              {accessLevel === "inactive" && (
+                <div className="flex flex-row">
+                  <p className="w-28 text-center bg-teal-900 px-4 py-2 rounded-md">Plan free</p>
+                  <Link
+                    href={"/subscription_checkout"}
+                    className="btn-sky w-32 mx-auto py-2 px-4 rounded-lg ml-4 text-center"
+                  >
+                    Suscribirme
+                  </Link>
+                </div>
+              )}
+              {accessLevel === "full" && (
+                <p className="w-28 text-center bg-slate-700 px-4 py-2 rounded-md">Plan PRO</p>
+              )}
+            </div>
             <AuthButton />
           </nav>
           {limitOfFree && accessLevel === "inactive" && (
@@ -91,30 +109,16 @@ export default async function ProtectedPage() {
               <ChangeRestoName userId={user.id} />
             </div>
             <div className="mt-16">
-              <NewCategory userId={user.id} />
+              <NewCategory userId={user.id} restoId={restoId} />
             </div>
             <div>
               <ShowCategory userId={user.id} />
             </div>
             <div className="flex flex-col basis-1/2 lg:hidden p-8">
-              <Link
-                href={"/subscription_checkout"}
-                className="btn-sky w-2/3 mx-auto py-2 px-4 rounded-lg mb-4 text-center"
-              >
-                Suscribirme a Pro
-              </Link>
               <ShowQr urlQr={urlQr} fileName={"codigoQR"} />
             </div>
           </div>
           <div className="basis-1/2 hidden lg:block p-8">
-            <div className="flex w-full justify-center">
-              <Link
-                href={"/subscription_checkout"}
-                className="btn-sky w-2/3 mx-auto py-2 px-4 rounded-lg mb-4 text-center"
-              >
-                Suscribirme a Pro
-              </Link>
-            </div>
             <ShowQr urlQr={urlQr} />
           </div>
         </div>
