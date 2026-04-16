@@ -10,7 +10,6 @@ import getAccessLevel from "../lib/subscriptions/getAccessLevel";
 import { notifySubscriptionBlocked } from "../lib/subscriptions/notifySubscriptionBlocked";
 import Link from "next/link";
 import countMenu from "../../utils/supabase/countMenu";
-import { div } from "motion/react-client";
 
 export default async function ProtectedPage() {
   const supabase = await createClient();

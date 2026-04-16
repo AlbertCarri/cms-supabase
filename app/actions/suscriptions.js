@@ -15,7 +15,7 @@ export async function getSuscriptionUrl({ userId, email }) {
       auto_recurring: {
         frequency: 1,
         frequency_type: "months",
-        transaction_amount: 100,
+        transaction_amount: 8000,
         currency_id: "ARS",
       },
       reason: "Suscripcion a TuResto",
