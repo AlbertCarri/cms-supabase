@@ -65,7 +65,9 @@ export default async function ProtectedPage() {
             <div className="flex mb-2">
               {accessLevel === "inactive" && (
                 <div className="flex flex-row">
-                  <p className="w-28 text-center bg-teal-900 px-4 py-2 rounded-md">Plan free</p>
+                  <p className="w-28 text-center bg-teal-900 px-4 py-2 rounded-md">
+                    Plan free
+                  </p>
                   <Link
                     href={"/subscription_checkout"}
                     className="btn-sky w-32 mx-auto py-2 px-4 rounded-lg ml-4 text-center"
@@ -75,7 +77,9 @@ export default async function ProtectedPage() {
                 </div>
               )}
               {accessLevel === "full" && (
-                <p className="w-28 text-center bg-slate-700 px-4 py-2 rounded-md">Plan PRO</p>
+                <p className="w-28 text-center bg-slate-700 px-4 py-2 rounded-md">
+                  Plan PRO
+                </p>
               )}
             </div>
             <AuthButton />
@@ -95,8 +99,7 @@ export default async function ProtectedPage() {
               </h3>
             </>
           )}
-          <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>{" "}
-          {/* línea separadora*/}
+          <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>
         </div>
         <div className="flex flex-row w-full">
           <div className="basis-full">
@@ -121,8 +124,7 @@ export default async function ProtectedPage() {
             <ShowQr urlQr={urlQr} />
           </div>
         </div>
-        <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>{" "}
-        {/* línea separadora*/}
+        <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>
       </div>
       <FooterMain />
     </>

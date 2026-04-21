@@ -1,7 +1,6 @@
 import { createClient } from "./lib/supabase/server";
 import MainIntro from "../components/MainIntro";
 import NavMenu from "../components/NavMenu";
-import { ClientButton } from "../components/ClientButton";
 import FooterMain from "../components/FooterMain";
 
 export default async function Index() {
@@ -22,11 +21,6 @@ export default async function Index() {
         <NavMenu />
       </header>
       <MainIntro />
-      {isSupabaseConnected && (
-        <>
-          <ClientButton>Comencemos</ClientButton>
-        </>
-      )}
       <FooterMain />
     </div>
   );

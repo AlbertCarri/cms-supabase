@@ -89,7 +89,7 @@ export default function MainIntro() {
             <div className="ml-8 mt-8">
               <h2 className="text-2xl font-bold">Plan Free</h2>
               <p>Hasta 20 productos</p>
-              <p className="mt-8 text-4xl font-bold">0$</p>
+              <p className="mt-8 text-4xl font-bold">$0</p>
               <div className="w-64 mt-16 border-t-slate-500 border border-t-2"></div>
               <p className="mt-16">✅ 1 Emprendimiento</p>
               <p>✅ Logo de tu negocio</p>
@@ -104,7 +104,7 @@ export default function MainIntro() {
             <div className="ml-8 mt-8">
               <h2 className="text-2xl font-bold">Plan Pro</h2>
               <p>Sin límites</p>
-              <p className="mt-8 text-4xl font-bold">5000$</p>
+              <p className="mt-8 text-4xl font-bold">$8000</p>
 
               <div className="w-64 mt-16 border-t-slate-500 border border-t-2"></div>
               <p className="mt-16">✅ 1 Emprendimiento</p>
