@@ -180,7 +180,7 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
               id="file"
               name="file"
               type="file"
-              accept="image/*"
+              accept="image/jpg,image/png,image/webp"
               onChange={ImagePreview}
             />
             <label htmlFor="price" className="mt-4 mb-1 font-bold">

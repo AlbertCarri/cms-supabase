@@ -7,7 +7,6 @@ export async function POST(request) {
     const signature = request.headers.get("x-signature");
     const requestId = request.headers.get("x-request-id");
     const body = await request.json();
-    const supabase = createClient();
 
     if (!signature || !requestId) {
       return NextResponse.json({ error: "Missing headers" }, { status: 400 });
@@ -42,6 +41,8 @@ export async function POST(request) {
     }
 
     console.warn("Webhook válido:", body);
+
+    const supabase = createClient();
     const created_at =
       body.date_created ?? body.date ?? new Date().toISOString();
 
