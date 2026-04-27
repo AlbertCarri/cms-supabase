@@ -47,15 +47,15 @@ export default function FooterMain() {
           <div className="flex flex-col basis-1/3">
           <h3 className="text-lg font-semibold mt-4">Legal</h3>
             <a
-                href="#"
+                href="/terminos"
                 target="_blank"
                 className="text-base mt-2 hover:underline"
                 rel="noreferrer"
               >
-                Términos del servicio
+                Términos y condiciones
               </a>
                <a
-                href="#"
+                href="/privacidad"
                 target="_blank"
                 className="text-base mt-2 hover:underline"
                 rel="noreferrer"
