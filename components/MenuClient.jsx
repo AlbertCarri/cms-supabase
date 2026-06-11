@@ -71,12 +71,12 @@ export default function MenuClient({ MenuList }) {
         />
       )}
       <p className="ml-4 mt-8">Nuestro menú:</p>
-      <div className="flex w-11/12 mx-auto gap-2 overflow-scroll">
+      <div className="flex w-11/12 mx-auto gap-2 overflow-scroll scrollbar-none">
         {category.map((categ) => (
           <button
             key={categ.name}
             style={{ background: `${palette.button1}` }}
-            className="min-w-24 h-16 text-xs rounded-xl overflow-hidden"
+            className="min-w-24 h-16 p-2 text-xs rounded-xl overflow-hidden"
             onClick={() => handleCategoryScroll(categ.id)}
           >
             {categ.name}
@@ -114,48 +114,50 @@ export default function MenuClient({ MenuList }) {
 
             {categ.menu.map((category_menu) => (
               <div key={category_menu.id}>
-                {category_menu.checked &&
-                  (category_menu.suitableFor?.includes(suitableFilter) ||
-                    suitableFilter === "") && (
-                    <div>
-                      <div className="flex flex-row justify-center">
-                        <div className="basis-40">
-                          <div className="rounded-lg mr-4 items-center w-28 h-28 overflow-hidden">
-                            <img
-                              className="w-full h-full object-cover"
-                              src={category_menu.image}
-                              alt="Food"
-                            />
+                {(category_menu.suitableFor?.includes(suitableFilter) ||
+                  suitableFilter === "") && (
+                  <div>
+                    <div className="flex flex-row justify-center">
+                      <div className="basis-40">
+                        <div className="relative rounded-lg mr-4 items-center w-28 h-28 overflow-hidden">
+                          <div className="absolute text-red-700 text-xs bg-white mt-14 ml-2">
+                            {category_menu.checked ? "" : "NO DISPONIBLE"}
                           </div>
-                        </div>
-                        <div className="basis-96">
-                          <p className="text-md mb-1 underline underline-offset-4">
-                            {category_menu.name}
-                          </p>
-                          <p className="text-xs mb-4 h-16">
-                            {category_menu.description} Apto para:{" "}
-                            {category_menu.suitableFor?.join()}
-                          </p>
-                          <p className="text-md mb-1">
-                            Precio ${category_menu.price}
-                          </p>
+                          <img
+                            className="w-full h-full object-cover"
+                            src={category_menu.image}
+                            alt="Food"
+                          />
                         </div>
                       </div>
-                      <p className="text-xs mb-1">Alergenos:</p>
-                      <div className="flex flex-row justify-center">
-                        {category_menu.alergens.map((alerg) => (
-                          <p
-                            key={alerg}
-                            className="label-emerald text-xs line-clamp-1 md:line-clamp-none rounded-sm px-1 mr-2 mb-4"
-                          >
-                            {alerg}
-                          </p>
-                        ))}
+                      <div className="basis-96">
+                        <p className="text-md mb-1 underline underline-offset-4">
+                          {category_menu.name}
+                        </p>
+                        <p className="text-xs mb-4 h-16">
+                          {category_menu.description} Apto para:{" "}
+                          {category_menu.suitableFor?.join()}
+                        </p>
+                        <p className="text-md mb-1">
+                          Precio ${category_menu.price}
+                        </p>
                       </div>
-                      <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>{" "}
-                      {/* línea separadora*/}
                     </div>
-                  )}
+                    <p className="text-xs mb-1">Alergenos:</p>
+                    <div className="flex flex-row justify-center">
+                      {category_menu.alergens.map((alerg) => (
+                        <p
+                          key={alerg}
+                          className="label-emerald text-xs line-clamp-1 md:line-clamp-none rounded-sm px-1 mr-2 mb-4"
+                        >
+                          {alerg}
+                        </p>
+                      ))}
+                    </div>
+                    <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>{" "}
+                    {/* línea separadora*/}
+                  </div>
+                )}
               </div>
             ))}
           </div>
