@@ -94,7 +94,7 @@ export const ShowMenu = ({ openEditModal, categoryId }) => {
                         <button key={menus.id} className='button-red rounded-lg ml-10 w-24 h-10 mr-2' onClick={() => deleteConfirm(menus.id, menus.name)}>Eliminar</button>
                         <button key={menus.id + 'edit'} className='button-sky rounded-lg ml-2 w-24 h-10 mr-2' onClick={() => editMenu(menus.id)}>Editar</button>
                         <input name={menus.id} type="checkbox" checked={menus.checked} onChange={(e) => OnView(e)} />
-                        <p className='ml-2 mt-2'>Visible</p>
+                        <p className='ml-2 mt-2'>Disponible</p>
                     </div>
                 </div>
             ))}

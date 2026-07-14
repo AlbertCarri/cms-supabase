@@ -15,17 +15,19 @@ visualizar la carta de menú. Es compatible con todos los dispositivos capaces d
 * Con SuResto podras crear un menú accesible desde cualquier dispositivo móvil con lector de códigos QR.
 * Con esta herramienta, podrás personalizar tu menú con el nombre de tu restaurante y organizarlo por categorías como pizzas, sándwiches, entre otros. Dentro de cada categoría, podrás añadir los platos correspondientes con su -descripción, precio, foto y alergenos.
 * Una vez configurado, el sistema generará un código QR único que podrás descargar e imprimir en el soporte de tu elección para ponerlo a disposición de tus clientes.
-* Al escanearlo, tus clientes accederán al menú completo y actualizado en su dispositivo móvil. Además, si alguno de tus menús no está disponible temporalmente, podrás ocultarlo fácilmente desde la aplicación.
+* Al escanearlo, tus clientes accederán al menú completo y actualizado en su dispositivo móvil. Además, si alguno de tus menús no está disponible temporalmente, aparecerá como no dispinible en el menú desde la aplicación.
+* El cliente al escanear el Código QR, no solo podrá ver los menús, sino que podrá ir directamente a la categoría buscada presionando el botón deseado, podrá filtrar por preferencias, celíaco, vegano, vegetariano o diabético.
 
-Puedes probarlo usando un usuario y contraseñas de muestra:
-Usuario: wottan@live.com.ar
-Contraseña: Vercel2024
+Puedes mirarlo escaneando el código QR :
+
+![CodigoQR](/public/turesto003.webp)
 
 ### Tecnologías Utilizadas:
 
 * Frontend: Next.js
 * Backend: Supabase y funciones de servidor NEXT.js
 * Estilos: Tailwind CSS
+* Suscipciones mensuales: Mercado pago
 * Hosting: Vercel
 ---
 
@@ -35,6 +37,6 @@ Contraseña: Vercel2024
 
 #### Link a la WEB APP desplegada en **Vercel**:
 
-#### Link : [CMS para Restaurants](https://cms-resto.vercel.app/)
+#### Link : [CMS para Restaurants](https://turesto.edelbyte.com.ar/)
 
   
