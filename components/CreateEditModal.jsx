@@ -1,14 +1,13 @@
 "use client";
 
-import { InsertIntoMenu } from "../utils/supabase/InsertIntoMenu";
-import { createClient } from "../app/lib/supabase/client";
 import { useState, useEffect } from "react";
 import { SelectEditMenu } from "../utils/supabase/EditMenu";
 import { Pencil } from "lucide-react";
+import imageCompression from "browser-image-compression";
+import createEditMenu from "../app/actions/createEditMenu";
 
-export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
+export const CreateEditModal = ({ closeModal, menuId, categoryId }) => {
   const [menu, setMenu] = useState([]);
-  const [imagePreview, setImagePreview] = useState("/LogoMenu.jpg");
   const [checkBox, setCheckedBox] = useState({
     gluten: false,
     crustaceos: false,
@@ -20,13 +19,26 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
     frutossecos: false,
   });
   const [suitableForDb, setSuitableForDb] = useState([]);
-
-  const suitableFor = [];
+  const [menuImage, setMenuImage] = useState("/LogoMenu.jpg");
+  const [menuImageFile, setMenuImageFile] = useState(null);
+  const [errorMessage, setErrorMessage] = useState();
+  const [imageChanged, setImageChanged] = useState("false");
+  const [imageUrl, setImageUrl] = useState("");
+  const suitableFor = ["Celíacos", "Veganos", "Vegetarianos", "Diabéticos"];
+  const options = {
+    maxSizeMB: 0.4,
+    maxWidthOrHeight: 1200,
+    useWebWorker: true,
+    fileType: "image/webp",
+    initialQuality: 0.75,
+  };
 
   useEffect(() => {
     const ReadMenus = async () => {
       const menus = await SelectEditMenu({ menuId });
       setMenu(menus);
+      setMenuImage(menus[0].image);
+      setImageUrl(menus[0].image);
       setCheckedBox({
         ...checkBox,
         gluten: menus[0].alergens.includes("gluten"),
@@ -46,66 +58,37 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
     }
   }, [menuId]);
 
-  const CloseModal = () => {
-    setImagePreview("/LogoMenu.jpg");
-    closeModal();
+  const handleImageChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      try {
+        const compressedBlob = await imageCompression(file, options);
+        const compressedFile = new File([compressedBlob], file.name, {
+          type: compressedBlob.type,
+          lastModified: Date.now(),
+        });
+
+        setMenuImageFile(compressedFile);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setMenuImage(reader.result);
+        };
+        reader.readAsDataURL(compressedFile);
+        setImageChanged("true");
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const supabase = createClient();
-    const datas = new FormData(event.target);
-    if (imagePreview === "/LogoMenu.jpg") {
-      const fileURL = menu[0].image;
-      const dataObject = Object.fromEntries(datas.entries());
-      const formDataObject = { ...dataObject };
-      delete formDataObject.file;
-      InsertIntoMenu({
-        fileURL,
-        formDataObject,
-        categoryId,
-        menu,
-        suitableFor,
-      });
-      closeModal();
-    } else {
-      const imageFile = datas.get("file");
-      const { data: path, error } = await supabase.storage
-        .from("cms-Main")
-        .upload(`public/${imageFile.name}`, imageFile, {
-          upsert: true,
-        });
-      const { data: fileURL } = supabase.storage
-        .from("cms-Main")
-        .getPublicUrl(path.path);
-      if (error) {
-        console.error("Error al subir la IMAGEN", path);
-      } else {
-      }
-      const dataObject = Object.fromEntries(datas.entries());
-      const formDataObject = { ...dataObject };
-      delete formDataObject.file;
-      InsertIntoMenu({
-        fileURL,
-        formDataObject,
-        categoryId,
-        menu,
-        suitableFor,
-      });
-      closeModal();
-    }
-  };
-  const ImagePreview = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImagePreview(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      setImagePreview(null);
-    }
+    const formData = new FormData(event.target);
+    formData.delete("file");
+    formData.append("file", menuImageFile);
+    const result = await createEditMenu({ menuId, categoryId, formData });
+    if (result.success) return closeModal();
+    setErrorMessage(Object.entries(result.error));
   };
 
   const handleSuitableChange = (item) => {
@@ -121,6 +104,8 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
       <div className="modal w-96" onClick={(e) => e.stopPropagation()}>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col foreground-dark text-start">
+            <input hidden name="imageChanged" value={imageChanged} readOnly />
+            <input hidden name="imageUrl" defaultValue={imageUrl} />
             <label htmlFor="name" className="mb-1 font-bold">
               Nuevo Menú
             </label>
@@ -162,11 +147,7 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
             <div className="relative w-24 h-24">
               <label htmlFor="file" className="cursor-pointer">
                 <img
-                  src={
-                    menu && menu.length > 0 && imagePreview === "/LogoMenu.jpg"
-                      ? menu[0].image
-                      : imagePreview
-                  }
+                  src={menuImage}
                   width={100}
                   height={100}
                   alt="imagen"
@@ -180,8 +161,8 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
               id="file"
               name="file"
               type="file"
-              accept="image/jpg,image/png,image/webp"
-              onChange={ImagePreview}
+              accept="image/jpeg,image/png,image/webp"
+              onChange={handleImageChange}
             />
             <label htmlFor="price" className="mt-4 mb-1 font-bold">
               Precio en $(pesos)
@@ -309,11 +290,20 @@ export const NewMenuModal = ({ closeModal, menuId, categoryId }) => {
             <button
               type="button"
               className="btn-zinc px-6 rounded-lg mx-2 p-2"
-              onClick={CloseModal}
+              onClick={closeModal}
             >
               Cancelar
             </button>
           </div>
+          {errorMessage && (
+            <div className="text-left mt-4 p-2 border border-black rounded-xl">
+              {errorMessage.map((error) => (
+                <p key={error[0]} className="text-md text-red-600">
+                  {Array.isArray(error[1]) ? error[1].join(",") : error[1]}
+                </p>
+              ))}
+            </div>
+          )}
         </form>
       </div>
     </div>

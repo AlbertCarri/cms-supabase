@@ -44,15 +44,15 @@ export default async function Menu({ params }) {
           <GoBack />
           <AuthButton />
         </nav>
-        <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>{" "}
-        {/* línea separadora*/}
       </div>
+      {/* línea separadora*/}
+      <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>
       <div className="w-11/12 text-center">
         <ChangeCategoryName name={name} categoryId={categoryId} />
         <NewMenu categoryId={categoryId} hidden={hiddenNewMenu} />
       </div>
-      <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>{" "}
       {/* línea separadora*/}
+      <div className="w-full border-zinc-500 border-t p-2 flex justify-center"></div>
       <FooterMain />
     </div>
   );

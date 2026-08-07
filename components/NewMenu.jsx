@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ShowMenu } from "./ShowMenu";
-import { NewMenuModal } from "./NewMenuModal";
+import { CreateEditModal } from "./CreateEditModal";
 
 export const NewMenu = ({ categoryId, hidden }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,7 +34,7 @@ export const NewMenu = ({ categoryId, hidden }) => {
         {hidden ? "Alcanzaste el límite" : "Agregar Menú"}
       </button>
       {isModalOpen && (
-        <NewMenuModal
+        <CreateEditModal
           closeModal={closeModal}
           menuId={menuId}
           categoryId={categoryId}
